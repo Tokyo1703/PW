@@ -29,7 +29,7 @@ public class Monitor {
 
     public void setId(int id){
         this.id = id;
-    
+    }
 
     public void setNombreCompleto(String Nombre){
         NombreCompleto = Nombre;
@@ -55,4 +55,5 @@ public class Monitor {
 
         return infoAsistente;
     }    
+    
 }
