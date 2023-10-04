@@ -1,4 +1,5 @@
-import java.sql.Date;
+package clases;
+
 
 public class Monitor {
     private int id;
