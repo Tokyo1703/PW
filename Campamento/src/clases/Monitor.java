@@ -1,3 +1,4 @@
+package clases;
 
 public class Monitor {
     private int id;
@@ -28,8 +29,8 @@ public class Monitor {
 
     public void setId(int id){
         this.id = id;
-    
     }
+
     public void setNombreCompleto(String Nombre){
         NombreCompleto = Nombre;
     }
@@ -38,7 +39,7 @@ public class Monitor {
         this.AtencionEsp = AtencionEsp;
     }
 
-    public String toString(){
+    public String to_String(){
         String atencion;
 
         if(AtencionEsp==false){
@@ -48,10 +49,10 @@ public class Monitor {
             atencion="Si";
         }
 
-        String informacion = "Identificador: " + id + "\n" +
+        String infoAsistente = "Identificador: " + id + "\n" +
                         "Nombre y apellidos: " + NombreCompleto + "\n" + 
                         "Atencion especial: " + atencion + "\n";
 
-        return informacion;
+        return infoAsistente;
     }    
 }
