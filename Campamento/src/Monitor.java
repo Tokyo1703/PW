@@ -1,4 +1,3 @@
-import java.sql.Date;
 
 public class Monitor {
     private int id;
@@ -30,7 +29,7 @@ public class Monitor {
     public void setId(int id){
         this.id = id;
     
-
+    }
     public void setNombreCompleto(String Nombre){
         NombreCompleto = Nombre;
     }
@@ -39,7 +38,7 @@ public class Monitor {
         this.AtencionEsp = AtencionEsp;
     }
 
-    public String to_String(){
+    public String toString(){
         String atencion;
 
         if(AtencionEsp==false){
@@ -49,10 +48,10 @@ public class Monitor {
             atencion="Si";
         }
 
-        String infoAsistente = "Identificador: " + id + "\n" +
+        String informacion = "Identificador: " + id + "\n" +
                         "Nombre y apellidos: " + NombreCompleto + "\n" + 
                         "Atencion especial: " + atencion + "\n";
 
-        return infoAsistente;
+        return informacion;
     }    
 }
