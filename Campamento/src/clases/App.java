@@ -2,7 +2,6 @@ package clases;
 
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class App {
@@ -11,7 +10,7 @@ public class App {
         Monitor Carlos = new Monitor(32, "Carlos Ruiz Martinez", false );
         ArrayList<Monitor> Encargados = new ArrayList<Monitor>();
         Encargados.add(Carlos);
-        Actividad Escondite = new Actividad("Escondite",Actividad.NivelEducativo.Infantil,Time.valueOf("12:00:00"),20,2,Encargados);
+        Actividad Escondite = new Actividad("Escondite", NivelEducativo.Infantil,Horario.Maniana,20,2,Encargados);
         System.out.println(Andres.toString());
         System.out.println(Carlos.toString());
         System.out.println(Escondite.toString());

@@ -1,16 +1,13 @@
 package clases;
-import java.sql.Time;
 import java.util.ArrayList;
+
+
 
 public class Actividad {
     
-    public enum NivelEducativo{
-    Infantil, Juvenil, Adolescente,
-    }
-
-    private String NombreUnico;
+    private String Nombre;
     private NivelEducativo Nivel;
-    private Time Hora;
+    private Horario Hora;
     private int Capacidad;
     private int MonitoresMax;
     private ArrayList<Monitor> MonitoresEncargados; //Implementamos un array para poder meter mas de un Monitor responsable
@@ -19,8 +16,8 @@ public class Actividad {
 
     }
 
-    Actividad(String Nombre, NivelEducativo Nivel, Time Hora, int Capacidad, int Monitores, ArrayList<Monitor> MonitoresList){
-        NombreUnico = Nombre;
+    Actividad(String Nombre, NivelEducativo Nivel, Horario Hora, int Capacidad, int Monitores, ArrayList<Monitor> MonitoresList){
+        this.Nombre = Nombre;
         this.Nivel = Nivel;
         this.Hora = Hora;
         this.Capacidad = Capacidad;
@@ -29,14 +26,14 @@ public class Actividad {
     }
 
     public String GetNombre(){
-        return NombreUnico;
+        return Nombre;
     }
 
     public NivelEducativo GetNivel(){
         return Nivel;
     }
 
-    public Time GetHora(){
+    public Horario GetHora(){
         return Hora;
     }
 
@@ -53,7 +50,7 @@ public class Actividad {
     }
 
     public String toString(){
-        String informacion = ("Nombre: " + NombreUnico + "\nNivel: " + Nivel + "\nHora: " + Hora +
+        String informacion = ("Nombre: " + Nombre + "\nNivel: " + Nivel + "\nHora: " + Hora +
                          "\nCapacidad: " + Capacidad + "\nMonitores Maximos: " + MonitoresMax +
                          "\nMonitores: \t ");
         
