@@ -79,7 +79,7 @@ public class Campamento {
 
         public ArrayList<Actividad> getActividades(){
             
-            return new ArrayList<Monitor> (ListaActividades_);
+            return new ArrayList<Actividad> (ListaActividades_);
         }
 
     //Setters
