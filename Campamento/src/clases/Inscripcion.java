@@ -9,9 +9,16 @@ public abstract class Inscripcion
     protected Date fecha;
     protected float precio;
 
+    protected boolean cancelacion;
+
     Inscripcion()
     {
 
+    }
+
+    Inscripcion(boolean cancelacion){
+
+        this.cancelacion = cancelacion;
     }
 
     // Getters
@@ -34,6 +41,23 @@ public abstract class Inscripcion
     public float getPrecio()
     {
         return precio;
+    }
+
+    public String getCancelacion(){
+        
+        String permitido = "No poermitida";
+
+        if(cancelacion == true){
+
+            permitido = "Permitida";
+        }
+
+        return permitido;
+    }
+        
+    public boolean getBoleanCancel(){
+        
+        return cancelacion;
     }
 
     // Setters
@@ -59,5 +83,11 @@ public abstract class Inscripcion
     }
 
 
-    public String toString();
+    public String toString(){
+
+        String info = "Id participante: " + this.asis_id + "\nId campamento: " + this.cmp_id + "\nFecha de la inscipcion: " 
+        + this.fecha + "\nPrecio: " + this.precio;
+
+        return info;
+    }
 }
