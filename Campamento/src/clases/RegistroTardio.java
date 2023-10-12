@@ -1,8 +1,8 @@
 package clases;
 
-public class RegistroTemprano extends Registro{
+public class RegistroTardio extends Registro{
 
-    public RegistroTemprano(){}
+    public RegistroTardio(){}
 
     public InscripcionCompleta createInscripcionC(){
 
