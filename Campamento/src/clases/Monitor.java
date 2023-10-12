@@ -39,7 +39,7 @@ public class Monitor {
         this.AtencionEsp = AtencionEsp;
     }
 
-    public String to_String(){
+    public String toString(){
         String atencion;
 
         if(AtencionEsp==false){
@@ -49,10 +49,11 @@ public class Monitor {
             atencion="Si";
         }
 
-        String infoAsistente = "Identificador: " + id + "\n" +
+        String infoMonitor = "Identificador: " + id + "\n" +
                         "Nombre y apellidos: " + NombreCompleto + "\n" + 
                         "Atencion especial: " + atencion + "\n";
 
-        return infoAsistente;
+        
+        return infoMonitor;               
     }    
 }

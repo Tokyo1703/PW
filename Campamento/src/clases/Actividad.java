@@ -52,7 +52,7 @@ public class Actividad {
     public String toString(){
         String informacion = ("Nombre: " + Nombre + "\nNivel: " + Nivel + "\nHora: " + Hora +
                          "\nCapacidad: " + Capacidad + "\nMonitores Maximos: " + MonitoresMax +
-                         "\nMonitores: \t ");
+                         "\nMonitores: \n");
         
         for (Monitor i : MonitoresEncargados) {
             informacion = informacion + i.toString() + "\n";    
