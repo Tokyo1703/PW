@@ -6,11 +6,7 @@ import java.util.List;
 
 public class Campamento {
 
-    //Tipo de variable del Nivel Educativo
-    public enum NivelEducativo{
 
-        Infantil, Juvenil, Adolescente,
-    }
     
     //Declaracion de los atributos de la clase campamento
     private int id_;                                //Identificador del campamento 
@@ -144,8 +140,8 @@ public class Campamento {
                 for(Actividad i : ListaActividades_){
 
                     if(i.GetNombre() == Nueva.GetNombre()){
-
-                        return true;
+                        System.out.println("Ya existe una actividad con ese nombre\n");
+                        return false;
                     }
                 }
 
@@ -154,7 +150,7 @@ public class Campamento {
 
             }else{
 
-                System.out.println("Nivel de dificultad no compatible\n");
+                System.out.println("Nivel educativo no compatible\n");
                 return false;
             }
         }
@@ -199,7 +195,7 @@ public class Campamento {
                     for(Monitor j : Opciones){
 
                         if(j.getId() == Nuevo.getId()){
-
+                            System.out.println("Este monitor esta asignado a una actividad\n");
                             return false;
                         }
                     }
