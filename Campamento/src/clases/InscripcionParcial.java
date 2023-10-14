@@ -1,6 +1,6 @@
 package clases;
 
-import java.sql.Date;
+
 
 public class InscripcionParcial extends Inscripcion
 {

@@ -2,9 +2,9 @@ package clases;
 
 public abstract class Registro{
 
-    public Registro(){}
 
-    public abstract InscripcionCompleta createInscripcionC();
+
+    public abstract InscripcionCompleta createRegistroC();
     
-    public abstract InscripcionParcial createInscripcionP();
+    public abstract InscripcionParcial createRegistroP();
 }

@@ -2,15 +2,16 @@ package clases;
 
 public class RegistroTardio extends Registro{
 
-    public RegistroTardio(){}
 
-    public InscripcionCompleta createInscripcionC(){
+    @Override
+    public InscripcionCompleta createRegistroC(){
 
         InscripcionCompleta NuevaCompleta = new InscripcionCompleta(false);
         return NuevaCompleta;
     }
     
-    public InscripcionParcial creaateInscripcionParcial(){
+    @Override
+    public InscripcionParcial createRegistroP(){
 
         InscripcionParcial NuevaParcial = new InscripcionParcial(false);
         return NuevaParcial;
