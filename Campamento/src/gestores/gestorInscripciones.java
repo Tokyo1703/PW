@@ -1,5 +1,6 @@
 package gestores;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import clases.Campamento;
@@ -9,7 +10,6 @@ import clases.Registro;
 import clases.RegistroTardio;
 import clases.RegistroTemprano;
 
-import java.sql.Date;
 
 public class gestorInscripciones
 {
@@ -108,7 +108,7 @@ public class gestorInscripciones
 
     }
 
-    public boolean inscribirParcial(int id_as, int id_camp, Date fecha)
+    public boolean inscribirParcial(int id_as, int id_camp, LocalDate fecha)
     {
         Campamento camp = campamento(id_camp);
         //Comprobar que exista el campamento
@@ -139,7 +139,7 @@ public class gestorInscripciones
         return inscribirParcial(ins);
     }
 
-    public boolean inscribirCompleta(int id_as, int id_camp, Date fecha)
+    public boolean inscribirCompleta(int id_as, int id_camp, LocalDate fecha)
     {
         Campamento camp = campamento(id_camp);
         //Comprobar que exista el campamento
@@ -173,7 +173,7 @@ public class gestorInscripciones
 
     // Campamentos disponibles
 
-    public ArrayList<Campamento> campamentos(Date fecha)
+    public ArrayList<Campamento> campamentos(LocalDate fecha)
     {
         ArrayList<Campamento> camps_ = new ArrayList<Campamento>();
         for (Campamento aux : camps)
