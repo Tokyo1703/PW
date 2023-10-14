@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.sql.Date;
 
 import clases.Asistente;
 
@@ -30,11 +31,16 @@ public class gestorAsistentes{
             while ((linea = lector.readLine()) != null) {
                 String[] partes = linea.split(";");
                 if (partes.length == 4) {
-                    int id = partes[0];
+                    int id = Integer.parseInt(partes[0]);
                     String nombre = partes[1];
                     Date fecha = partes[2];
-                    boolean especial = partes[3];
-                    Asistente asistente = new Participantes(id, nombre, fecha, especial);
+                    if(partes[3]=="true"){
+                        boolean especial = true;
+                    }
+                    else{
+                        boolean especial = false;
+                    }
+                    Asistente asistente = new Asistente(id, nombre, fecha, especial);
                     lista.add(asistente);
                 }
             }
