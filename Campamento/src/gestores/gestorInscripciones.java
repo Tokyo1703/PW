@@ -117,7 +117,7 @@ public class gestorInscripciones
             return false;
         }
 
-        int dias = (int) (camp.getInicio().getTime() - fecha.getDayOfMonth());
+        int dias = (int) (camp.getInicio().getDayOfMonth() - fecha.getDayOfMonth());
         if (dias>=15)
         {
             reg = regTemp;
@@ -148,7 +148,7 @@ public class gestorInscripciones
             return false;
         }
 
-        int dias = (int) (camp.getInicio().getTime() - fecha.getDayOfMonth());
+        int dias = (int) (camp.getInicio().getDayOfMonth() - fecha.getDayOfMonth());
         if (dias>=15)
         {
             reg = regTemp;
@@ -178,7 +178,7 @@ public class gestorInscripciones
         ArrayList<Campamento> camps_ = new ArrayList<Campamento>();
         for (Campamento aux : camps)
         {
-            if ( ((int)(aux.getInicio().getTime() - fecha.getDayOfMonth()) > 2) && (aux.getMax() > nasistentes(aux.getId()) ) )
+            if ( ((int)(aux.getInicio().getDayOfMonth() - fecha.getDayOfMonth()) > 2) && (aux.getMax() > nasistentes(aux.getId()) ) )
             {
                 camps_.add(aux);
             }   
