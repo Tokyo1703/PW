@@ -5,8 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
-import java.sql.Date;
 
 import clases.Asistente;
 
@@ -26,6 +26,7 @@ public class gestorAsistentes{
 
             FileReader archivo = new FileReader(DataArchive);
             BufferedReader lector = new BufferedReader(archivo);
+            boolean especial;
 
             String linea;
             while ((linea = lector.readLine()) != null) {
@@ -33,12 +34,12 @@ public class gestorAsistentes{
                 if (partes.length == 4) {
                     int id = Integer.parseInt(partes[0]);
                     String nombre = partes[1];
-                    Date fecha = partes[2];
+                    LocalDate fecha = LocalDate.parse(partes[2]);
                     if(partes[3]=="true"){
-                        boolean especial = true;
+                        especial = true;
                     }
                     else{
-                        boolean especial = false;
+                        especial = false;
                     }
                     Asistente asistente = new Asistente(id, nombre, fecha, especial);
                     lista.add(asistente);

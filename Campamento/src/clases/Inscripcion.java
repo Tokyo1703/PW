@@ -1,12 +1,12 @@
 package clases;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public abstract class Inscripcion
 {
     protected int asis_id;
     protected int cmp_id;
-    protected Date fecha;
+    protected LocalDate fecha;
     protected float precio;
     protected boolean cancelacion;
 
@@ -35,7 +35,7 @@ public abstract class Inscripcion
         return cmp_id;
     }
 
-    public Date getFecha()
+    public LocalDate getFecha()
     {
         return fecha;
     }
@@ -76,7 +76,7 @@ public abstract class Inscripcion
         this.cmp_id = id;
     }
 
-    public void setFecha(Date fecha_)
+    public void setFecha(LocalDate fecha_)
     {
         this.fecha = fecha_;
     }

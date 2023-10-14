@@ -1,6 +1,6 @@
 package clases;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Campamento {
@@ -9,8 +9,8 @@ public class Campamento {
     
     //Declaracion de los atributos de la clase campamento
     private int id_;                                //Identificador del campamento 
-    private Date inicio_;                           //Fecha inicio 
-    private Date fin_;                              //Fecha Final 
+    private LocalDate inicio_;                           //Fecha inicio 
+    private LocalDate fin_;                              //Fecha Final 
     private NivelEducativo nivel_;                  //Nivel educativo
     private int Nmax_;                              //Numero maximo de participantes 
     private ArrayList<Actividad> ListaActividades_;     //Actividades del campamento
@@ -24,7 +24,7 @@ public class Campamento {
     }
 
     //Constructor Parametrizado
-    Campamento(int id, Date inicio, Date fin, NivelEducativo nivel, int Nmax){
+    Campamento(int id, LocalDate inicio, LocalDate fin, NivelEducativo nivel, int Nmax){
 
         id_ = id;
         inicio_ = inicio;
@@ -40,18 +40,18 @@ public class Campamento {
         }
 
     //No se si sera necesario pero aqui un get de las fechas juntas 
-        public String getDates(){
+        public String getLocalDates(){
 
             String Fechas = ("Inicio: " + inicio_ + "\nFinal: " + fin_);
             return Fechas;
         }
 
-        public Date getInicio(){
+        public LocalDate getInicio(){
 
             return inicio_;
         }
 
-        public Date getFinal(){
+        public LocalDate getFinal(){
 
             return fin_;
         }
@@ -84,12 +84,12 @@ public class Campamento {
             id_ = id;
         }
 
-        public void setInicio(Date inici){
+        public void setInicio(LocalDate inici){
 
             inicio_ = inici;
         }
 
-        public void setFin(Date fin){
+        public void setFin(LocalDate fin){
 
             fin_ = fin;
         }

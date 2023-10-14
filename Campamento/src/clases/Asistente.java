@@ -1,19 +1,19 @@
 package clases;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Asistente {
     
     private int id;
     private String nombreCompleto;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private boolean atencionEsp;
 
     public Asistente(){
 
     }
 
-    public Asistente(int id, String nombreCompleto, Date fechaNacimiento, boolean atencionEsp){
+    public Asistente(int id, String nombreCompleto, LocalDate fechaNacimiento, boolean atencionEsp){
         this.id=id;
         this.nombreCompleto=nombreCompleto;
         this.fechaNacimiento=fechaNacimiento;
@@ -28,7 +28,7 @@ public class Asistente {
         return nombreCompleto;
     }
 
-    public Date getFenachaNacimniento(){
+    public LocalDate getFenachaNacimniento(){
         return fechaNacimiento;
     }
 
@@ -44,7 +44,7 @@ public class Asistente {
         this.nombreCompleto=nombreCompleto;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento){
+    public void setFechaNacimiento(LocalDate fechaNacimiento){
         this.fechaNacimiento=fechaNacimiento;
     }
 
