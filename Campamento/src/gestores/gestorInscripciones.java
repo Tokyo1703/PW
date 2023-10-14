@@ -2,6 +2,11 @@ package gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import clases.Campamento;
 import clases.InscripcionCompleta;
@@ -25,6 +30,19 @@ public class gestorInscripciones
     private RegistroTardio regTard = new RegistroTardio();
     private RegistroTemprano regTemp = new RegistroTemprano();
 
+    // Ficheros Almacenamiento de Datos
+    private String inscripcionesFile;
+    private String campamentosFile;   
+    
+    // Constructor
+
+    public gestorInscripciones(String inscripcionesFile_, String campamentosFile_)
+    {
+        this.inscripcionesFile = inscripcionesFile_;
+        this.campamentosFile = campamentosFile_;
+        cargarDatos();
+    }
+
     // Busca el campamento por su id
 
     private Campamento campamento(int id)
@@ -40,6 +58,7 @@ public class gestorInscripciones
     }
 
     // Cuenta el numero de asistentes del campamento
+
     private int nasistentes(int id)
     {
         int c = 0;
@@ -62,6 +81,7 @@ public class gestorInscripciones
     }
 
     // Añadir Inscripciones
+
     private boolean inscribirParcial(InscripcionParcial ins)
     {
         for (InscripcionCompleta aux : insCompleta)
@@ -185,6 +205,124 @@ public class gestorInscripciones
         }
         return camps_;
     }
+
+    // Carga la informacion de los ficheros
     
+    private void cargarDatos(){
+
+        try{
+
+            BufferedReader lector = new BufferedReader(new FileReader(inscripcionesFile));
+            String linea;
+
+            linea = lector.readLine();
+            if (linea != "InscripcionesParciales")
+            {
+                System.out.println("Formato del archivo \"" + inscripcionesFile + "\" erroneo \n");
+            }
+
+            // Carga el vector insParcial
+            while ((linea = lector.readLine()) != null && linea != "InscripcionesCompletas") {
+                String[] partes = linea.split(";");
+                if (partes.length == 5) {
+                    int id_as = Integer.parseInt(partes[0]);
+                    int id_cmp = Integer.parseInt(partes[1]);
+                    LocalDate fecha = LocalDate.parse(partes[2]);
+                    float precio = Float.parseFloat(partes[3]);
+                    if(partes[4]=="true"){
+                        reg = regTemp;
+                    }
+                    else{
+                        reg = regTemp;
+                    }
+                    InscripcionParcial inscripcion =  reg.createRegistroP();
+                    inscripcion.setIdAsis(id_as);
+                    inscripcion.setIdCmp(id_cmp);
+                    inscripcion.setFecha(fecha);
+                    inscripcion.setPrecio(precio);
+                    insParcial.add(inscripcion);
+                }
+            }
+
+            // Carga el vector insCompleta
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 5) {
+                    int id_as = Integer.parseInt(partes[0]);
+                    int id_cmp = Integer.parseInt(partes[1]);
+                    LocalDate fecha = LocalDate.parse(partes[2]);
+                    float precio = Float.parseFloat(partes[3]);
+                    if(partes[4]=="true"){
+                        reg = regTemp;
+                    }
+                    else{
+                        reg = regTemp;
+                    }
+                    InscripcionCompleta inscripcion =  reg.createRegistroC();
+                    inscripcion.setIdAsis(id_as);
+                    inscripcion.setIdCmp(id_cmp);
+                    inscripcion.setFecha(fecha);
+                    inscripcion.setPrecio(precio);
+                    insCompleta.add(inscripcion);
+                }
+            }
+            /*
+            FileReader campF = new FileReader(campamentosFile);
+            lector = new BufferedReader(campF);
+
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 4) {
+                    int id = Integer.parseInt(partes[0]);
+                    String nombre = partes[1];
+                    LocalDate fecha = LocalDate.parse(partes[2]);
+                    if(partes[3]=="true"){
+                        especial = true;
+                    }
+                    else{
+                        especial = false;
+                    }
+                    Asistente asistente = new Asistente(id, nombre, fecha, especial);
+                    lista.add(asistente);
+                }
+            }
+            */
+
+            lector.close();
+
+        }catch(IOException e){
+
+            e.printStackTrace();
+        }
+    }
+
+    // Guarda la informacion en los ficheros
+
+    public void guardar(){
+
+        try{
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(inscripcionesFile));
+            escritor.write("InscripcionesParciales");
+            escritor.newLine();
+            for (InscripcionParcial inscripcion : insParcial){
+
+                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getBooleanCancel());
+                escritor.newLine();
+            }
+
+            escritor.write("Inscripcionescompletas");
+            escritor.newLine();
+            for (InscripcionCompleta inscripcion : insCompleta){
+
+                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getBooleanCancel());
+                escritor.newLine();
+            }
+            escritor.close();
+            
+        } catch (IOException e){
+
+            e.printStackTrace();
+        }
+    }
 
 }
