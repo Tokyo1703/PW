@@ -1,6 +1,14 @@
 package gestores;
 
 import java.util.ArrayList;
+
+import clases.Campamento;
+import clases.InscripcionCompleta;
+import clases.InscripcionParcial;
+import clases.Registro;
+import clases.RegistroTardio;
+import clases.RegistroTemprano;
+
 import java.sql.Date;
 
 public class gestorInscripciones
@@ -123,11 +131,11 @@ public class gestorInscripciones
             return false;
         }
 
-        InscripcionParcial ins = reg.creaateInscripcionParcial();
+        InscripcionParcial ins = reg.createRegistroP();
         ins.setIdAsis(id_as);
         ins.setIdCmp(id_camp);
         ins.setFecha(fecha);
-        ins.setPrecio(100.0 + camp.getActividades().size()*20.0 );
+        ins.setPrecio(100 + camp.getActividades().size()*20 );
         return inscribirParcial(ins);
     }
 
@@ -155,19 +163,19 @@ public class gestorInscripciones
         }
 
 
-        InscripcionCompleta ins = reg.createInscripcionC();
+        InscripcionCompleta ins = reg.createRegistroC();
         ins.setIdAsis(id_as);
         ins.setIdCmp(id_camp);
         ins.setFecha(fecha);
-        ins.setPrecio(300.0 + camp.getActividades().size()*20.0 );
-        return inscribirCompeta(ins);
+        ins.setPrecio(300 + camp.getActividades().size()*20 );
+        return inscribirCompleta(ins);
     }
 
     // Campamentos disponibles
 
     public ArrayList<Campamento> campamentos(Date fecha)
     {
-        ArrayList<Campamento> camps_;
+        ArrayList<Campamento> camps_ = new ArrayList<Campamento>();
         for (Campamento aux : camps)
         {
             if ( ((int)(aux.getInicio().getTime() - fecha.getTime()) > 2) && (aux.getMax() > nasistentes(aux.getId()) ) )
