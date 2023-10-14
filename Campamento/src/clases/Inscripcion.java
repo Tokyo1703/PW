@@ -8,15 +8,17 @@ public abstract class Inscripcion
     protected int cmp_id;
     protected Date fecha;
     protected float precio;
-
     protected boolean cancelacion;
 
+    // Constructor Vacio
     Inscripcion()
     {
 
     }
 
-    Inscripcion(boolean cancelacion){
+    // Constructor Diferenciador Temprano/Tardia
+    Inscripcion(boolean cancelacion)
+    {
 
         this.cancelacion = cancelacion;
     }
@@ -43,9 +45,10 @@ public abstract class Inscripcion
         return precio;
     }
 
-    public String getCancelacion(){
+    public String getCancelacion()
+    {
         
-        String permitido = "No poermitida";
+        String permitido = "No permitida";
 
         if(cancelacion == true){
 
@@ -55,7 +58,8 @@ public abstract class Inscripcion
         return permitido;
     }
         
-    public boolean getBoleanCancel(){
+    public boolean getBooleanCancel()
+    {
         
         return cancelacion;
     }
@@ -64,22 +68,22 @@ public abstract class Inscripcion
 
     public void setIdAsis(int id)
     {
-        asis_id = id;
+        this.asis_id = id;
     }
 
     public void setIdCmp(int id)
     {
-        cmp_id = id;
+        this.cmp_id = id;
     }
 
     public void setFecha(Date fecha_)
     {
-        fecha = fecha_;
+        this.fecha = fecha_;
     }
 
-    public void setIdAsis(float precio_)
+    public void setPrecio(float precio_)
     {
-        precio = precio_;
+        this.precio = precio_;
     }
 
 
