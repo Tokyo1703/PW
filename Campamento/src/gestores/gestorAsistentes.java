@@ -63,7 +63,10 @@ public class gestorAsistentes{
 
     public boolean addAsist(Asistente Nuevo){
 
-        volcarDatos(); 
+        if(lista.isEmpty()){
+
+            volcarDatos(); 
+        }
 
         for(Asistente asist : lista){
 
@@ -86,6 +89,10 @@ public class gestorAsistentes{
 
     public boolean editAsist(int id, Asistente Editado){
 
+        if(lista.isEmpty()){
+            
+            volcarDatos(); 
+        }
         int i = 0;
 
         for(Asistente asist : lista){
