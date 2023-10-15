@@ -1,6 +1,13 @@
 package mainProgram;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Properties;
 import java.util.Scanner;
 
 import clases.Asistente;
@@ -9,6 +16,28 @@ import gestores.gestorInscripciones;
 
 public class mainProgram {
     public static void main(String[] args){
+        /*Properties prop = new Properties();
+        String directorioActual = prop.getProperty("user.dir");
+        System.out.println("Directorio de trabajo actual: " + directorioActual);
+
+
+        String nuevoDirectorio = directorioActual + "/bin/data";
+        System.out.println("Nuevo directorio: " + nuevoDirectorio);
+        prop.setProperty("user.dir", nuevoDirectorio);
+        */
+
+        Properties prop = new Properties();
+		String filename = "propiedades.properties";
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			prop.load(reader);
+			
+            String AsistentesTxt = prop.getProperty("file.path1");
+
+			String login = prop.getProperty("login");
+			System.out.println(login);
+			
+
 
 
         int opcion=0;
@@ -32,7 +61,7 @@ public class mainProgram {
                 
                 case 1:
 
-                    gestorAsistentes gestorA=new gestorAsistentes("src/data/data.txt");
+                    gestorAsistentes gestorA=new gestorAsistentes(AsistentesTxt);
                     while(opcion2!=4){
                         
                         System.out.println("\nGestor de asistentes:\n"+
@@ -187,5 +216,10 @@ public class mainProgram {
                     System.out.println("Opción no valida");
             }
         }
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 }
