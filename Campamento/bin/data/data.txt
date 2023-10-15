@@ -1,2 +1,6 @@
 21;Carla;1999-11-21;true
+<<<<<<< HEAD
 22;Carla;1999-11-21;true
+=======
+22;Carla;1999-11-21;true
+>>>>>>> 14ec3c8 (Estado Intermedio)

@@ -12,17 +12,17 @@ public class Actividad {
     private int MonitoresMax;
     private ArrayList<Monitor> MonitoresEncargados; //Implementamos un array para poder meter mas de un Monitor responsable
 
-    Actividad(){
+    public Actividad(){
 
     }
 
-    Actividad(String Nombre, NivelEducativo Nivel, Horario Hora, int Capacidad, int Monitores, ArrayList<Monitor> MonitoresList){
+    public Actividad(String Nombre, NivelEducativo Nivel, Horario Hora, int Capacidad, int Monitores){
         this.Nombre = Nombre;
         this.Nivel = Nivel;
         this.Hora = Hora;
         this.Capacidad = Capacidad;
         MonitoresMax = Monitores;
-        MonitoresEncargados = MonitoresList;
+        MonitoresEncargados = new ArrayList<Monitor>();
     }
 
     public String GetNombre(){

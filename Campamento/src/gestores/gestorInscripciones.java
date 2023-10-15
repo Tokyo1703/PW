@@ -303,5 +303,4 @@ public class gestorInscripciones
             e.printStackTrace();
         }
     }
-
 }

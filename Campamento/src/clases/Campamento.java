@@ -15,22 +15,25 @@ public class Campamento {
     private int Nmax_;                              //Numero maximo de participantes 
     private ArrayList<Actividad> ListaActividades_;     //Actividades del campamento
     private ArrayList<Monitor> Responsable_;            //Monitor/s del campamento
+    private boolean AsistenteEspecial;
 
     //Constructores 
 
     //Constructor Vacio
-    Campamento(){
+    public Campamento(){
 
     }
 
     //Constructor Parametrizado
-    Campamento(int id, LocalDate inicio, LocalDate fin, NivelEducativo nivel, int Nmax){
+    public Campamento(int id, LocalDate inicio, LocalDate fin, NivelEducativo nivel, int Nmax){
 
         id_ = id;
         inicio_ = inicio;
         fin_ = fin;
         nivel_ = nivel;
         Nmax_ = Nmax;
+        ListaActividades_= new ArrayList<Actividad>();
+        AsistenteEspecial=false;
     }
 
     //Getters
