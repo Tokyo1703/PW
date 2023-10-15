@@ -43,10 +43,11 @@ public class gestorInscripciones
     
     // Constructor
 
-    public gestorInscripciones(String inscripcionesFile_, String campamentosFile_)
+    public gestorInscripciones(String inscripcionesFile_, String campamentosFile_, String asistentesFile_)
     {
         this.inscripcionesFile = inscripcionesFile_;
         this.campamentosFile = campamentosFile_;
+        this.asistentesFile = asistentesFile_;
         cargarDatos();
     }
 
