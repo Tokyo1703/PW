@@ -28,11 +28,11 @@ public class mainProgram {
                 case 1:
                     while(opcion2!=4){
                         
-                        System.out.println("Escoga una opción:\n"+
+                        System.out.println("Gestor de asistentes:\n"+
                                     "1) Dar de alta a un asistente\n"+
                                     "2) Modificar la información de un asistente\n"+
                                     "3) Listar todos los asistentes\n"+
-                                    "4) Cerrar menu\n");
+                                    "4) Cerrar gestor\n");
 
                         sc = new Scanner(System.in);
                         opcion2 = sc.nextInt();
@@ -56,13 +56,17 @@ public class mainProgram {
                     break;
 
                 case 2:
-                    while(opcion2!=4){
+                    while(opcion2!=8){
                         
-                        System.out.println("Escoga una opción:\n"+
-                                    "1) Dar de alta a un asistente\n"+
-                                    "2) Modificar la información de un asistente\n"+
-                                    "3) Listar todos los asistentes\n"+
-                                    "4) Cerrar menu\n");
+                        System.out.println("Gestor de campamentos:\n"+
+                                    "1) Crear actividad\n"+
+                                    "2) Crear monitor\n"+
+                                    "3) Crear campamento\n"+
+                                    "4) Asociar monitor a actividad\n"+
+                                    "5) Asociar actividad a campamento\n"+
+                                    "6) Asociar monitor a campamento\n"+
+                                    "7) Asociar monitor de atención especial a campamento\n" +
+                                    "8) Cerrar gestor\n");
 
                         sc = new Scanner(System.in);
                         opcion2 = sc.nextInt();
@@ -88,11 +92,11 @@ public class mainProgram {
 
                     while(opcion2!=4){
                         
-                        System.out.println("Escoga una opción:\n"+
-                                    "1) Dar de alta a un asistente\n"+
-                                    "2) Modificar la información de un asistente\n"+
-                                    "3) Listar todos los asistentes\n"+
-                                    "4) Cerrar menu\n"); 
+                        System.out.println("Gestor de inscripciones:\n"+
+                                    "1) \n"+
+                                    "2) \n"+
+                                    "3) \n"+
+                                    "4) Cerrar gestor\n"); 
                         sc = new Scanner(System.in);
                         opcion2 = sc.nextInt();
                         switch(opcion2){
