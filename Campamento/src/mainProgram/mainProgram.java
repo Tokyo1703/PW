@@ -16,15 +16,7 @@ import gestores.gestorInscripciones;
 
 public class mainProgram {
     public static void main(String[] args){
-        /*Properties prop = new Properties();
-        String directorioActual = prop.getProperty("user.dir");
-        System.out.println("Directorio de trabajo actual: " + directorioActual);
 
-
-        String nuevoDirectorio = directorioActual + "/bin/data";
-        System.out.println("Nuevo directorio: " + nuevoDirectorio);
-        prop.setProperty("user.dir", nuevoDirectorio);
-        */
 
         Properties prop = new Properties();
 		String filename = "propiedades.properties";
@@ -32,10 +24,9 @@ public class mainProgram {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
 			prop.load(reader);
 			
-            String AsistentesTxt = prop.getProperty("file.path1");
-
-			String login = prop.getProperty("login");
-			System.out.println(login);
+            String Asistentes = prop.getProperty("asistentes");
+            String Campamentos = prop.getProperty("campamentos");
+            String Inscripciones = prop.getProperty("inscripciones");
 			
 
 
@@ -61,7 +52,7 @@ public class mainProgram {
                 
                 case 1:
 
-                    gestorAsistentes gestorA=new gestorAsistentes(AsistentesTxt);
+                    gestorAsistentes gestorA=new gestorAsistentes(Asistentes);
                     while(opcion2!=4){
                         
                         System.out.println("\nGestor de asistentes:\n"+
@@ -75,7 +66,7 @@ public class mainProgram {
 
                         switch(opcion2){
                             case 1:
-                                /*System.out.println("Introduzca el id:");
+                                System.out.println("Introduzca el id:");
                                 sc = new Scanner(System.in);
                                 int id=sc.nextInt();
 
@@ -93,9 +84,9 @@ public class mainProgram {
                                 Boolean atencion=false;
                                 if(aux=="si"){
                                     atencion=true;
-                                }*/
-                                LocalDate fecha = LocalDate.parse("1999-11-21");
-                                Asistente asistente=new Asistente(21,"Carla",fecha,true);
+                                }
+                                
+                                Asistente asistente=new Asistente(id,nombre,fecha,atencion);
                                 gestorA.addAsist(asistente);
 
                                 break;
@@ -150,7 +141,7 @@ public class mainProgram {
 
                 case 3:
                     
-                    gestorInscripciones gestor= new gestorInscripciones("inscripciones.txt", "campamentos.txt");
+                    gestorInscripciones gestor= new gestorInscripciones(Inscripciones,Campamentos,Asistentes);
                     int id_as,id_camp;
                     LocalDate fecha;
 
