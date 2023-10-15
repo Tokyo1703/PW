@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import clases.Asistente;
 import clases.Campamento;
 import clases.InscripcionCompleta;
 import clases.InscripcionParcial;
+import clases.NivelEducativo;
 import clases.Registro;
 import clases.RegistroTardio;
 import clases.RegistroTemprano;
@@ -235,7 +237,8 @@ public class gestorInscripciones
 
         try{
 
-            BufferedReader lector = new BufferedReader(new FileReader(inscripcionesFile));
+            FileReader fr = new FileReader(new File(inscripcionesFile));
+            BufferedReader lector = new BufferedReader(fr);
             String linea;
 
             linea = lector.readLine();
@@ -245,26 +248,35 @@ public class gestorInscripciones
             }
 
             // Carga el vector insParcial
-            while ((linea = lector.readLine()) != null && linea != "InscripcionesCompletas") {
+            while ((linea = lector.readLine()) != null && linea != "InscripcionesCompletas") 
+            {
                 String[] partes = linea.split(";");
-                if (partes.length == 6) {
+                if (partes.length == 6) 
+                {
                     int id_as = Integer.parseInt(partes[0]);
                     int id_cmp = Integer.parseInt(partes[1]);
                     LocalDate fecha = LocalDate.parse(partes[2]);
                     float precio = Float.parseFloat(partes[3]);
+
                     boolean asEsp;
-                    if(partes[4]=="true"){
+                    if(partes[4]=="true")
+                    {
                         asEsp = true;
                     }
-                    else{
+                    else
+                    {
                         asEsp = false;
                     }
-                    if(partes[5]=="true"){
+
+                    if(partes[5]=="true")
+                    {
                         reg = regTemp;
                     }
-                    else{
+                    else
+                    {
                         reg = regTemp;
                     }
+
                     InscripcionParcial inscripcion =  reg.createRegistroP();
                     inscripcion.setIdAsis(id_as);
                     inscripcion.setIdCmp(id_cmp);
@@ -276,26 +288,35 @@ public class gestorInscripciones
             }
 
             // Carga el vector insCompleta
-            while ((linea = lector.readLine()) != null) {
+            while ((linea = lector.readLine()) != null) 
+            {
                 String[] partes = linea.split(";");
-                if (partes.length == 6) {
+                if (partes.length == 6) 
+                {
                     int id_as = Integer.parseInt(partes[0]);
                     int id_cmp = Integer.parseInt(partes[1]);
                     LocalDate fecha = LocalDate.parse(partes[2]);
                     float precio = Float.parseFloat(partes[3]);
+
                     boolean asEsp;
-                    if(partes[4]=="true"){
+                    if(partes[4]=="true")
+                    {
                         asEsp = true;
                     }
-                    else{
+                    else
+                    {
                         asEsp = false;
                     }
-                    if(partes[5]=="true"){
+
+                    if (partes[5]=="true")
+                    {
                         reg = regTemp;
                     }
-                    else{
+                    else
+                    {
                         reg = regTemp;
                     }
+
                     InscripcionCompleta inscripcion =  reg.createRegistroC();
                     inscripcion.setIdAsis(id_as);
                     inscripcion.setIdCmp(id_cmp);
@@ -305,39 +326,62 @@ public class gestorInscripciones
                     insCompleta.add(inscripcion);
                 }
             }
+            fr.close();
             lector.close();
 
-            lector = new BufferedReader(new FileReader(campamentosFile));
+            // Carga el vector camps
+            fr = new FileReader(new File(campamentosFile));
+            lector = new BufferedReader(fr);
+
             while ((linea = lector.readLine()) != null) {
                 String[] partes = linea.split(";");
                 if (partes.length == 5) {
-                    int id_as = Integer.parseInt(partes[0]);
-                    int id_cmp = Integer.parseInt(partes[1]);
-                    LocalDate fecha = LocalDate.parse(partes[2]);
-                    float precio = Float.parseFloat(partes[3]);
-                    boolean asEsp;
-                    if(partes[4]=="true"){
-                        asEsp = true;
+                    int id = Integer.parseInt(partes[0]);
+                    LocalDate inicio = LocalDate.parse(partes[1]);
+                    LocalDate fin = LocalDate.parse(partes[2]);
+                    NivelEducativo nivel;
+                    if (partes[3] == "Infantil")
+                    {
+                        nivel = NivelEducativo.Infantil;
                     }
-                    else{
-                        asEsp = false;
+                    else if (partes[3] == "Juvenil")
+                    {
+                        nivel = NivelEducativo.Juvenil;
                     }
-                    if(partes[5]=="true"){
-                        reg = regTemp;
+                    else
+                    {
+                        nivel = NivelEducativo.Adolescente;
                     }
-                    else{
-                        reg = regTemp;
-                    }
-                    InscripcionParcial inscripcion =  reg.createRegistroP();
-                    inscripcion.setIdAsis(id_as);
-                    inscripcion.setIdCmp(id_cmp);
-                    inscripcion.setFecha(fecha);
-                    inscripcion.setPrecio(precio);
-                    inscripcion.setNecesidadEspecial(asEsp);
-                    insParcial.add(inscripcion);
+                    int nMax = Integer.parseInt(partes[4]);
+                    
+                    camps.add(new Campamento(id, inicio, fin, nivel, nMax));
                 }
             }
+            fr.close();
+            lector.close();
 
+            // Carga el vector asistentes
+            fr = new FileReader(new File(campamentosFile));
+            lector = new BufferedReader(fr);
+
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 4) {
+                    int id = Integer.parseInt(partes[0]);
+                    String nombre = partes[1];
+                    LocalDate fecha = LocalDate.parse(partes[2]);
+                    boolean especial;
+                    if(partes[3]=="true"){
+                        especial = true;
+                    }
+                    else{
+                        especial = false;
+                    }
+                    Asistente asistente = new Asistente(id, nombre, fecha, especial);
+                    asistentes.add(asistente);
+                }
+            }
+            fr.close();
             lector.close();
 
         }catch(IOException e){
