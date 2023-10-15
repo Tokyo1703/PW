@@ -30,10 +30,31 @@ public class gestorAsistentes{
             
             BufferedReader lector = new BufferedReader(new FileReader(new File(DataArchive)));
             boolean especial;
-            System.out.println("error2");
+            System.out.println("error1");
             String linea;
+
+
+
+            while((linea = lector.readLine())!=null){
+                System.out.println(linea);
+                System.out.println("error2");
+                // Leer la siguiente línea
+
+
+
+
+
+
+
+
+                
+            }
+            
+            /*
             while ((linea = lector.readLine()) != null) {
+                System.out.println("error2");
                 String[] partes = linea.split(";");
+
                 if (partes.length == 4) {
                     int id = Integer.parseInt(partes[0]);
                     String nombre = partes[1];
@@ -48,12 +69,14 @@ public class gestorAsistentes{
                     lista.add(asistente);
                 }
             }
+            */
             lector.close();
 
-        }catch(IOException e){
-
+        }
+        catch(IOException e){
+                System.out.println("Error IOException");
                 e.printStackTrace();
-            }
+        }
     }
 
     private void guardar(){
@@ -74,7 +97,7 @@ public class gestorAsistentes{
     public boolean addAsist(Asistente Nuevo){
         
         volcarDatos(); 
-        if(lista.isEmpty()){
+        /*if(lista.isEmpty()){
 
         }
 
@@ -93,8 +116,8 @@ public class gestorAsistentes{
             guardar();
             return true;
         }
-
-        return false;
+        */
+        return true;
     }
 
     public boolean editAsist(int id, Asistente Editado){

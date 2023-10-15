@@ -266,27 +266,6 @@ public class gestorInscripciones
                     insCompleta.add(inscripcion);
                 }
             }
-            /*
-            FileReader campF = new FileReader(campamentosFile);
-            lector = new BufferedReader(campF);
-
-            while ((linea = lector.readLine()) != null) {
-                String[] partes = linea.split(";");
-                if (partes.length == 4) {
-                    int id = Integer.parseInt(partes[0]);
-                    String nombre = partes[1];
-                    LocalDate fecha = LocalDate.parse(partes[2]);
-                    if(partes[3]=="true"){
-                        especial = true;
-                    }
-                    else{
-                        especial = false;
-                    }
-                    Asistente asistente = new Asistente(id, nombre, fecha, especial);
-                    lista.add(asistente);
-                }
-            }
-            */
 
             lector.close();
 

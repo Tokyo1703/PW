@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import clases.Asistente;
 import gestores.gestorAsistentes;
+import gestores.gestorInscripciones;
 
 public class mainProgram {
     public static void main(String[] args){
@@ -19,7 +20,7 @@ public class mainProgram {
                     "1) Gestionar asistentes\n"+
                     "2) Gestionar campamentos\n"+
                     "3) Gestionar inscripciones\n"+
-                    "4) Cerrar menu\n");
+                    "4) Cerrar menu");
 
 
 
@@ -30,7 +31,7 @@ public class mainProgram {
                 
                 case 1:
 
-                    gestorAsistentes gestorA=new gestorAsistentes("asistentes.txt");
+                    gestorAsistentes gestorA=new gestorAsistentes("../data/data.txt");
                     while(opcion2!=4){
                         
                         System.out.println("\nGestor de asistentes:\n"+
@@ -69,8 +70,10 @@ public class mainProgram {
 
                                 break;
                             case 2:
+                                
                                 break;
                             case 3:
+                                
                                 break;
                             case 4:
                                 System.out.println("Saliendo...\n");
@@ -85,7 +88,7 @@ public class mainProgram {
                 case 2:
                     while(opcion2!=8){
                         
-                        System.out.println("Gestor de campamentos:\n"+
+                        System.out.println("\nGestor de campamentos:\n"+
                                     "1) Crear actividad\n"+
                                     "2) Crear monitor\n"+
                                     "3) Crear campamento\n"+
@@ -93,14 +96,14 @@ public class mainProgram {
                                     "5) Asociar actividad a campamento\n"+
                                     "6) Asociar monitor a campamento\n"+
                                     "7) Asociar monitor de atención especial a campamento\n" +
-                                    "8) Cerrar gestor\n");
+                                    "8) Cerrar gestor");
 
                         sc = new Scanner(System.in);
                         opcion2 = sc.nextInt();
 
                         switch(opcion2){
                             case 1:
-
+                                
                                 break;
                             case 2:
                                 break;
@@ -116,23 +119,56 @@ public class mainProgram {
                     break;
 
                 case 3:
+                    
+                    gestorInscripciones gestor= new gestorInscripciones("inscripciones.txt", "campamentos.txt");
+                    int id_as,id_camp;
+                    LocalDate fecha;
 
                     while(opcion2!=4){
                         
-                        System.out.println("Gestor de inscripciones:\n"+
-                                    "1) \n"+
-                                    "2) \n"+
-                                    "3) \n"+
-                                    "4) Cerrar gestor\n"); 
+                        System.out.println("\nGestor de inscripciones:\n"+
+                                    "1) Realizar Inscripcion Completa \n"+
+                                    "2) Realizar Inscripcion Parcial \n"+
+                                    "3) Ver campamentos disponibles \n"+
+                                    "4) Cerrar gestor"); 
                         sc = new Scanner(System.in);
                         opcion2 = sc.nextInt();
                         switch(opcion2){
                             case 1:
+                                System.out.println("Introduzca el id del asistente:");
+                                sc = new Scanner(System.in);
+                                id_as=sc.nextInt();
 
+                                System.out.println("Introduzca el id campamento:");
+                                sc = new Scanner(System.in);
+                                id_camp=sc.nextInt();
+
+                                System.out.println("Introduzca la fecha actual con el siguiente formato 'yyyy-mm-dd':");
+                                sc = new Scanner(System.in);
+                                fecha = LocalDate.parse(sc.next());
+
+                                gestor.inscribirCompleta(id_as, id_camp, fecha);
                                 break;
                             case 2:
+                                System.out.println("Introduzca el id del asistente:");
+                                sc = new Scanner(System.in);
+                                id_as=sc.nextInt();
+
+                                System.out.println("Introduzca el id campamento:");
+                                sc = new Scanner(System.in);
+                                id_camp=sc.nextInt();
+
+                                System.out.println("Introduzca la fecha actual con el siguiente formato 'yyyy-mm-dd':");
+                                sc = new Scanner(System.in);
+                                fecha = LocalDate.parse(sc.next());
+
+                                gestor.inscribirParcial(id_as, id_camp, fecha);
                                 break;
                             case 3:
+                                System.out.println("Introduzca la fecha actual con el siguiente formato 'yyyy-mm-dd':");
+                                sc = new Scanner(System.in);
+                                fecha = LocalDate.parse(sc.next());
+                                gestor.campamentos(fecha);
                                 break;
                             case 4:
                                 System.out.println("Saliendo...\n");
