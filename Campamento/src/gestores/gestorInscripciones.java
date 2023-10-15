@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import clases.Asistente;
 import clases.Campamento;
 import clases.InscripcionCompleta;
 import clases.InscripcionParcial;
@@ -25,6 +26,9 @@ public class gestorInscripciones
     // Lista de campamentos
     private ArrayList<Campamento> camps;
 
+    // Lista de asistentes
+    private ArrayList<Asistente> asistentes;
+
     // Clases Factoria
     private Registro reg;
     private RegistroTardio regTard = new RegistroTardio();
@@ -33,6 +37,7 @@ public class gestorInscripciones
     // Ficheros Almacenamiento de Datos
     private String inscripcionesFile;
     private String campamentosFile;   
+    private String asistentesFile;  
     
     // Constructor
 
@@ -48,6 +53,20 @@ public class gestorInscripciones
     private Campamento campamento(int id)
     {
         for (Campamento aux : camps)
+        {
+            if (id == aux.getId())
+            {
+                return aux;
+            }
+        }
+        return null;
+    }
+
+    // Busca el asistente por su id
+
+    private Asistente asistente(int id)
+    {
+        for (Asistente aux : asistentes)
         {
             if (id == aux.getId())
             {
@@ -155,6 +174,8 @@ public class gestorInscripciones
         ins.setIdAsis(id_as);
         ins.setIdCmp(id_camp);
         ins.setFecha(fecha);
+        Asistente asis = asistente(id_as);
+        ins.setNecesidadEspecial(asis.getAtencionEsp());
         ins.setPrecio(100 + camp.getActividades().size()*20 );
         return inscribirParcial(ins);
     }
@@ -188,6 +209,8 @@ public class gestorInscripciones
         ins.setIdCmp(id_camp);
         ins.setFecha(fecha);
         ins.setPrecio(300 + camp.getActividades().size()*20 );
+        Asistente asis = asistente(id_as);
+        ins.setNecesidadEspecial(asis.getAtencionEsp());
         return inscribirCompleta(ins);
     }
 
@@ -224,12 +247,19 @@ public class gestorInscripciones
             // Carga el vector insParcial
             while ((linea = lector.readLine()) != null && linea != "InscripcionesCompletas") {
                 String[] partes = linea.split(";");
-                if (partes.length == 5) {
+                if (partes.length == 6) {
                     int id_as = Integer.parseInt(partes[0]);
                     int id_cmp = Integer.parseInt(partes[1]);
                     LocalDate fecha = LocalDate.parse(partes[2]);
                     float precio = Float.parseFloat(partes[3]);
+                    boolean asEsp;
                     if(partes[4]=="true"){
+                        asEsp = true;
+                    }
+                    else{
+                        asEsp = false;
+                    }
+                    if(partes[5]=="true"){
                         reg = regTemp;
                     }
                     else{
@@ -240,6 +270,7 @@ public class gestorInscripciones
                     inscripcion.setIdCmp(id_cmp);
                     inscripcion.setFecha(fecha);
                     inscripcion.setPrecio(precio);
+                    inscripcion.setNecesidadEspecial(asEsp);
                     insParcial.add(inscripcion);
                 }
             }
@@ -247,12 +278,19 @@ public class gestorInscripciones
             // Carga el vector insCompleta
             while ((linea = lector.readLine()) != null) {
                 String[] partes = linea.split(";");
-                if (partes.length == 5) {
+                if (partes.length == 6) {
                     int id_as = Integer.parseInt(partes[0]);
                     int id_cmp = Integer.parseInt(partes[1]);
                     LocalDate fecha = LocalDate.parse(partes[2]);
                     float precio = Float.parseFloat(partes[3]);
+                    boolean asEsp;
                     if(partes[4]=="true"){
+                        asEsp = true;
+                    }
+                    else{
+                        asEsp = false;
+                    }
+                    if(partes[5]=="true"){
                         reg = regTemp;
                     }
                     else{
@@ -263,7 +301,40 @@ public class gestorInscripciones
                     inscripcion.setIdCmp(id_cmp);
                     inscripcion.setFecha(fecha);
                     inscripcion.setPrecio(precio);
+                    inscripcion.setNecesidadEspecial(asEsp);
                     insCompleta.add(inscripcion);
+                }
+            }
+            lector.close();
+
+            lector = new BufferedReader(new FileReader(campamentosFile));
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 5) {
+                    int id_as = Integer.parseInt(partes[0]);
+                    int id_cmp = Integer.parseInt(partes[1]);
+                    LocalDate fecha = LocalDate.parse(partes[2]);
+                    float precio = Float.parseFloat(partes[3]);
+                    boolean asEsp;
+                    if(partes[4]=="true"){
+                        asEsp = true;
+                    }
+                    else{
+                        asEsp = false;
+                    }
+                    if(partes[5]=="true"){
+                        reg = regTemp;
+                    }
+                    else{
+                        reg = regTemp;
+                    }
+                    InscripcionParcial inscripcion =  reg.createRegistroP();
+                    inscripcion.setIdAsis(id_as);
+                    inscripcion.setIdCmp(id_cmp);
+                    inscripcion.setFecha(fecha);
+                    inscripcion.setPrecio(precio);
+                    inscripcion.setNecesidadEspecial(asEsp);
+                    insParcial.add(inscripcion);
                 }
             }
 
@@ -285,7 +356,7 @@ public class gestorInscripciones
             escritor.newLine();
             for (InscripcionParcial inscripcion : insParcial){
 
-                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getBooleanCancel());
+                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getNecesidadEspecial() + ";" + inscripcion.getBooleanCancel());
                 escritor.newLine();
             }
 
@@ -293,7 +364,7 @@ public class gestorInscripciones
             escritor.newLine();
             for (InscripcionCompleta inscripcion : insCompleta){
 
-                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getBooleanCancel());
+                escritor.write(inscripcion.getIdAsis() + ";" + inscripcion.getIdCamp() + ";" + inscripcion.getFecha() + ";" + inscripcion.getPrecio() + ";" + inscripcion.getNecesidadEspecial() + ";" + inscripcion.getBooleanCancel());
                 escritor.newLine();
             }
             escritor.close();
@@ -303,4 +374,5 @@ public class gestorInscripciones
             e.printStackTrace();
         }
     }
+
 }
