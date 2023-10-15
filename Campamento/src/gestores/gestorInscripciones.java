@@ -361,7 +361,7 @@ public class gestorInscripciones
             lector.close();
 
             // Carga el vector asistentes
-            fr = new FileReader(new File(campamentosFile));
+            fr = new FileReader(new File(asistentesFile));
             lector = new BufferedReader(fr);
 
             while ((linea = lector.readLine()) != null) {
