@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
+import java.io.File;
+
 import clases.Asistente;
 
 public class gestorAsistentes{
@@ -23,11 +27,10 @@ public class gestorAsistentes{
     private void volcarDatos(){
 
         try{
-
-            FileReader archivo = new FileReader(DataArchive);
-            BufferedReader lector = new BufferedReader(archivo);
+            
+            BufferedReader lector = new BufferedReader(new FileReader(new File(DataArchive)));
             boolean especial;
-
+            System.out.println("error2");
             String linea;
             while ((linea = lector.readLine()) != null) {
                 String[] partes = linea.split(";");
@@ -69,10 +72,10 @@ public class gestorAsistentes{
     }
 
     public boolean addAsist(Asistente Nuevo){
-
+        
+        volcarDatos(); 
         if(lista.isEmpty()){
 
-            volcarDatos(); 
         }
 
         for(Asistente asist : lista){
