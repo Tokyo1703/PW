@@ -102,7 +102,7 @@ public class gestorInscripciones
         return c;
     }
 
-    // Añadir Inscripciones
+    // Funciones auxiliares para comprobar que no esten ya inscritos en ese campamento ya sea en la misma modalidad o no
 
     private boolean inscribirParcial(InscripcionParcial ins)
     {
@@ -149,6 +149,8 @@ public class gestorInscripciones
         return true;
 
     }
+
+    // Añadir Inscripciones
 
     public boolean inscribirParcial(int id_as, int id_camp, LocalDate fecha)
     {
