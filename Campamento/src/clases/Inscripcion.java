@@ -8,6 +8,7 @@ public abstract class Inscripcion
     protected int cmp_id;
     protected LocalDate fecha;
     protected float precio;
+    protected boolean necesidadEspecial;
     protected boolean cancelacion;
 
     // Constructor Vacio
@@ -43,6 +44,11 @@ public abstract class Inscripcion
     public float getPrecio()
     {
         return precio;
+    }
+
+    public boolean getNecesidadEspecial()
+    {
+        return necesidadEspecial;
     }
 
     public String getCancelacion()
@@ -84,6 +90,11 @@ public abstract class Inscripcion
     public void setPrecio(float precio_)
     {
         this.precio = precio_;
+    }
+
+    public void setNecesidadEspecial(boolean necesidadEspecial_)
+    {
+        this.necesidadEspecial = necesidadEspecial_;
     }
 
 
