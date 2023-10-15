@@ -28,14 +28,14 @@ public class gestorAsistentes{
 
         try{
             
-            BufferedReader lector = new BufferedReader(new FileReader(new File(DataArchive)));
+            BufferedWriter lector = new BufferedWriter(new FileWriter(new File(DataArchive)));
             boolean especial;
             System.out.println("error1");
             String linea;
 
 
 
-            while((linea = lector.readLine())!=null){
+            /*while((linea = lector.readLine())!=null){
                 System.out.println(linea);
                 System.out.println("error2");
                 // Leer la siguiente línea
@@ -48,10 +48,9 @@ public class gestorAsistentes{
 
 
                 
-            }
-            
-            /*
-            while ((linea = lector.readLine()) != null) {
+            }*/
+            /* 
+                        while ((linea = lector.readLine()) != null) {
                 System.out.println("error2");
                 String[] partes = linea.split(";");
 

@@ -10,6 +10,7 @@ import gestores.gestorInscripciones;
 public class mainProgram {
     public static void main(String[] args){
 
+
         int opcion=0;
         int opcion2=0;
         Scanner sc;
@@ -31,7 +32,7 @@ public class mainProgram {
                 
                 case 1:
 
-                    gestorAsistentes gestorA=new gestorAsistentes("../data/data.txt");
+                    gestorAsistentes gestorA=new gestorAsistentes("src/data/data.txt");
                     while(opcion2!=4){
                         
                         System.out.println("\nGestor de asistentes:\n"+
