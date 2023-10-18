@@ -5,8 +5,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
+
 
 
 
@@ -17,11 +19,12 @@ import clases.Asistente;
 public class gestorAsistentes{
 
     private String DataArchive;
-    private List<Asistente> lista;
+    private ArrayList<Asistente> lista=new ArrayList<Asistente>();
     
     public gestorAsistentes(String Data){
 
         DataArchive = Data;
+        volcarDatos();
     }
 
     private void volcarDatos(){
@@ -33,9 +36,9 @@ public class gestorAsistentes{
 
             String linea;
 
-            
+
             while ((linea = lector.readLine()) != null) {
-                System.out.println("error2");
+                
                 String[] partes = linea.split(";");
 
                 if (partes.length == 4) {
@@ -48,12 +51,14 @@ public class gestorAsistentes{
                     else{
                         especial = false;
                     }
+
                     Asistente asistente = new Asistente(id, nombre, fecha, especial);
                     lista.add(asistente);
                 }
             }
             
             lector.close();
+                                
 
         }
         catch(IOException e){
@@ -78,7 +83,7 @@ public class gestorAsistentes{
     }
 
     public boolean addAsist(Asistente Nuevo){
-        
+         
 
         if(lista.isEmpty()){
             volcarDatos(); 
@@ -86,7 +91,7 @@ public class gestorAsistentes{
 
         for(Asistente asist : lista){
 
-            if(asist == Nuevo){
+            if(asist.getId() == Nuevo.getId()){
 
                 System.out.println("El asistente ya esta registrado\n");
 
@@ -131,7 +136,7 @@ public class gestorAsistentes{
 
         for(Asistente asist : lista){
 
-            System.out.println(asist);
+            System.out.println(asist.toString());
         }
     }
 }

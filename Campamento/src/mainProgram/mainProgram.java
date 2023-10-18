@@ -2,7 +2,6 @@ package mainProgram;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -51,6 +50,11 @@ public class mainProgram {
             switch(opcion){
                 
                 case 1:
+                    int id;
+                    String nombre,aux;
+                    LocalDate fecha;
+                    Boolean atencion;
+                    
 
                     gestorAsistentes gestorA=new gestorAsistentes(Asistentes);
                     while(opcion2!=4){
@@ -66,35 +70,58 @@ public class mainProgram {
 
                         switch(opcion2){
                             case 1:
+                                
                                 System.out.println("Introduzca el id:");
                                 sc = new Scanner(System.in);
-                                int id=sc.nextInt();
+                                id=sc.nextInt();
 
                                 System.out.println("Introduzca el nombre completo:");
                                 sc = new Scanner(System.in);
-                                String nombre=sc.next();
+                                nombre=sc.next();
 
                                 System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
                                 sc = new Scanner(System.in);
-                                LocalDate fecha = LocalDate.parse(sc.next());
+                                fecha = LocalDate.parse(sc.next());
                                 
                                 System.out.println("Si necesita atencion especial escriba 'si':");
                                 sc = new Scanner(System.in);
-                                String aux=sc.next();
-                                Boolean atencion=false;
+                                aux=sc.next();
+                                atencion=false;
                                 if(aux=="si"){
                                     atencion=true;
                                 }
-                                
+
                                 Asistente asistente=new Asistente(id,nombre,fecha,atencion);
                                 gestorA.addAsist(asistente);
 
                                 break;
                             case 2:
+                                System.out.println("Introduzca los nuevos datos del asitente");
+                                System.out.println("Introduzca el id:");
+                                sc = new Scanner(System.in);
+                                id=sc.nextInt();
+
+                                System.out.println("Introduzca el nombre completo:");
+                                sc = new Scanner(System.in);
+                                nombre=sc.next();
+
+                                System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
+                                sc = new Scanner(System.in);
+                                fecha = LocalDate.parse(sc.next());
                                 
+                                System.out.println("Si necesita atencion especial escriba 'si':");
+                                sc = new Scanner(System.in);
+                                aux=sc.next();
+                                atencion=false;
+                                if(aux=="si"){
+                                    atencion=true;
+                                }
+
+                                Asistente asistenteM=new Asistente(id,nombre,fecha,atencion);
+                                gestorA.editAsist(opcion2, asistenteM);
                                 break;
                             case 3:
-                                
+                                gestorA.print();
                                 break;
                             case 4:
                                 System.out.println("Saliendo...\n");
@@ -143,7 +170,7 @@ public class mainProgram {
                     
                     gestorInscripciones gestor= new gestorInscripciones(Inscripciones,Campamentos,Asistentes);
                     int id_as,id_camp;
-                    LocalDate fecha;
+                    LocalDate fecha_camp;
 
                     while(opcion2!=4){
                         
@@ -166,9 +193,9 @@ public class mainProgram {
 
                                 System.out.println("Introduzca la fecha actual con el siguiente formato 'yyyy-mm-dd':");
                                 sc = new Scanner(System.in);
-                                fecha = LocalDate.parse(sc.next());
+                                fecha_camp = LocalDate.parse(sc.next());
 
-                                gestor.inscribirCompleta(id_as, id_camp, fecha);
+                                gestor.inscribirCompleta(id_as, id_camp, fecha_camp);
                                 break;
                             case 2:
                                 System.out.println("Introduzca el id del asistente:");
