@@ -4,16 +4,16 @@ public class RegistroTemprano extends Registro{
 
 
     @Override
-    public InscripcionCompleta createRegistroC(){
+    public InscripcionCompleta createRegistroC(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial){
 
-        InscripcionCompleta NuevaCompleta = new InscripcionCompleta(true);
+        InscripcionCompleta NuevaCompleta = new InscripcionCompleta(id_asist, id_campa, fecha, precio, necesidadEspecial, true);
         return NuevaCompleta;
     }
     
     @Override
-    public InscripcionParcial createRegistroP(){
+    public InscripcionParcial createRegistroP(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial){
 
-        InscripcionParcial NuevaParcial = new InscripcionParcial(true);
+        InscripcionParcial NuevaParcial = new InscripcionParcial(id_asist, id_campa, fecha, precio, necesidadEspecial, true);
         return NuevaParcial;
     }
 }

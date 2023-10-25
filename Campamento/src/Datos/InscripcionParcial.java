@@ -9,9 +9,9 @@ public class InscripcionParcial extends Inscripcion
         super();
     }
 
-    InscripcionParcial(boolean cancelacion){
+    InscripcionParcial(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial, boolean cancelacion){
 
-        super(cancelacion);
+        super(id_asist, id_campa, fecha, precio, necesidadEspecial, cancelacion);
     }
 
     @Override

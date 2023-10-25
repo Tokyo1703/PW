@@ -8,9 +8,9 @@ public class InscripcionCompleta extends Inscripcion {
         super();
     }
 
-    InscripcionCompleta(boolean cancelacion) {
+    InscripcionCompleta(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial, boolean cancelacion) {
         
-        super(cancelacion);
+        super(id_asist, id_campa, fecha, precio, necesidadEspecial, cancelacion);
     }
 
     @Override

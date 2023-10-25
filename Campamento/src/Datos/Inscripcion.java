@@ -18,10 +18,15 @@ public abstract class Inscripcion
     }
 
     // Constructor Diferenciador Temprano/Tardia
-    Inscripcion(boolean cancelacion)
+    Inscripcion(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial, boolean cancelacion)
     {
 
         this.cancelacion = cancelacion;
+        this.asis_id = id_asist;
+        this.cmp_id = id_campa;
+        this.fecha = fecha;
+        this.precio = precio;
+        this.necesidadEspecial = necesidadEspecial;
     }
 
     // Getters
