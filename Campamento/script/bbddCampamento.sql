@@ -57,9 +57,13 @@ CREATE TABLE IF NOT EXISTS Campamento (
     fechaFin date not null,
 	nivelEducativo varchar2(64) not null,
     numMaxAsistentes number(14) not null,
-    --Queda pendiente representar los monitores responsables
+    IdMonitorResponsable int(8) not null,
+    IdMonitorEspecial int(8),
+
     --Queda pendiente representar las actividades
 	constraint ck_NivelEducativo CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
+    constraint fk_IdMonitor foreign key (IdMonitorResponsable) references Monitor(Id),
+    constraint fk_IdMonitorEspecial foreign key (IdMonitorEspecial) references Monitor(Id)
 )
 
 -- --------------------------------------------------------
@@ -77,6 +81,6 @@ CREATE TABLE IF NOT EXISTS Inscripcion (
     registro varchar2(16) not null,
     constraint ck_Tipo CHECK (tipo in ('Completa', 'Parcial')),
     constraint ck_Registro CHECK (registro in ('Temprano', 'Tardio')),
-    constraint fk_IdParticipante foreign key (IdParticipante) references Asistente(Id)
+    constraint fk_IdParticipante foreign key (IdParticipante) references Asistente(Id),
     constraint fk_IdCampamento foreign key (IdCampamento) references Campamento(Id)
 )
