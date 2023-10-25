@@ -1,3 +1,0 @@
-21;Carla;1999-11-21;false
-22;Carla;1999-11-21;false
-21;Pepito;2001-11-26;true

@@ -1,5 +1,6 @@
 package Datos;
 
+import java.time.LocalDate;
 
 public class InscripcionCompleta extends Inscripcion {
 

@@ -1,6 +1,6 @@
 package Datos;
 
-
+import java.time.LocalDate;
 
 public class InscripcionParcial extends Inscripcion
 {
