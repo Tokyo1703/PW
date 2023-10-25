@@ -1,5 +1,7 @@
 package Datos;
 
+import java.time.LocalDate;
+
 public class RegistroTemprano extends Registro{
 
 
