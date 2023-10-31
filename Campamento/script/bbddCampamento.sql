@@ -25,8 +25,9 @@ CREATE TABLE IF NOT EXISTS Monitor (
     Id int(8) primary key,
 	nombreApellidos varchar2(64) not null,
 	atencionEspecial varchar2(2) not null,
-	constraint ck_atencionEspecial CHECK (atencionEspecial in ('Si','No')),	
+	constraint ck_atencionEspecial CHECK (atencionEspecial in ('Si','No'))
 )
+
 
 -- --------------------------------------------------------
 -- 
@@ -40,10 +41,10 @@ CREATE TABLE IF NOT EXISTS Actividad (
     horario varchar2(32) not null,
     numMaxAsistentes number(14) not null,
     numeroMonitores number(14) not null,
-    --Queda pendiente representar los monitores de una actividad 
 	constraint ck_NivelEducativo CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
     constraint ck_Horario CHECK (horario in ('Maniana','Tarde')),	
 )
+
 
 -- --------------------------------------------------------
 -- 
@@ -62,8 +63,37 @@ CREATE TABLE IF NOT EXISTS Campamento (
 
     --Queda pendiente representar las actividades
 	constraint ck_NivelEducativo CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
-    constraint fk_IdMonitor foreign key (IdMonitorResponsable) references Monitor(Id),
+    constraint fk_IdMonitorResponsable foreign key (IdMonitorResponsable) references Monitor(Id),
     constraint fk_IdMonitorEspecial foreign key (IdMonitorEspecial) references Monitor(Id)
+)
+
+
+-- --------------------------------------------------------
+-- 
+-- Estructura de tabla para la tabla 'Actividad_Monitor'
+-- 
+DROP TABLE IF EXISTS Actividad_Monitor;
+CREATE TABLE IF NOT EXISTS Actividad_Monitor (
+
+    Id int(8) primary key,
+    nombreActividad varchar2(64) not null,
+	idCampamento int(8) not null,
+    constraint fk_Campamento foreign key (idCampamento) references Campamento(Id),
+    constraint fk_nombreActividad foreign key (nombreActividad) references Actividad(nombre)
+)
+
+-- --------------------------------------------------------
+-- 
+-- Estructura de tabla para la tabla 'Actividad_Campamento'
+-- 
+DROP TABLE IF EXISTS Actividad_Campamento;
+CREATE TABLE IF NOT EXISTS Actividad_Campamento (
+
+    Id int(8) primary key,
+    nombreActividad varchar2(64) not null,
+	idMonitor int(8) not null,
+    constraint fk_IdMonitor foreign key (idMonitor) references Monitor(Id),
+    constraint fk_nombreActividad foreign key (nombreActividad) references Actividad(nombre)
 )
 
 -- --------------------------------------------------------
