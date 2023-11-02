@@ -1,3 +1,4 @@
+-- Active: 1698755137224@@127.0.0.1@3306@pw
 -- Base de datos: 'i12brmac'
 
 -- --------------------------------------------------------
@@ -5,15 +6,15 @@
 -- Estructura de tabla para la tabla 'Asistente'
 -- 
 
+
 DROP TABLE IF EXISTS Asistente;
 CREATE TABLE IF NOT EXISTS Asistente (
-
     Id int(8) primary key,
-	nombreApellidos varchar2(64) not null,
+	nombreApellidos varchar(64) not null,
 	fechaNacimiento date not null,
-	atencionEspecial varchar2(2) not null,
-	constraint ck_atencionEspecial CHECK (atencionEspecial in ('Si','No')),	
-)
+	atencionEspecial varchar(2) not null,
+	constraint ck_atencionEspecial CHECK (atencionEspecial in ('Si','No'))	
+);
 
 -- --------------------------------------------------------
 -- 
@@ -21,12 +22,11 @@ CREATE TABLE IF NOT EXISTS Asistente (
 -- 
 DROP TABLE IF EXISTS Monitor;
 CREATE TABLE IF NOT EXISTS Monitor (
-
     Id int(8) primary key,
-	nombreApellidos varchar2(64) not null,
-	atencionEspecial varchar2(2) not null,
-	constraint ck_atencionEspecial CHECK (atencionEspecial in ('Si','No'))
-)
+	nombreApellidos varchar(64) not null,
+	atencionEspecial varchar(2) not null,
+	constraint ck_atencionEspecialMonitor CHECK (atencionEspecial in ('Si','No'))
+);
 
 
 -- --------------------------------------------------------
@@ -35,15 +35,14 @@ CREATE TABLE IF NOT EXISTS Monitor (
 -- 
 DROP TABLE IF EXISTS Actividad;
 CREATE TABLE IF NOT EXISTS Actividad (
-
-    nombre varchar2(64) primary key,
-	nivelEducativo varchar2(64) not null,
-    horario varchar2(32) not null,
-    numMaxAsistentes number(14) not null,
-    numeroMonitores number(14) not null,
+    nombre varchar(64) primary key,
+	nivelEducativo varchar(64) not null,
+    horario varchar(32) not null,
+    numMaxAsistentes int(14) not null,
+    numeroMonitores int(14) not null,
 	constraint ck_NivelEducativo CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
-    constraint ck_Horario CHECK (horario in ('Maniana','Tarde')),	
-)
+    constraint ck_Horario CHECK (horario in ('Maniana','Tarde'))	
+);
 
 
 -- --------------------------------------------------------
@@ -52,17 +51,14 @@ CREATE TABLE IF NOT EXISTS Actividad (
 -- 
 DROP TABLE IF EXISTS Campamento;
 CREATE TABLE IF NOT EXISTS Campamento (
-
     Id int(8) primary key,
     fechaInicio date not null,
     fechaFin date not null,
-	nivelEducativo varchar2(64) not null,
-    numMaxAsistentes number(14) not null,
+	nivelEducativo varchar(64) not null,
+    numMaxAsistentes int(14) not null,
     IdMonitorResponsable int(8) not null,
     IdMonitorEspecial int(8),
-
-    --Queda pendiente representar las actividades
-	constraint ck_NivelEducativo CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
+	constraint ck_NivelEducativoCampamento CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
     constraint fk_IdMonitorResponsable foreign key (IdMonitorResponsable) references Monitor(Id),
     constraint fk_IdMonitorEspecial foreign key (IdMonitorEspecial) references Monitor(Id)
 )
@@ -74,9 +70,8 @@ CREATE TABLE IF NOT EXISTS Campamento (
 -- 
 DROP TABLE IF EXISTS Actividad_Monitor;
 CREATE TABLE IF NOT EXISTS Actividad_Monitor (
-
     Id int(8) primary key,
-    nombreActividad varchar2(64) not null,
+    nombreActividad varchar(64) not null,
 	idCampamento int(8) not null,
     constraint fk_Campamento foreign key (idCampamento) references Campamento(Id),
     constraint fk_nombreActividad foreign key (nombreActividad) references Actividad(nombre)
@@ -88,12 +83,11 @@ CREATE TABLE IF NOT EXISTS Actividad_Monitor (
 -- 
 DROP TABLE IF EXISTS Actividad_Campamento;
 CREATE TABLE IF NOT EXISTS Actividad_Campamento (
-
     Id int(8) primary key,
-    nombreActividad varchar2(64) not null,
+    nombreActividad varchar(64) not null,
 	idMonitor int(8) not null,
     constraint fk_IdMonitor foreign key (idMonitor) references Monitor(Id),
-    constraint fk_nombreActividad foreign key (nombreActividad) references Actividad(nombre)
+    constraint fk_nombreActividadCampamento foreign key (nombreActividad) references Actividad(nombre)
 )
 
 -- --------------------------------------------------------
@@ -102,13 +96,12 @@ CREATE TABLE IF NOT EXISTS Actividad_Campamento (
 -- 
 DROP TABLE IF EXISTS Inscripcion;
 CREATE TABLE IF NOT EXISTS Inscripcion (
-
     IdParticipante int(8) primary key,
     IdCampamento int(8) not null,
     fecha date not null,
     precio real not null,
-    tipo varchar2(16) not null,
-    registro varchar2(16) not null,
+    tipo varchar(16) not null,
+    registro varchar(16) not null,
     constraint ck_Tipo CHECK (tipo in ('Completa', 'Parcial')),
     constraint ck_Registro CHECK (registro in ('Temprano', 'Tardio')),
     constraint fk_IdParticipante foreign key (IdParticipante) references Asistente(Id),

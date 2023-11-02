@@ -1,26 +1,61 @@
 package Datos.Comun;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 
 public class ConexionBD {
 
+
+
+
+	protected String Usuario;
+	protected  String Contrasena;
+
 	protected Connection conexion = null;
 	
-	protected String url = "jdbc:mysql://oraclepr.uco.es:3306/i12brmac";
+	protected String url;
 
-	protected String usuario = "i12brmac";
+	public ConexionBD(String FichProperties){
 
-	protected String contrasenia = "PWCamp1";
+		Properties config = new Properties();
+		
+		try{
+			BufferedReader lector = new BufferedReader(new FileReader(new File(FichProperties)));
+			config.load(lector);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+
+		String Nombre = config.getProperty("nombre");
+		String Puerto = config.getProperty("puerto");
+		url="jdbc:mysql://oraclepr.uco.es:"+Puerto+"/"+Nombre;
+
+		Usuario = config.getProperty("usuario");
+		Contrasena=config.getProperty("contrasena");
+	}
+
+
+
+
 
 	public Connection getConnection(){
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.conexion = (Connection) DriverManager.getConnection(url, usuario, contrasenia);
+			this.conexion = (Connection) DriverManager.getConnection(url, Usuario, Contrasena);
 			System.out.println("¡Conexión a la base de datos con exito!");
 		} 
 		catch (SQLException e) {
