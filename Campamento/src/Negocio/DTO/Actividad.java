@@ -1,4 +1,4 @@
-package Datos;
+package Negocio.DTO;
 import java.util.ArrayList;
 
 import Datos.Comun.Horario;

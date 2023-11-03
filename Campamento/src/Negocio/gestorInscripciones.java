@@ -3,14 +3,14 @@ package Negocio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Datos.Asistente;
-import Datos.Campamento;
-import Datos.InscripcionCompleta;
-import Datos.InscripcionParcial;
-import Datos.Registro;
-import Datos.RegistroTardio;
-import Datos.RegistroTemprano;
 import Datos.Comun.NivelEducativo;
+import Negocio.DTO.Asistente;
+import Negocio.DTO.Campamento;
+import Negocio.DTO.InscripcionCompleta;
+import Negocio.DTO.InscripcionParcial;
+import Negocio.DTO.Registro;
+import Negocio.DTO.RegistroTardio;
+import Negocio.DTO.RegistroTemprano;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

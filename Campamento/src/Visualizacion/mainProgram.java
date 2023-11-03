@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Scanner;
 
-import Datos.Asistente;
 import Negocio.gestorAsistentes;
 import Negocio.gestorInscripciones;
+import Negocio.DTO.Asistente;
 
 public class mainProgram {
     public static void main(String[] args){

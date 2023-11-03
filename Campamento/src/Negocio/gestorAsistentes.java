@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Datos.Asistente;
+import Negocio.DTO.Asistente;
 
 import java.io.File;
 
@@ -70,7 +70,7 @@ public class gestorAsistentes{
 
             for (Asistente asist : lista){
 
-                escritor.write(asist.getId() + ";" + asist.getNombreCompleto() + ";" + asist.getFenachaNacimniento() + ";" + asist.getAtencionEsp() );
+                escritor.write(asist.getId() + ";" + asist.getNombreCompleto() + ";" + asist.getFechaNacimiento() + ";" + asist.getAtencionEsp() );
                 escritor.newLine();
             }
         } catch (IOException e){

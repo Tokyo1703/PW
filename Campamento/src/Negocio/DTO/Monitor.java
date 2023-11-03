@@ -1,4 +1,4 @@
-package Datos;
+package Negocio.DTO;
 
 public class Monitor {
     private int id;

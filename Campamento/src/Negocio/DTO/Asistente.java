@@ -1,4 +1,4 @@
-package Datos;
+package Negocio.DTO;
 
 import java.time.LocalDate;
 
@@ -28,7 +28,7 @@ public class Asistente {
         return nombreCompleto;
     }
 
-    public LocalDate getFenachaNacimniento(){
+    public LocalDate getFechaNacimiento(){
         return fechaNacimiento;
     }
 

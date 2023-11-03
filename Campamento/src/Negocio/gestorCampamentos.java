@@ -2,11 +2,11 @@ package Negocio;
 
 import java.util.ArrayList;
 
-import Datos.Actividad;
-import Datos.Campamento;
-import Datos.Monitor;
 import Datos.Comun.Horario;
 import Datos.Comun.NivelEducativo;
+import Negocio.DTO.Actividad;
+import Negocio.DTO.Campamento;
+import Negocio.DTO.Monitor;
 
 import java.time.LocalDate;
 
