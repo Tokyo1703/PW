@@ -1,9 +1,6 @@
 package Negocio.DTO;
 import java.util.ArrayList;
 
-import Datos.Comun.Horario;
-import Datos.Comun.NivelEducativo;
-
 
 
 public class Actividad {

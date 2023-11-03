@@ -1,4 +1,4 @@
-package Datos.Comun;
+package Negocio.DTO;
 
 public enum NivelEducativo{
     Infantil, Juvenil, Adolescente

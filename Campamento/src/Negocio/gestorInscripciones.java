@@ -3,11 +3,11 @@ package Negocio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Datos.Comun.NivelEducativo;
 import Negocio.DTO.Asistente;
 import Negocio.DTO.Campamento;
 import Negocio.DTO.InscripcionCompleta;
 import Negocio.DTO.InscripcionParcial;
+import Negocio.DTO.NivelEducativo;
 import Negocio.DTO.Registro;
 import Negocio.DTO.RegistroTardio;
 import Negocio.DTO.RegistroTemprano;
