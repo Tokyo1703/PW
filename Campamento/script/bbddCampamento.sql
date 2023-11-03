@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS Campamento (
     fechaFin date not null,
 	nivelEducativo varchar(64) not null,
     numMaxAsistentes int(14) not null,
-    IdMonitorResponsable int(8) not null,
+    IdMonitorResponsable int(8),
     IdMonitorEspecial int(8),
 	constraint ck_NivelEducativoCampamento CHECK (nivelEducativo in ('Infantil', 'Juvenil', 'Adolescente')),
     constraint fk_IdMonitorResponsable foreign key (IdMonitorResponsable) references Monitor(Id),

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Negocio.DTO.Actividad;
 import Negocio.DTO.Asistente;
+import Negocio.DTO.Campamento;
 import Negocio.DTO.Horario;
 import Negocio.DTO.Monitor;
 import Negocio.DTO.NivelEducativo;
@@ -25,11 +26,13 @@ public class PuebaDAOS {
         for(Asistente it:lista){
             System.out.println(it.toString());
         } */
-        MonitorDAO monitorDAO=new MonitorDAO();
+        //MonitorDAO monitorDAO=new MonitorDAO();
         //monitorDAO.AgregarMonitor(monitorPrueba);
         //ActividadDAO actividadDAO = new ActividadDAO();
         //actividadDAO.AgregarActividad(actividadPrueba);
-        monitorDAO.asociarMonitorActividad(monitorPrueba, actividadPrueba);
-
+        //monitorDAO.asociarMonitorActividad(monitorPrueba, actividadPrueba);
+        Campamento campamentoPrueba= new Campamento(21,LocalDate.parse("2023-11-15"),LocalDate.parse("2023-11-20"),NivelEducativo.Juvenil,100);
+        CampamentoDAO campamentoDAO=new CampamentoDAO();
+        campamentoDAO.AgregarCampamento(campamentoPrueba);
     }   
 }
