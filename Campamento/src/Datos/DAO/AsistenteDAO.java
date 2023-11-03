@@ -1,6 +1,9 @@
 package Datos.DAO;
 
+import java.util.ArrayList;
 import java.util.Properties;
+
+import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
 import Negocio.DTO.Asistente;
@@ -12,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 
 public class AsistenteDAO {
 
@@ -57,9 +61,84 @@ public class AsistenteDAO {
 		}catch(Exception e){
 			System.out.println(e);
 		}
-
-       
     }
+
+	public boolean existeID(int Id){
+		String Consulta=getConsulta("existeId");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,Id);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
+
+	public void modificar(Asistente asistente){
+		String Consulta=getConsulta("modificarAsistente");
+
+		try{
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+			String AtencionEspecial ="No";
+			if(asistente.getAtencionEsp()){
+				AtencionEspecial="Si";
+			}
+			ps.setInt(4,asistente.getId());
+			ps.setString(1,asistente.getNombreCompleto());
+			ps.setString(2,asistente.getFechaNacimiento().toString());
+			ps.setString(3,AtencionEspecial);
+			ps.executeUpdate();
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
+	public ArrayList<Asistente> listaAsistentes(){
+
+		ArrayList<Asistente> lista = new ArrayList<Asistente>();
+		String Consulta=getConsulta("listarAsistentes");
+
+		try{
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			while(rs.next()){
+				int id=rs.getInt("Id");
+				String nombre=rs.getString("nombreApellidos");
+				LocalDate fecha= LocalDate.parse(rs.getString("fechaNacimiento"));
+				String atencionEspecial=rs.getString("atencionEspecial");
+				boolean atencion=false;
+				if(atencionEspecial=="Si"){
+					atencion=true;
+				}
+				lista.add(new Asistente(id,nombre,fecha,atencion));
+
+			}
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+
+		return lista;
+	}
+		
 }
 
 	
