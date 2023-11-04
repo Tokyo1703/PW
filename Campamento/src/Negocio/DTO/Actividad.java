@@ -1,5 +1,4 @@
 package Negocio.DTO;
-import java.util.ArrayList;
 
 
 
@@ -10,7 +9,7 @@ public class Actividad {
     private Horario Hora;
     private int Capacidad;
     private int MonitoresMax;
-    private ArrayList<Monitor> MonitoresEncargados; //Implementamos un array para poder meter mas de un Monitor responsable
+
 
     public Actividad(){
 
@@ -22,7 +21,6 @@ public class Actividad {
         this.Hora = Hora;
         this.Capacidad = Capacidad;
         MonitoresMax = Monitores;
-        MonitoresEncargados = new ArrayList<Monitor>();
     }
 
     public String GetNombre(){
@@ -45,26 +43,12 @@ public class Actividad {
         return MonitoresMax;
     }
 
-    public ArrayList<Monitor> GetMonitoresEncargados(){
-        return new ArrayList<Monitor> (MonitoresEncargados);
-    }
 
     public String toString(){
         String informacion = ("Nombre: " + Nombre + "\nNivel: " + Nivel + "\nHora: " + Hora +
-                         "\nCapacidad: " + Capacidad + "\nMonitores Maximos: " + MonitoresMax +
-                         "\nMonitores: \n");
-        
-        for (Monitor i : MonitoresEncargados) {
-            informacion = informacion + i.toString() + "\n";    
-        }
-        return informacion;
-    }
+                         "\nCapacidad: " + Capacidad + "\nMonitores Maximos: " + MonitoresMax);
 
-    public void asociarMonitor(Monitor m){
-        if(MonitoresEncargados.size() < MonitoresMax)
-            MonitoresEncargados.add(m);
-        else
-            System.out.println("Esta actividad ya tiene los maximos monitores posibles asignados.");
+        return informacion;
     }
     
 }

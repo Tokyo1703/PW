@@ -1,139 +1,70 @@
 package Negocio;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import Negocio.DTO.Asistente;
 
-import java.io.File;
+import Datos.DAO.AsistenteDAO;
 
 public class gestorAsistentes{
 
-    private String DataArchive;
-    private ArrayList<Asistente> lista=new ArrayList<Asistente>();
+    private AsistenteDAO DAO;
     
-    public gestorAsistentes(String Data){
+    public gestorAsistentes(){
 
-        DataArchive = Data;
-        volcarDatos();
+        DAO = new AsistenteDAO();
     }
 
-    private void volcarDatos(){
-
-        try{
-            
-            BufferedReader lector = new BufferedReader(new FileReader(new File(DataArchive)));
-            boolean especial;
-
-            String linea;
-
-
-            while ((linea = lector.readLine()) != null) {
-                
-                String[] partes = linea.split(";");
-
-                if (partes.length == 4) {
-                    int id = Integer.parseInt(partes[0]);
-                    String nombre = partes[1];
-                    LocalDate fecha = LocalDate.parse(partes[2]);
-                    if(partes[3]=="true"){
-                        especial = true;
-                    }
-                    else{
-                        especial = false;
-                    }
-
-                    Asistente asistente = new Asistente(id, nombre, fecha, especial);
-                    lista.add(asistente);
-                }
-            }
-            
-            lector.close();
-                                
-
-        }
-        catch(IOException e){
-                System.out.println("Error IOException");
-                e.printStackTrace();
-        }
-    }
-
-    private void guardar(){
-
-        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(DataArchive))){
-
-            for (Asistente asist : lista){
-
-                escritor.write(asist.getId() + ";" + asist.getNombreCompleto() + ";" + asist.getFechaNacimiento() + ";" + asist.getAtencionEsp() );
-                escritor.newLine();
-            }
-        } catch (IOException e){
-
-            e.printStackTrace();
-        }
-    }
 
     public boolean addAsist(Asistente Nuevo){
-         
 
-        if(lista.isEmpty()){
-            volcarDatos(); 
-        }
+        if(!DAO.existeID(Nuevo.getId())){
 
-        for(Asistente asist : lista){
-
-            if(asist.getId() == Nuevo.getId()){
-
-                System.out.println("El asistente ya esta registrado\n");
-
-                return true;
-            }
-        }
-
-        if(lista.add(Nuevo)){
-
-            guardar();
+            DAO.AgregarAsistente(Nuevo);
             return true;
+        }else{
+
+            System.out.println("Ese asistente ya esta registrado\n");
         }
-        
-        return true;
+
+        return false;
     }
 
     public boolean editAsist(int id, Asistente Editado){
 
-        if(lista.isEmpty()){
-            
-            volcarDatos(); 
-        }
-        int i = 0;
+        if(DAO.existeID(id)){
 
-        for(Asistente asist : lista){
+            DAO.modificar(Editado);
+            return true;
+        }else{
 
-            if(asist.getId() == id){
-
-                lista.set(i, Editado);
-                guardar();
-                return true;
-            }
-
-            i++;
+            System.out.println("Asistente no encontrado\n");
         }
 
-        System.out.println("No se encontro ese participante\n");
         return false;
     }
 
-    public void print(){
+    public boolean deleteAsist(int id){
 
-        for(Asistente asist : lista){
+        if(DAO.existeID(id)){
 
-            System.out.println(asist.toString());
+            //Llamada al DAO.Delete(int id)
+            return true;
+        }else{
+
+            System.out.println("Asistente no encontrado\n");
         }
+
+        return false;
+    }
+
+    public boolean deleteAsist(Asistente Asist){
+
+        int id = Asist.getId();
+
+        return deleteAsist(id);
+    }
+
+    public void Listar(){
+
+        DAO.listaAsistentes();
     }
 }

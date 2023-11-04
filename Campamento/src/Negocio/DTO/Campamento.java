@@ -1,7 +1,6 @@
 package Negocio.DTO;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Campamento {
 
@@ -13,8 +12,6 @@ public class Campamento {
     private LocalDate fin_;                              //Fecha Final 
     private NivelEducativo nivel_;                  //Nivel educativo
     private int Nmax_;                              //Numero maximo de participantes 
-    private ArrayList<Actividad> ListaActividades_;     //Actividades del campamento
-    private ArrayList<Monitor> Responsable_;            //Monitor/s del campamento
     private boolean AsistenteEspecial;
 
     //Constructores 
@@ -32,8 +29,7 @@ public class Campamento {
         fin_ = fin;
         nivel_ = nivel;
         Nmax_ = Nmax;
-        ListaActividades_= new ArrayList<Actividad>();
-        AsistenteEspecial=false;
+        this.AsistenteEspecial = false;
     }
 
     //Getters
@@ -69,15 +65,9 @@ public class Campamento {
             return Nmax_;
         }
 
-        public ArrayList<Monitor> getResponsables(){
-            
-            return new ArrayList<Monitor> (Responsable_);
-        }
+        public boolean getEspecial(){
 
-
-        public ArrayList<Actividad> getActividades(){
-            
-            return new ArrayList<Actividad> (ListaActividades_);
+            return AsistenteEspecial;
         }
 
     //Setters
@@ -107,6 +97,11 @@ public class Campamento {
             Nmax_ = n;
         }
 
+        public void setEspecial(boolean bol){
+
+            AsistenteEspecial = bol;
+        }
+
     //Metodos
 
         //tostring: Imprime la informacion del campamento
@@ -114,106 +109,10 @@ public class Campamento {
         public String toString(){
 
             String InfoCampamento = "Identificador: " + id_ + "\nFecha de Inicio: " + inicio_ + "\nFecha de finalizacion: "
-                                    + fin_ + "\nNivel educativo: " + nivel_ + "Maximo de participantes: " + Nmax_ + 
-                                    "Actividades:\n";
-            
-            for (Actividad i : ListaActividades_) {
-
-                InfoCampamento = InfoCampamento + i.toString() + "\n";    
-            }
-            
-            InfoCampamento = InfoCampamento + "Monitores responsables:\n";
-
-                        
-            for (Monitor i : Responsable_) {
-
-                InfoCampamento = InfoCampamento + i.toString() + "\n";    
-            }
+                                    + fin_ + "\nNivel educativo: " + nivel_ + "Maximo de participantes: " + Nmax_ ;
 
             return InfoCampamento;
         }
 
-        //addActividad: Añade una actividad si esta es del mismo nivel que el campamento
 
-        public boolean addActividad(Actividad Nueva){
-
-            if(Nueva.GetNivel() == this.nivel_){
-
-                for(Actividad i : ListaActividades_){
-
-                    if(i.GetNombre() == Nueva.GetNombre()){
-                        System.out.println("Ya existe una actividad con ese nombre\n");
-                        return false;
-                    }
-                }
-
-                ListaActividades_.add(Nueva);
-                return true;
-
-            }else{
-
-                System.out.println("Nivel educativo no compatible\n");
-                return false;
-            }
-        }
-
-        //addMonitor: Añade un Monitor resposable del campamento
-
-        public boolean addMonitor(Monitor Nuevo){
-
-            for(Actividad i : ListaActividades_){
-
-                ArrayList<Monitor> Opciones = i.GetMonitoresEncargados();
-
-                for(Monitor j : Opciones){
-
-                    if(j.getId() == Nuevo.getId()){
-
-                        if(!Responsable_.isEmpty()){
-
-                            Responsable_.set(0, Nuevo);
-                            return true;
-                        }else{
-                        
-                            Responsable_.add(0, Nuevo);
-                            return true;
-                        }
-                    }
-                }
-            }
-        
-            return false;
-        }
-
-        //addMonitorEspecial: Añade un segundo monitor si esta capacitado para trato especial
-        public boolean addMonitorEspecial(Monitor Nuevo){
-
-            if(Nuevo.getAtencionEsp() == true && !Responsable_.isEmpty()){
-
-                for(Actividad i : ListaActividades_){
-
-                    ArrayList<Monitor> Opciones = i.GetMonitoresEncargados();
-
-                    for(Monitor j : Opciones){
-
-                        if(j.getId() == Nuevo.getId()){
-                            System.out.println("Este monitor esta asignado a una actividad\n");
-                            return false;
-                        }
-                    }
-                }
-                if(Responsable_.size() == 2){
-
-                    Responsable_.set(1, Nuevo);
-                    return true;
-                }else{
-               
-                    Responsable_.add(1, Nuevo);
-                    return true;
-                }
-
-            }
-        
-            return false;
-        }
 }
