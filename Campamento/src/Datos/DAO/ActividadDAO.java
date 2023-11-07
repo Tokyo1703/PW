@@ -9,9 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
+import com.mysql.jdbc.ResultSet;
+
 import Datos.Comun.ConexionBD;
 import Negocio.DTO.Actividad;
 import Negocio.DTO.Campamento;
+import Negocio.DTO.Horario;
+import Negocio.DTO.NivelEducativo;
 
 public class ActividadDAO {
     
@@ -57,6 +61,59 @@ public class ActividadDAO {
 			System.out.println(e);
 		}
     }
+
+	public boolean existeActividad(String nombre){
+		String Consulta=getConsulta("buscarActividad");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1,nombre);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
+
+	public Actividad buscarActividad(String nombre){
+		
+		String Consulta=getConsulta("buscarActividad");
+		Actividad actividad=new Actividad();
+		
+		try{
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1, nombre);
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			rs.next();
+
+			NivelEducativo nivelEducativo = NivelEducativo.valueOf(rs.getString("nivelEducativo"));
+			Horario horario = Horario.valueOf(rs.getString("horario"));
+			int numMaxAsistentes =rs.getInt("numMaxAsistentes");
+			int numeroMonitores=rs.getInt("numeroMonitores");
+			actividad=new Actividad(nombre,nivelEducativo,horario,numMaxAsistentes,numeroMonitores);
+
+			conexionBD.closeConnection();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return actividad;
+
+	}
 
 	public void asociarCampamentoActividad(Campamento Campamento, Actividad actividad){
         String Consulta=getConsulta("asociarCampamentoActividad");

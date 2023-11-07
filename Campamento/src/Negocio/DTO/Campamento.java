@@ -12,7 +12,8 @@ public class Campamento {
     private LocalDate fin_;                              //Fecha Final 
     private NivelEducativo nivel_;                  //Nivel educativo
     private int Nmax_;                              //Numero maximo de participantes 
-    private boolean AsistenteEspecial;
+    private String monitorResponsable_;
+    private String monitorEspecial_;
 
     //Constructores 
 
@@ -29,7 +30,6 @@ public class Campamento {
         fin_ = fin;
         nivel_ = nivel;
         Nmax_ = Nmax;
-        this.AsistenteEspecial = false;
     }
 
     //Getters
@@ -65,9 +65,14 @@ public class Campamento {
             return Nmax_;
         }
 
-        public boolean getEspecial(){
+        public String getResponsable(){
 
-            return AsistenteEspecial;
+            return monitorResponsable_;
+        }
+
+        public String getEspecial(){
+
+            return monitorEspecial_;
         }
 
     //Setters
@@ -97,9 +102,14 @@ public class Campamento {
             Nmax_ = n;
         }
 
-        public void setEspecial(boolean bol){
+        public void setResponsable(String monitorResponsable){
 
-            AsistenteEspecial = bol;
+            monitorResponsable_=monitorResponsable;
+        }
+
+        public void setEspecial(String monitorEspecial){
+
+            monitorEspecial_ = monitorEspecial;
         }
 
     //Metodos

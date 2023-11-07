@@ -64,7 +64,7 @@ public class AsistenteDAO {
     }
 
 	public boolean existeID(int Id){
-		String Consulta=getConsulta("existeId");
+		String Consulta=getConsulta("existeIdAsistente");
 		boolean existe=false;
 		try{
 			

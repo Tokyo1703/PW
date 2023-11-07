@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -16,6 +15,7 @@ import com.mysql.jdbc.ResultSet;
 import Datos.Comun.ConexionBD;
 import Negocio.DTO.Actividad;
 import Negocio.DTO.Monitor;
+
 
 
 public class MonitorDAO {
@@ -62,6 +62,61 @@ public class MonitorDAO {
 			System.out.println(e);
 		}
     }
+
+	public boolean existeID(int Id){
+		String Consulta=getConsulta("buscarMonitor");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,Id);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
+
+	public Monitor buscarMonitor(int id){
+		
+		String Consulta=getConsulta("buscarMonitor");
+		Monitor monitor=new Monitor();
+
+		try{
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1, id);
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			rs.next();
+				
+			Boolean atencionEspecial=false;
+			String nombreApellidos= rs.getString("nombreApellidos");
+			String atencion=rs.getString("atencionEspecial");
+			if(atencion=="Si"){
+				atencionEspecial=true;
+			}
+			monitor=new Monitor(id,nombreApellidos,atencionEspecial);
+
+			conexionBD.closeConnection();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return monitor;
+
+	}			
 
     public void asociarMonitorActividad(Monitor monitor, Actividad actividad){
         String Consulta=getConsulta("asociarMonitorActividad");
