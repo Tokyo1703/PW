@@ -28,36 +28,12 @@ public class gestorInscripciones
     
     // Constructor
 
-    public gestorInscripciones(String inscripcionesFile_, String campamentosFile_, String asistentesFile_)
+    public gestorInscripciones()
     {
         Campamento_DAO = new CampamentoDAO();
         Asistente_DAO = new AsistenteDAO();
         Inscripcion_DAO = new InscripcionDAO();
     } 
-
-    // Cuenta el numero de asistentes del campamento
-
-    private int nasistentes(int id)
-    {
-        int c = 0;
-        for (InscripcionCompleta aux : insCompleta)
-        {
-            if (aux.getIdCamp() == id)
-            {
-                c++;
-            }
-        }
-        for (InscripcionParcial aux : insParcial)
-        {
-            if (aux.getIdCamp() == id)
-            {
-                c++;
-            }
-        }
-
-        return c;
-    }
-
 
     // Añadir Inscripciones
 
@@ -89,8 +65,6 @@ public class gestorInscripciones
         // boolean AsistenteDAO::getAtencionEspecial(int id); Devuelve si el asistente necesita atencion especial
         InscripcionParcial ins = reg.createRegistroP(id_as, id_camp, fecha, 100 + Campamento_DAO.numeroActividades(id_camp)*20, Asistente_DAO.getAtencionEspecial());
         
-        // boolean InscripcionDAO::existeCompleta(int idAsistente, int idCampamento); Busca si existe la inscripcion entre las inscripciones completas
-        // boolean InscripcionDAO::existeParcial(int idAsistente, int idCampamento); Busca si existe la inscripcion entre las inscripciones parciales
         if (Inscripcion_DAO.existeCompleta(id_as, id_camp))
         {
             return false;
@@ -153,20 +127,21 @@ public class gestorInscripciones
 
     public ArrayList<Campamento> campamentos(LocalDate fecha)
     {
-        ArrayList<Campamento> camps_ = new ArrayList<Campamento>();
+        ArrayList<Campamento> camps = new ArrayList<Campamento>();
 
-        // ArrayList<Campamento> CampamentoDAO::getCampamentos(LocalDate fecha); Busca todos los campamentos cuya fecha de inicio sea mayor que fecha + 2 dias y que no tengan su maximo numero de asistentes y los devuelve en un array
-        camps_ = Campamento_DAO.buscarCampamentosPorFecha(fecha);
-        /*
-        for (Campamento aux : camps)
+        // ArrayList<Campamento> CampamentoDAO::getCampamentos(LocalDate fecha); Busca todos los campamentos cuya fecha de inicio sea mayor que fecha + 2 dias
+        camps = Campamento_DAO.buscarCampamentosPorFecha(fecha);
+        
+        for (int i = 0; i < camps.size(); i++)
         {
-            if ( ((int)(aux.getInicio().getDayOfMonth() - fecha.getDayOfMonth()) > 2) && (aux.getMax() > nasistentes(aux.getId()) ) )
+            // int CampamentoDAO::numeroAsistentes(int idCampamento); Devuelve la cantidad de asistentes al capamento
+            if (camps.get(i).getMax() > Campamento_DAO.numeroAsistentes(camps.get(i).getId()));
             {
-                camps_.add(aux);
+                camps.remove(i);
             }   
         }
-        */
-        return camps_;
+    
+        return camps;
     }
 
 }
