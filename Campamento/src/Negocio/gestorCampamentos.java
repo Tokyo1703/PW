@@ -1,7 +1,5 @@
 package Negocio;
 
-import java.util.ArrayList;
-
 import Datos.DAO.ActividadDAO;
 import Datos.DAO.CampamentoDAO;
 import Datos.DAO.MonitorDAO;
@@ -12,8 +10,6 @@ import Negocio.DTO.Monitor;
 import Negocio.DTO.NivelEducativo;
 
 import java.time.LocalDate;
-
-import clases.*;
 
 public class gestorCampamentos {
     
@@ -28,7 +24,7 @@ public class gestorCampamentos {
         Monitor_DAO = new MonitorDAO();
     }
     
-    public boolean AddCampamento(Campamento campamento){
+    public boolean InsertarCampamento(Campamento campamento){
         if(!Campamento_DAO.existeID(campamento.getId())){
             Campamento_DAO.AgregarCampamento(campamento);
             return true;
@@ -37,7 +33,7 @@ public class gestorCampamentos {
         }
     }
 
-    public boolean AddMonitor(Monitor monitor){
+    public boolean InsertarMonitor(Monitor monitor){
         if(!Monitor_DAO.existeID(monitor.getId())){
             Monitor_DAO.AgregarMonitor(monitor);
             return true;
@@ -46,7 +42,7 @@ public class gestorCampamentos {
         }
     }
 
-    public boolean AddActividad(Actividad actividad){
+    public boolean InsertarActividad(Actividad actividad){
         if(!Actividad_DAO.existeActividad(actividad.GetNombre())){
             Actividad_DAO.AgregarActividad(actividad);
             return true;
@@ -55,16 +51,20 @@ public class gestorCampamentos {
         }
     }
 
-    public boolean AsociarMonitorActividad(int id, String Nom ){
-        Actividad_DAO.asociarMonitorActividad(id,Nom);
+    public void AsociarMonitorActividad(Monitor monitor, Actividad actividad){
+        Monitor_DAO.asociarMonitorActividad(monitor,actividad);
     }
 
-    public boolean AsociarActividadcampamento(String Nom, int id ){
-        Campamento_DAO.asociarActividadCampamento(Nom,id);
+    public void AsociarActividadcampamento(Campamento campamento, Actividad actividad){
+        Actividad_DAO.asociarCampamentoActividad(campamento,actividad);
     }
 
-    public boolean AsociarMonitorESPCampamento(int IdMonitor, int IdCampamento ){
-        Campamento_DAO.asociarMonitorESP(IdMonitor,IdCampamento);
+    public void AsociarMonitorESPCampamento(int IdMonitor, int IdCampamento ){
+        Campamento_DAO.asociarMonitorEsp(IdMonitor,IdCampamento);
+    }
+
+    public void AsociarMonitorResponsable(int idMonitor, int idCampamento){
+        Campamento_DAO.asociarMonitorResponsable(idMonitor, idCampamento);
     }
 }
 
