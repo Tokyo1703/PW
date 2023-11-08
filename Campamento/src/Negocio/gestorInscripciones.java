@@ -102,7 +102,7 @@ public class gestorInscripciones
         else
         {
             // void InscripcionDAO::agregarParcial(InscripcionParcial inscripcion);
-            InscripcionDAO.agregarParcial(ins);
+            Inscripcion_DAO.agregarParcial(ins);
             return true;
         }
     }
@@ -144,7 +144,7 @@ public class gestorInscripciones
         else
         {
             // void InscripcionDAO::agregarCompleta(InscripcionCompleta inscripcion);
-            InscripcionDAO.agregarCompleta(ins);
+            Inscripcion_DAO.agregarCompleta(ins);
             return true;
         }
     }
