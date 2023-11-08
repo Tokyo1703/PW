@@ -21,7 +21,7 @@ public class gestorInscripciones
     // Clases Factoria
     private Registro reg;
 
-    // Ficheros Almacenamiento de Datos
+    // Acceso a base de datos
     private InscripcionDAO Inscripcion_DAO; 
     private CampamentoDAO Campamento_DAO;
     private AsistenteDAO Asistente_DAO; 
