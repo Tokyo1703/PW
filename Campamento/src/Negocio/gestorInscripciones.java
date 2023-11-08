@@ -63,7 +63,7 @@ public class gestorInscripciones
 
         // int CampamentoDAO::numeroActividades(int id); Devuelve el numero de actividades asignadas al campamento con ese id
         // boolean AsistenteDAO::getAtencionEspecial(int id); Devuelve si el asistente necesita atencion especial
-        InscripcionParcial ins = reg.createRegistroP(id_as, id_camp, fecha, 100 + Campamento_DAO.numeroActividades(id_camp)*20, Asistente_DAO.getAtencionEspecial());
+        InscripcionParcial ins = reg.createInscripcionP(id_as, id_camp, fecha, 100 + Campamento_DAO.numeroActividades(id_camp)*20);
         
         if (Inscripcion_DAO.existeCompleta(id_as, id_camp))
         {
@@ -105,7 +105,7 @@ public class gestorInscripciones
         }
 
 
-        InscripcionCompleta ins = reg.createRegistroC(id_as, id_camp, fecha, 100 + Campamento_DAO.numeroActividades(id_camp)*20, Asistente_DAO.getAtencionEspecial());
+        InscripcionCompleta ins = reg.createInscripcionC(id_as, id_camp, fecha, 100 + Campamento_DAO.numeroActividades(id_camp)*20);
         
         if (Inscripcion_DAO.existeParcial(id_as, id_camp))
         {

@@ -8,7 +8,6 @@ public abstract class Inscripcion
     protected int cmp_id;
     protected LocalDate fecha;
     protected float precio;
-    protected boolean necesidadEspecial;
     protected boolean cancelacion;
 
     // Constructor Vacio
@@ -18,7 +17,7 @@ public abstract class Inscripcion
     }
 
     // Constructor Diferenciador Temprano/Tardia
-    Inscripcion(int id_asist, int id_campa, LocalDate fecha, float precio, boolean necesidadEspecial, boolean cancelacion)
+    Inscripcion(int id_asist, int id_campa, LocalDate fecha, float precio, boolean cancelacion)
     {
 
         this.cancelacion = cancelacion;
@@ -26,7 +25,6 @@ public abstract class Inscripcion
         this.cmp_id = id_campa;
         this.fecha = fecha;
         this.precio = precio;
-        this.necesidadEspecial = necesidadEspecial;
     }
 
     // Getters
@@ -49,11 +47,6 @@ public abstract class Inscripcion
     public float getPrecio()
     {
         return precio;
-    }
-
-    public boolean getNecesidadEspecial()
-    {
-        return necesidadEspecial;
     }
 
     public String getCancelacion()
@@ -95,11 +88,6 @@ public abstract class Inscripcion
     public void setPrecio(float precio_)
     {
         this.precio = precio_;
-    }
-
-    public void setNecesidadEspecial(boolean necesidadEspecial_)
-    {
-        this.necesidadEspecial = necesidadEspecial_;
     }
 
 

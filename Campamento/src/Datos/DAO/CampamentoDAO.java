@@ -114,7 +114,7 @@ public class CampamentoDAO {
 
 	}
 
-	ArrayList<Campamento> buscarCampamentosPorFecha(LocalDate fecha){
+	public ArrayList<Campamento> buscarCampamentosPorFecha(LocalDate fecha){
 		String Consulta=getConsulta("buscarCampamentoPorFecha");
 		ArrayList<Campamento> lista = new ArrayList<Campamento>();
 
@@ -178,5 +178,28 @@ public class CampamentoDAO {
 		}catch(Exception e){
 			System.out.println(e);
 		}
+	}
+
+	public int numeroActividades(int idCampamento){
+		String Consulta=getConsulta("contarActividades");
+		int cantidad = 0;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,idCampamento);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				cantidad = rs.getInt("cantidad");
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return cantidad;
 	}
 }

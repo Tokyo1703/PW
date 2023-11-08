@@ -181,4 +181,5 @@ insertarInscipcion=insert into Inscripcion (idAsistente, idCampamento, fecha, pr
 buscarInscripcionParcial=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Parcial'
 buscarInscripcionCompleta=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Completa'
 contarAsistentes=select COUNT(idAsistente) as cantidad from Inscripcion where IdCampamento=?
+contarActividades=select COUNT(idCampamento) as cantidad from Actividad_Campamento where idCampamento=?
 */
