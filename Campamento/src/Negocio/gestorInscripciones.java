@@ -135,7 +135,7 @@ public class gestorInscripciones
         for (int i = 0; i < camps.size(); i++)
         {
             // int CampamentoDAO::numeroAsistentes(int idCampamento); Devuelve la cantidad de asistentes al capamento
-            if (camps.get(i).getMax() > Campamento_DAO.numeroAsistentes(camps.get(i).getId()));
+            if (camps.get(i).getMax() > Inscripcion_DAO.numeroAsistentes(camps.get(i).getId()));
             {
                 camps.remove(i);
             }   

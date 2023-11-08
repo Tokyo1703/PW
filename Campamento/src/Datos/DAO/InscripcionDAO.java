@@ -148,13 +148,37 @@ public class InscripcionDAO {
 		return existe;
     }
 
+	public int numeroAsistentes(int idCampamento){
+		String Consulta=getConsulta("contarAsistentes");
+		int cantidad = 0;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,idCampamento);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				cantidad = rs.getInt("cantidad");
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return cantidad;
+	}
+
 }
 
 // Añadir a sql.properties
 
 /*
-* #Inscripdion
-* insertarInscipcion=insert into Inscripcion (idAsistente, idCampamento, fecha, precio, tipo, registro) values (?,?,?,?,?,?)
-* buscarInscripcionParcial=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Parcial'
-* buscarInscripcionCompleta=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Completa'
+#Inscripdion
+insertarInscipcion=insert into Inscripcion (idAsistente, idCampamento, fecha, precio, tipo, registro) values (?,?,?,?,?,?)
+buscarInscripcionParcial=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Parcial'
+buscarInscripcionCompleta=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Completa'
+contarAsistentes=select COUNT(idAsistente) as cantidad from Inscripcion where IdCampamento=?
 */
