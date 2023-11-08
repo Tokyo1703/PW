@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
@@ -113,6 +114,35 @@ public class CampamentoDAO {
 
 	}
 
+	ArrayList<Campamento> buscarCampamentosPorFecha(LocalDate fecha){
+		String Consulta=getConsulta("buscarCampamentoPorFecha");
+		ArrayList<Campamento> lista = new ArrayList<Campamento>();
+
+		try{
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1, fecha.toString());
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			while(rs.next()){
+				int id=rs.getInt("Id");
+				LocalDate fechaInicio= LocalDate.parse(rs.getString("fechaInicio"));
+				LocalDate fechaFin= LocalDate.parse(rs.getString("fechaFin"));
+				NivelEducativo nivelEducativo = NivelEducativo.valueOf(rs.getString("nivelEducativo"));
+				int numMaxAsistentes =rs.getInt("numMaxAsistentes");
+				lista.add(new Campamento(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes));
+			}
+
+			conexionBD.closeConnection();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return lista;
+	}
+
 	public void asociarMonitorResponsable(int idMonitor, int idCampamento){
 		String Consulta=getConsulta("asociarMonitorResponsable");
 
@@ -131,6 +161,7 @@ public class CampamentoDAO {
 		}
 	}
 
+	
 	public void asociarMonitorEsp(int idMonitor, int idCampamento){
 		String Consulta=getConsulta("asociarMonitorEspecial");
 

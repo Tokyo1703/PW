@@ -31,7 +31,7 @@ public class PuebaDAOS {
         ActividadDAO actividadDAO = new ActividadDAO();
         //actividadDAO.AgregarActividad(actividadPrueba);
         //monitorDAO.asociarMonitorActividad(monitorPrueba, actividadPrueba);
-        //Campamento campamentoPrueba= new Campamento(21,LocalDate.parse("2023-11-15"),LocalDate.parse("2023-11-20"),NivelEducativo.Juvenil,100);
+        //Campamento campamentoPrueba= new Campamento(11,LocalDate.parse("2024-01-09"),LocalDate.parse("2024-01-13"),NivelEducativo.Juvenil,100);
         CampamentoDAO campamentoDAO=new CampamentoDAO();
         //campamentoDAO.AgregarCampamento(campamentoPrueba);
         /*if(actividadDAO.existeActividad("Escalada")){
@@ -43,8 +43,11 @@ public class PuebaDAOS {
             Campamento campamentoPrueba=campamentoDAO.buscarCampamento(21);
             System.out.println(campamentoPrueba.toString());
         }*/
-        campamentoDAO.asociarMonitorResponsable(11, 21);
-
+        //campamentoDAO.asociarMonitorResponsable(11, 21);
+        ArrayList<Campamento> lista= campamentoDAO.buscarCampamentosPorFecha(LocalDate.parse("2023-11-08"));
+        for(Campamento it: lista){
+            System.out.println(it.toString());
+        }
 
         
     }   

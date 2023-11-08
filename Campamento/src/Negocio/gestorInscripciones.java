@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Datos.DAO.AsistenteDAO;
 import Datos.DAO.CampamentoDAO;
+import Datos.DAO.InscripcionDAO;
 import Negocio.DTO.Asistente;
 import Negocio.DTO.Campamento;
 import Negocio.DTO.InscripcionCompleta;
@@ -63,7 +64,7 @@ public class gestorInscripciones
     public boolean inscribirParcial(int id_as, int id_camp, LocalDate fecha)
     {
         // Campamento CampamentoDAO::getCampamento(int id); Busca un campamento por id
-        Campamento camp = Campamento_DAO.getCampamento(id_camp); 
+        Campamento camp = Campamento_DAO.buscarCampamento(id_camp); 
         //Comprobar que exista el campamento
         if (camp == null)
         {
@@ -108,7 +109,7 @@ public class gestorInscripciones
 
     public boolean inscribirCompleta(int id_as, int id_camp, LocalDate fecha)
     {
-        Campamento camp = Campamento_DAO.getCampamento(id_camp); 
+        Campamento camp = Campamento_DAO.buscarCampamento(id_camp); 
         //Comprobar que exista el campamento
         if (camp == null)
         {
@@ -155,7 +156,7 @@ public class gestorInscripciones
         ArrayList<Campamento> camps_ = new ArrayList<Campamento>();
 
         // ArrayList<Campamento> CampamentoDAO::getCampamentos(LocalDate fecha); Busca todos los campamentos cuya fecha de inicio sea mayor que fecha + 2 dias y que no tengan su maximo numero de asistentes y los devuelve en un array
-        camps_ = Campamento_DAO.getCampamentos(fecha)
+        camps_ = Campamento_DAO.buscarCampamentosPorFecha(fecha);
         /*
         for (Campamento aux : camps)
         {
