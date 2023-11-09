@@ -125,9 +125,10 @@ public class AsistenteDAO {
 				LocalDate fecha= LocalDate.parse(rs.getString("fechaNacimiento"));
 				String atencionEspecial=rs.getString("atencionEspecial");
 				boolean atencion=false;
-				if(atencionEspecial=="Si"){
+				if(atencionEspecial.equals("Si")){
 					atencion=true;
 				}
+				
 				lista.add(new Asistente(id,nombre,fecha,atencion));
 
 			}
