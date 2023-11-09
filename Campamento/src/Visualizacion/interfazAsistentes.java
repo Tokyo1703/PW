@@ -30,7 +30,7 @@ public class interfazAsistentes {
 
         System.out.println("Introduzca el nombre completo:\n");
         sc = new Scanner(System.in);
-        nombre = sc.next();
+        nombre = sc.nextLine();
 
         System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
         sc = new Scanner(System.in);
@@ -41,13 +41,15 @@ public class interfazAsistentes {
         aux = sc.next();
         especial = false;
 
-        if (aux == "si") {
+        if(aux.equals("si")){
 
             especial = true;
         }
 
+        System.out.println(especial);
+
         Asistente nuevo = new Asistente(id, nombre, fecha, especial);
-        
+
         return Gestor.insertarAsistente(nuevo);
     }
 
@@ -71,7 +73,7 @@ public class interfazAsistentes {
 
         System.out.println("Introduzca el nombre completo:\n");
         sc = new Scanner(System.in);
-        nombre = sc.next();
+        nombre = sc.nextLine();
 
         System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
         sc = new Scanner(System.in);
@@ -82,7 +84,7 @@ public class interfazAsistentes {
         aux = sc.next();
         especial = false;
 
-        if (aux == "si") {
+        if (aux.equals("si")) {
 
             especial = true;
         }

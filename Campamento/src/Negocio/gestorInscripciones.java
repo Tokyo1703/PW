@@ -3,14 +3,11 @@ package Negocio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Datos.DAO.AsistenteDAO;
 import Datos.DAO.CampamentoDAO;
 import Datos.DAO.InscripcionDAO;
-import Negocio.DTO.Asistente;
 import Negocio.DTO.Campamento;
 import Negocio.DTO.InscripcionCompleta;
 import Negocio.DTO.InscripcionParcial;
-import Negocio.DTO.NivelEducativo;
 import Negocio.DTO.Registro;
 import Negocio.DTO.RegistroTardio;
 import Negocio.DTO.RegistroTemprano;
@@ -24,14 +21,12 @@ public class gestorInscripciones
     // Acceso a base de datos
     private InscripcionDAO Inscripcion_DAO; 
     private CampamentoDAO Campamento_DAO;
-    private AsistenteDAO Asistente_DAO; 
     
     // Constructor
 
     public gestorInscripciones()
     {
         Campamento_DAO = new CampamentoDAO();
-        Asistente_DAO = new AsistenteDAO();
         Inscripcion_DAO = new InscripcionDAO();
     } 
 

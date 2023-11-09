@@ -5,11 +5,7 @@ import Datos.DAO.CampamentoDAO;
 import Datos.DAO.MonitorDAO;
 import Negocio.DTO.Actividad;
 import Negocio.DTO.Campamento;
-import Negocio.DTO.Horario;
 import Negocio.DTO.Monitor;
-import Negocio.DTO.NivelEducativo;
-
-import java.time.LocalDate;
 
 public class gestorCampamentos {
     
