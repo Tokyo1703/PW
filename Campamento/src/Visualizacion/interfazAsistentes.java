@@ -13,7 +13,7 @@ public class interfazAsistentes {
 
     public void menu(){
 
-        System.out.println("---Menu Asistentes---\n\n1- Añadir nuevo asistente\n2- Modificar un asistente\n3- Borrar un asistente\n4- Listar asistentes\n5- salir");
+        System.out.println("---Menu Asistentes---\n\n1- Añadir nuevo asistente\n2- Modificar un asistente\n3- Listar asistentes\n4- salir");
     }
 
     public boolean añadir(){
@@ -24,35 +24,32 @@ public class interfazAsistentes {
         LocalDate fecha;
         boolean especial;
 
-        System.out.println("Introduzca el id:");
+        System.out.println("Introduzca el id:\n");
         sc = new Scanner(System.in);
         id = sc.nextInt();
-        sc.close();
 
-
-        System.out.println("Introduzca el nombre completo:");
+        System.out.println("Introduzca el nombre completo:\n");
         sc = new Scanner(System.in);
-        nombre = sc.next();
-        sc.close();
+        nombre = sc.nextLine();
 
-        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
+        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
         sc = new Scanner(System.in);
         fecha = LocalDate.parse(sc.next());
-        sc.close();
 
-        System.out.println("¿ Necesita atencion especial ? si/no :");
+        System.out.println("¿ Necesita atencion especial ? si/no :\n");
         sc = new Scanner(System.in);
         aux = sc.next();
-        sc.close();
         especial = false;
 
-        if (aux == "si") {
+        if(aux.equals("si")){
 
             especial = true;
         }
 
+        System.out.println(especial);
+
         Asistente nuevo = new Asistente(id, nombre, fecha, especial);
-        
+
         return Gestor.insertarAsistente(nuevo);
     }
 
@@ -67,7 +64,6 @@ public class interfazAsistentes {
         System.out.println("Inserte el id del asistente que desea editar\n");
         sc = new Scanner(System.in);
         id = sc.nextInt();
-        sc.close();
 
         if(!Gestor.existeID(id)){
 
@@ -75,23 +71,20 @@ public class interfazAsistentes {
             return false;
         }
 
-        System.out.println("Introduzca el nombre completo:");
+        System.out.println("Introduzca el nombre completo:\n");
         sc = new Scanner(System.in);
-        nombre = sc.next();
-        sc.close();
+        nombre = sc.nextLine();
 
-        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
+        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
         sc = new Scanner(System.in);
         fecha = LocalDate.parse(sc.next());
-        sc.close();
 
-        System.out.println("¿ Necesita atencion especial ? si/no :");
+        System.out.println("¿ Necesita atencion especial ? si/no :\n");
         sc = new Scanner(System.in);
         aux = sc.next();
-        sc.close();
         especial = false;
 
-        if (aux == "si") {
+        if (aux.equals("si")) {
 
             especial = true;
         }

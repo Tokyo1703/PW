@@ -1,5 +1,68 @@
 package Visualizacion;
 
+import java.util.Scanner;
+
+public class mainProgram {
+    public static void main(String[] args){
+
+        interfazAsistentes Asistente = new interfazAsistentes();
+
+        int opcion = 0;
+
+        Scanner sc;
+
+
+        while (opcion != 4){
+
+            Asistente.menu();
+            
+            sc = new Scanner(System.in);
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+
+                    if(Asistente.añadir()){
+
+                        System.out.println("Asistente Añadido correctamente\n");
+                    }else{
+
+                        System.out.println("Error. El asistente ya existe\n");
+                    }
+                    break;
+
+                case 2:
+
+                    if(Asistente.editar()){
+
+                        System.out.println("Asistente modificado con exito\n");
+                    }else{
+
+                        System.out.println("Error. No se encontro dicho asistente\n");
+                    }
+
+                    break;
+
+                case 3:
+
+                    Asistente.ListarAsistentes();
+
+                    break;
+                case 4:
+                    
+                    System.out.println("SALIENDO GESTOR ASISTENTES...");
+                    
+                    break;
+
+                default:
+                    System.out.println("Opcion no valida\n");
+                    break;
+            }
+        }
+    }
+}
+
+/*
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -241,3 +304,5 @@ public class mainProgram {
     }
     }
 }
+
+*/
