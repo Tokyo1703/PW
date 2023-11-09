@@ -11,8 +11,7 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.InscripcionParcial;
-import Negocio.DTO.InscripcionCompleta;
+import Negocio.DTO.Inscripcion;
 
 public class InscripcionDAO {
 
@@ -36,7 +35,7 @@ public class InscripcionDAO {
 		return Consulta;
 	}
 
-	public void agregarParcial(InscripcionParcial inscripcion){
+	public void agregarParcial(Inscripcion inscripcion){
 
 		String Consulta=getConsulta("insertarInscipcion");
 
@@ -45,19 +44,12 @@ public class InscripcionDAO {
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
-			ps.setInt(1, inscripcion.getIdAsis());
-			ps.setInt(2,inscripcion.getIdCamp());
+			ps.setInt(1, inscripcion.getIdAsistente());
+			ps.setInt(2,inscripcion.getIdCampamento());
 			ps.setString(3,inscripcion.getFecha().toString());
 			ps.setFloat(4,inscripcion.getPrecio());
 			ps.setString(5,"Parcial");
-			if(inscripcion.getBooleanCancel())
-			{
-				ps.setString(6,"Temprano");
-			}
-			else
-			{
-				ps.setString(6,"Tardio");
-			}
+			ps.setString(6, inscripcion.getRegistro().name());
 
 			ps.executeUpdate();
 
@@ -67,7 +59,7 @@ public class InscripcionDAO {
 		}
     }
 
-	public void agregarCompleta(InscripcionCompleta inscripcion){
+	public void agregarCompleta(Inscripcion inscripcion){
 
 		String Consulta=getConsulta("insertarInscipcion");
 
@@ -76,19 +68,12 @@ public class InscripcionDAO {
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
-			ps.setInt(1, inscripcion.getIdAsis());
-			ps.setInt(2,inscripcion.getIdCamp());
+			ps.setInt(1, inscripcion.getIdAsistente());
+			ps.setInt(2,inscripcion.getIdCampamento());
 			ps.setString(3,inscripcion.getFecha().toString());
 			ps.setFloat(4,inscripcion.getPrecio());
 			ps.setString(5,"Completa");
-			if(inscripcion.getBooleanCancel())
-			{
-				ps.setString(6,"Temprano");
-			}
-			else
-			{
-				ps.setString(6,"Tardio");
-			}
+			ps.setString(6, inscripcion.getRegistro().name());
 
 			ps.executeUpdate();
 
@@ -172,14 +157,3 @@ public class InscripcionDAO {
 	}
 
 }
-
-// Añadir a sql.properties
-
-/*
-#Inscripdion
-insertarInscipcion=insert into Inscripcion (idAsistente, idCampamento, fecha, precio, tipo, registro) values (?,?,?,?,?,?)
-buscarInscripcionParcial=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Parcial'
-buscarInscripcionCompleta=select * from Inscripcion where IdParticipante=? and IdCampamento=? and tipo='Completa'
-contarAsistentes=select COUNT(idAsistente) as cantidad from Inscripcion where IdCampamento=?
-contarActividades=select COUNT(idCampamento) as cantidad from Actividad_Campamento where idCampamento=?
-*/

@@ -2,41 +2,46 @@ package Negocio.DTO;
 
 import java.time.LocalDate;
 
-public abstract class Inscripcion
+import Negocio.DTO.Enum.Registro;
+import Negocio.DTO.Enum.TipoInscripcion;
+
+public class Inscripcion
 {
-    protected int asis_id;
-    protected int cmp_id;
-    protected LocalDate fecha;
-    protected float precio;
-    protected boolean cancelacion;
+    private int idAsistente;
+    private int idCampamento;
+    private LocalDate fecha;
+    private float precio;
+    private Registro tipoRegistro;
+    private TipoInscripcion tipoInscripcion;
 
     // Constructor Vacio
-    Inscripcion()
+    public Inscripcion()
     {
 
     }
 
     // Constructor Diferenciador Temprano/Tardia
-    Inscripcion(int id_asist, int id_campa, LocalDate fecha, float precio, boolean cancelacion)
+    public Inscripcion(int idAsistente_, int idCampamento_, LocalDate fecha_, float precio_, Registro tipoRegistro_, TipoInscripcion tipoInscripcion_)
     {
 
-        this.cancelacion = cancelacion;
-        this.asis_id = id_asist;
-        this.cmp_id = id_campa;
-        this.fecha = fecha;
-        this.precio = precio;
+        this.idAsistente = idAsistente_;
+        this.idCampamento = idCampamento_;
+        this.fecha = fecha_;
+        this.precio = precio_;
+        this.tipoRegistro = tipoRegistro_;
+        this.tipoInscripcion = tipoInscripcion_;
     }
 
     // Getters
 
-    public int getIdAsis()
+    public int getIdAsistente()
     {
-        return asis_id;
+        return idAsistente;
     }
 
-    public int getIdCamp()
+    public int getIdCampamento()
     {
-        return cmp_id;
+        return idCampamento;
     }
 
     public LocalDate getFecha()
@@ -49,35 +54,26 @@ public abstract class Inscripcion
         return precio;
     }
 
-    public String getCancelacion()
+    public Registro getRegistro()
     {
-        
-        String permitido = "No permitida";
-
-        if(cancelacion == true){
-
-            permitido = "Permitida";
-        }
-
-        return permitido;
+        return tipoRegistro;
     }
         
-    public boolean getBooleanCancel()
+    public TipoInscripcion getTipoInscripcion()
     {
-        
-        return cancelacion;
+        return tipoInscripcion;
     }
 
     // Setters
 
-    public void setIdAsis(int id)
+    public void setIdAsistente(int id)
     {
-        this.asis_id = id;
+        this.idAsistente = id;
     }
 
-    public void setIdCmp(int id)
+    public void setIdCampamento(int id)
     {
-        this.cmp_id = id;
+        this.idCampamento = id;
     }
 
     public void setFecha(LocalDate fecha_)
@@ -93,7 +89,7 @@ public abstract class Inscripcion
 
     public String toString(){
 
-        String info = "Id participante: " + this.asis_id + "\nId campamento: " + this.cmp_id + "\nFecha de la inscipcion: " 
+        String info = "Id participante: " + this.idAsistente + "\nId campamento: " + this.idCampamento + "\nFecha de la inscipcion: " 
         + this.fecha + "\nPrecio: " + this.precio;
 
         return info;
