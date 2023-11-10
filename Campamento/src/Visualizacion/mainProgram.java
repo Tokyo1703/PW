@@ -14,49 +14,32 @@ public class mainProgram {
 
         while (opcion != 4){
 
-            Asistente.menu();
-            
+            System.out.println("\nEscoga una opción:\n"+
+                    "1) Gestionar asistentes\n"+
+                    "2) Gestionar campamentos\n"+
+                    "3) Gestionar inscripciones\n"+
+                    "4) Cerrar menu");
+
             sc = new Scanner(System.in);
             opcion = sc.nextInt();
 
-            switch (opcion) {
+            switch(opcion){
+                
                 case 1:
 
-                    if(Asistente.añadir()){
-
-                        System.out.println("Asistente Añadido correctamente\n");
-                    }else{
-
-                        System.out.println("Error. El asistente ya existe\n");
-                    }
+                    Asistente.menu();
                     break;
 
                 case 2:
-
-                    if(Asistente.editar()){
-
-                        System.out.println("Asistente modificado con exito\n");
-                    }else{
-
-                        System.out.println("Error. No se encontro dicho asistente\n");
-                    }
 
                     break;
 
                 case 3:
 
-                    Asistente.ListarAsistentes();
+                    break;
+            
+            
 
-                    break;
-                case 4:
-                    
-                    System.out.println("SALIENDO GESTOR ASISTENTES...");
-                    
-                    break;
-
-                default:
-                    System.out.println("Opcion no valida\n");
-                    break;
             }
         }
     }

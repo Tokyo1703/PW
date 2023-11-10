@@ -2,6 +2,8 @@ package Visualizacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Negocio.gestorAsistentes;
@@ -12,32 +14,93 @@ public class interfazAsistentes {
     private gestorAsistentes Gestor = new gestorAsistentes();
 
     public void menu(){
+        try{
+            Scanner sc;
+            int opcion=0;
+            while(opcion!=4){
 
-        System.out.println("---Menu Asistentes---\n\n1- Añadir nuevo asistente\n2- Modificar un asistente\n3- Listar asistentes\n4- salir");
+                System.out.println("---Menu Asistentes---\n\n"+
+                                "1- Añadir nuevo asistente\n"+
+                                "2- Modificar un asistente\n"+
+                                "3- Listar asistentes\n"+
+                                "4- Salir");
+
+                sc = new Scanner(System.in);
+                opcion = sc.nextInt();
+            
+            
+                switch (opcion) {
+                    case 1:
+
+                        if(añadir()){
+
+                            System.out.println("Asistente Añadido correctamente\n");
+                        }else{
+
+                            System.out.println("Error. El asistente ya existe\n");
+                        }
+                        break;
+
+                    case 2:
+
+                        if(editar()){
+
+                            System.out.println("Asistente modificado con exito\n");
+                        }else{
+
+                            System.out.println("Error. No se encontro dicho asistente\n");
+                        }
+
+                        break;
+
+                    case 3:
+
+                        ListarAsistentes();
+
+                        break;
+                    case 4:
+                        
+                        System.out.println("SALIENDO GESTOR ASISTENTES...");
+                        
+                        break;
+
+                    default:
+                        System.out.println("Opcion no valida\n");
+                        break;
+                }
+            }                
+        }
+        catch(InputMismatchException e){
+            e.printStackTrace();
+        }
+        catch(NoSuchElementException e){
+            e.printStackTrace();
+        }
+        catch(IllegalStateException e){
+            e.printStackTrace();
+        }
+        
     }
 
-    public boolean añadir(){
+    private boolean añadir(){
 
-        Scanner sc;
+        Scanner sc = new Scanner(System.in);
         int id;
-        String nombre, aux;
+        String nombre="", aux;
         LocalDate fecha;
         boolean especial;
 
-        System.out.println("Introduzca el id:\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nIntroduzca el id:");
         id = sc.nextInt();
 
-        System.out.println("Introduzca el nombre completo:\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nIntroduzca el nombre completo:");
+        sc.nextLine();
         nombre = sc.nextLine();
 
-        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nIntroduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
         fecha = LocalDate.parse(sc.next());
 
-        System.out.println("¿ Necesita atencion especial ? si/no :\n");
-        sc = new Scanner(System.in);
+        System.out.println("\n¿Necesita atencion especial? si/no :");
         aux = sc.next();
         especial = false;
 
@@ -46,41 +109,37 @@ public class interfazAsistentes {
             especial = true;
         }
 
-        System.out.println(especial);
-
         Asistente nuevo = new Asistente(id, nombre, fecha, especial);
 
         return Gestor.insertarAsistente(nuevo);
+        
     }
 
-    public boolean editar(){
+    private boolean editar(){
 
-        Scanner sc;
+        Scanner sc=new Scanner(System.in);
         int id;
         String nombre, aux;
         LocalDate fecha;
         boolean especial;
 
-        System.out.println("Inserte el id del asistente que desea editar\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nInserte el id del asistente que desea editar");
         id = sc.nextInt();
 
         if(!Gestor.existeID(id)){
 
-            System.out.println("No existe un asistente con ese ID\n");
+            System.out.println("\nNo existe un asistente con ese ID");
             return false;
         }
 
-        System.out.println("Introduzca el nombre completo:\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nIntroduzca el nombre completo:");
+        sc.nextLine();
         nombre = sc.nextLine();
 
-        System.out.println("Introduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':\n");
-        sc = new Scanner(System.in);
+        System.out.println("\nIntroduzca la fecha de nacimiento con el siguiente formato 'yyyy-mm-dd':");
         fecha = LocalDate.parse(sc.next());
 
-        System.out.println("¿ Necesita atencion especial ? si/no :\n");
-        sc = new Scanner(System.in);
+        System.out.println("\n ¿Necesita atencion especial? si/no :");
         aux = sc.next();
         especial = false;
 
@@ -93,7 +152,7 @@ public class interfazAsistentes {
         return Gestor.editarAsistente(id, edit);
     }
 
-    public void ListarAsistentes(){
+    private void ListarAsistentes(){
 
         ArrayList<Asistente> lista = new ArrayList<Asistente>();
         lista = Gestor.Listar();
