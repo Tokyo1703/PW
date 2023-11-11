@@ -14,9 +14,12 @@ public class interfazAsistentes {
     private gestorAsistentes Gestor = new gestorAsistentes();
 
     public void menu(){
+
         try{
-            Scanner sc;
+
+            Scanner sc=new Scanner(System.in);
             int opcion=0;
+
             while(opcion!=4){
 
                 System.out.println("---Menu Asistentes---\n\n"+
@@ -25,7 +28,7 @@ public class interfazAsistentes {
                                 "3- Listar asistentes\n"+
                                 "4- Salir");
 
-                sc = new Scanner(System.in);
+                
                 opcion = sc.nextInt();
             
             
@@ -125,12 +128,6 @@ public class interfazAsistentes {
 
         System.out.println("\nInserte el id del asistente que desea editar");
         id = sc.nextInt();
-
-        if(!Gestor.existeID(id)){
-
-            System.out.println("\nNo existe un asistente con ese ID");
-            return false;
-        }
 
         System.out.println("\nIntroduzca el nombre completo:");
         sc.nextLine();

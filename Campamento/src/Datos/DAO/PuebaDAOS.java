@@ -14,18 +14,18 @@ public class PuebaDAOS {
     public static void main(String[] args){
         LocalDate fecha=LocalDate.parse("2000-09-22");
         Asistente asistentePrueba=new Asistente(16,"Ivan Romero Garcia",fecha,true);
-        //Monitor monitorPrueba=new Monitor(11,"Luis Ramirez Benito",false);
-        //Actividad actividadPrueba=new Actividad("Escalada", NivelEducativo.Juvenil,Horario.valueOf("Manana"), 10, 3);
+        Monitor monitorPrueba=new Monitor(22,"Pepe Garcia Cruz",false);
+        Actividad actividadPrueba=new Actividad("Escalada", NivelEducativo.Juvenil,Horario.valueOf("Manana"), 10, 3);
         AsistenteDAO asistenteDAO=new AsistenteDAO();
         //asistenteDAO.AgregarAsistente(asistentePrueba);
         /*if(asistenteDAO.existeID(11)){
             System.out.println("Si existe");
-        }*/
+        }
         //asistenteDAO.modificar(asistentePrueba);
         ArrayList<Asistente> lista=asistenteDAO.listaAsistentes();
         for(Asistente it:lista){
             System.out.println(it.toString());
-        }
+        }*/
         MonitorDAO monitorDAO=new MonitorDAO();
         //monitorDAO.AgregarMonitor(monitorPrueba);
         ActividadDAO actividadDAO = new ActividadDAO();
@@ -48,7 +48,8 @@ public class PuebaDAOS {
         for(Campamento it: lista2){
             System.out.println(it.toString());
         }*/
-
         
+        System.out.println(monitorDAO.cantidadActividadesMonitor(23));
+
     }   
 }

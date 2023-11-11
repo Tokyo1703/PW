@@ -118,6 +118,29 @@ public class MonitorDAO {
 
 	}			
 
+	public int cantidadActividadesMonitor(int id){
+		String Consulta=getConsulta("cantidadActividadesMonitor");
+		int cantidad=0;
+
+		try {
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1, id);
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			rs.next();
+			cantidad=rs.getInt("cantidad");
+			
+			conexionBD.closeConnection();
+
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}	
+		return cantidad;
+	}
     public void asociarMonitorActividad(Monitor monitor, Actividad actividad){
         String Consulta=getConsulta("asociarMonitorActividad");
 

@@ -17,6 +17,7 @@ import Negocio.DTO.Campamento;
 import Negocio.DTO.Horario;
 import Negocio.DTO.NivelEducativo;
 
+
 public class ActividadDAO {
     
     private String getConsulta(String clave){
@@ -38,6 +39,8 @@ public class ActividadDAO {
 
 		return Consulta;
 	}
+
+
 
     public void AgregarActividad(Actividad actividad){
 
@@ -115,6 +118,34 @@ public class ActividadDAO {
 
 	}
 
+	public int cantidadMonitoresActividad(String nombre){
+		
+		String Consulta=getConsulta("cantidadMonitoresActividad");
+		int cantidad=0;
+
+		try {
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1, nombre);
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			rs.next();
+			cantidad=rs.getInt("cantidad");
+			
+			conexionBD.closeConnection();
+
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}	
+		return cantidad;
+		
+	}
+
+
+	
 	public void asociarCampamentoActividad(Campamento Campamento, Actividad actividad){
         String Consulta=getConsulta("asociarCampamentoActividad");
 
