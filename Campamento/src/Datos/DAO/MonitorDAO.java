@@ -104,7 +104,7 @@ public class MonitorDAO {
 			Boolean atencionEspecial=false;
 			String nombreApellidos= rs.getString("nombreApellidos");
 			String atencion=rs.getString("atencionEspecial");
-			if(atencion=="Si"){
+			if(atencion.equals("Si")){
 				atencionEspecial=true;
 			}
 			monitor=new Monitor(id,nombreApellidos,atencionEspecial);
