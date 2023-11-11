@@ -6,11 +6,11 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Negocio.gestorCampamentos;
-import Negocio.DTO.Actividad;
-import Negocio.DTO.Campamento;
-import Negocio.DTO.Horario;
-import Negocio.DTO.Monitor;
-import Negocio.DTO.NivelEducativo;
+import Negocio.DTO.ActividadDTO;
+import Negocio.DTO.CampamentoDTO;
+import Negocio.DTO.MonitorDTO;
+import Negocio.DTO.Enum.Horario;
+import Negocio.DTO.Enum.NivelEducativo;
 
 public class interfazCampamentos {
     
@@ -202,7 +202,7 @@ public class interfazCampamentos {
             especial = true;
         }
 
-        Monitor nuevo = new Monitor(id, nombre, especial);
+        MonitorDTO nuevo = new MonitorDTO(id, nombre, especial);
 
         return Gestor_campamento.InsertarMonitor(nuevo);
     }
@@ -249,7 +249,7 @@ public class interfazCampamentos {
         System.out.println("Inserte la capacidad maxima de monitores de la actividad\n");
         MonitoresMax = sc.nextInt();
 
-        Actividad nueva = new Actividad(Nombre, Nivel, Hora, Capacidad, MonitoresMax);
+        ActividadDTO nueva = new ActividadDTO(Nombre, Nivel, Hora, Capacidad, MonitoresMax);
 
         return Gestor_campamento.InsertarActividad(nueva);
     }
@@ -317,7 +317,7 @@ public class interfazCampamentos {
         System.out.println("Inserte capacidad maxima del campamento\n");
         Max = sc.nextInt();
 
-        Campamento nuevo = new Campamento(id, Inicio, Fin, nivel, Max);
+        CampamentoDTO nuevo = new CampamentoDTO(id, Inicio, Fin, nivel, Max);
 
         return Gestor_campamento.InsertarCampamento(nuevo);
     }

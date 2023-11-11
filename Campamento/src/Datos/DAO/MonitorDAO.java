@@ -13,8 +13,8 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.Actividad;
-import Negocio.DTO.Monitor;
+import Negocio.DTO.ActividadDTO;
+import Negocio.DTO.MonitorDTO;
 
 
 
@@ -41,7 +41,7 @@ public class MonitorDAO {
 
 	}
 
-    public void AgregarMonitor(Monitor monitor){
+    public void AgregarMonitor(MonitorDTO monitor){
 
 		String Consulta=getConsulta("insertarMonitor");
 
@@ -86,10 +86,10 @@ public class MonitorDAO {
 		return existe;
 	}
 
-	public Monitor buscarMonitor(int id){
+	public MonitorDTO buscarMonitor(int id){
 		
 		String Consulta=getConsulta("buscarMonitor");
-		Monitor monitor=new Monitor();
+		MonitorDTO monitor=new MonitorDTO();
 
 		try{
 			ConexionBD conexionBD=new ConexionBD("config.properties");
@@ -107,7 +107,7 @@ public class MonitorDAO {
 			if(atencion.equals("Si")){
 				atencionEspecial=true;
 			}
-			monitor=new Monitor(id,nombreApellidos,atencionEspecial);
+			monitor=new MonitorDTO(id,nombreApellidos,atencionEspecial);
 
 			conexionBD.closeConnection();
 			
@@ -141,7 +141,7 @@ public class MonitorDAO {
 		}	
 		return cantidad;
 	}
-    public void asociarMonitorActividad(Monitor monitor, Actividad actividad){
+    public void asociarMonitorActividad(MonitorDTO monitor, ActividadDTO actividad){
         String Consulta=getConsulta("asociarMonitorActividad");
 
 		try{
@@ -158,9 +158,9 @@ public class MonitorDAO {
     }
 
 
-    public ArrayList<Monitor> listaMonitores(){
+    public ArrayList<MonitorDTO> listaMonitores(){
 
-		ArrayList<Monitor> lista = new ArrayList<Monitor>();
+		ArrayList<MonitorDTO> lista = new ArrayList<MonitorDTO>();
 		String Consulta=getConsulta("listarMonitores");
 
 		try{
@@ -177,7 +177,7 @@ public class MonitorDAO {
 				if(atencionEspecial=="Si"){
 					atencion=true;
 				}
-				lista.add(new Monitor(id,nombre,atencion));
+				lista.add(new MonitorDTO(id,nombre,atencion));
 
 			}
 			conexionBD.closeConnection();

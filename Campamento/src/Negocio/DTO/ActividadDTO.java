@@ -1,8 +1,9 @@
 package Negocio.DTO;
 
+import Negocio.DTO.Enum.Horario;
+import Negocio.DTO.Enum.NivelEducativo;
 
-
-public class Actividad {
+public class ActividadDTO {
     
     private String Nombre;
     private NivelEducativo Nivel;
@@ -11,11 +12,11 @@ public class Actividad {
     private int MonitoresMax;
 
 
-    public Actividad(){
+    public ActividadDTO(){
 
     }
 
-    public Actividad(String Nombre, NivelEducativo Nivel, Horario Hora, int Capacidad, int Monitores){
+    public ActividadDTO(String Nombre, NivelEducativo Nivel, Horario Hora, int Capacidad, int Monitores){
         this.Nombre = Nombre;
         this.Nivel = Nivel;
         this.Hora = Hora;

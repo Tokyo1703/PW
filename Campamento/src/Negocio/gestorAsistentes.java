@@ -1,6 +1,6 @@
 package Negocio;
 
-import Negocio.DTO.Asistente;
+import Negocio.DTO.AsistenteDTO;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class gestorAsistentes{
     }
 
 
-    public boolean insertarAsistente(Asistente Nuevo){
+    public boolean insertarAsistente(AsistenteDTO Nuevo){
 
         if(!DAO.existeID(Nuevo.getId())){
 
@@ -37,7 +37,7 @@ public class gestorAsistentes{
         return false;
     }
 
-    public boolean editarAsistente(int id, Asistente Editado){
+    public boolean editarAsistente(int id, AsistenteDTO Editado){
 
         if(DAO.existeID(id)){
 
@@ -48,9 +48,9 @@ public class gestorAsistentes{
         return false;
     }
 
-    public ArrayList<Asistente> Listar(){
+    public ArrayList<AsistenteDTO> Listar(){
 
-        ArrayList<Asistente> lista = new ArrayList<Asistente>(); 
+        ArrayList<AsistenteDTO> lista = new ArrayList<AsistenteDTO>(); 
         lista = DAO.listaAsistentes();
 
         return lista;

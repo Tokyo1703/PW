@@ -2,18 +2,18 @@ package Negocio.DTO;
 
 import java.time.LocalDate;
 
-public class Asistente {
+public class AsistenteDTO {
     
     private int id;
     private String nombreCompleto;
     private LocalDate fechaNacimiento;
     private boolean atencionEsp;
 
-    public Asistente(){
+    public AsistenteDTO(){
 
     }
 
-    public Asistente(int id, String nombreCompleto, LocalDate fechaNacimiento, boolean atencionEsp){
+    public AsistenteDTO(int id, String nombreCompleto, LocalDate fechaNacimiento, boolean atencionEsp){
         this.id=id;
         this.nombreCompleto=nombreCompleto;
         this.fechaNacimiento=fechaNacimiento;

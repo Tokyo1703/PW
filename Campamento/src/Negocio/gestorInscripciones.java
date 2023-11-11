@@ -8,8 +8,8 @@ import Datos.DAO.AsistenteDAO;
 import Datos.DAO.CampamentoDAO;
 import Datos.DAO.InscripcionDAO;
 
-import Negocio.DTO.Campamento;
-import Negocio.DTO.Inscripcion;
+import Negocio.DTO.CampamentoDTO;
+import Negocio.DTO.InscripcionDTO;
 import Negocio.DTO.Enum.Registro;
 import Negocio.DTO.Enum.TipoInscripcion;
 
@@ -41,7 +41,7 @@ public class gestorInscripciones
             return false;
         }
         
-        Campamento camp = Campamento_DAO.buscarCampamento(idCampamento);
+        CampamentoDTO camp = Campamento_DAO.buscarCampamento(idCampamento);
         if(camp.getMax() <= Inscripcion_DAO.numeroAsistentes(camp.getId())){
             error=2;
             return false;
@@ -73,7 +73,7 @@ public class gestorInscripciones
             precio = 300 + Campamento_DAO.numeroActividades(idCampamento)*20;
         }
 
-        Inscripcion ins =  new Inscripcion(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
+        InscripcionDTO ins =  new InscripcionDTO(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
         
         if(Inscripcion_DAO.existeInscripcion(idAsistente, idCampamento))
         {
@@ -91,10 +91,10 @@ public class gestorInscripciones
     
     // Campamentos disponibles
 
-    public ArrayList<Campamento> campamentosDisponibles()
+    public ArrayList<CampamentoDTO> campamentosDisponibles()
     {
         LocalDate fecha = LocalDate.now();
-        ArrayList<Campamento> camps = new ArrayList<Campamento>();
+        ArrayList<CampamentoDTO> camps = new ArrayList<CampamentoDTO>();
 
         camps = Campamento_DAO.buscarCampamentosPorFecha(fecha.plusDays(2));
 

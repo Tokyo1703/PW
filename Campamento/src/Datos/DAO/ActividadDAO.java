@@ -12,10 +12,10 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.Actividad;
-import Negocio.DTO.Campamento;
-import Negocio.DTO.Horario;
-import Negocio.DTO.NivelEducativo;
+import Negocio.DTO.ActividadDTO;
+import Negocio.DTO.CampamentoDTO;
+import Negocio.DTO.Enum.Horario;
+import Negocio.DTO.Enum.NivelEducativo;
 
 
 public class ActividadDAO {
@@ -42,7 +42,7 @@ public class ActividadDAO {
 
 
 
-    public void AgregarActividad(Actividad actividad){
+    public void AgregarActividad(ActividadDTO actividad){
 
 		String Consulta=getConsulta("insertarActividad");
 
@@ -88,10 +88,10 @@ public class ActividadDAO {
 		return existe;
 	}
 
-	public Actividad buscarActividad(String nombre){
+	public ActividadDTO buscarActividad(String nombre){
 		
 		String Consulta=getConsulta("buscarActividad");
-		Actividad actividad=new Actividad();
+		ActividadDTO actividad=new ActividadDTO();
 		
 		try{
 			ConexionBD conexionBD=new ConexionBD("config.properties");
@@ -107,7 +107,7 @@ public class ActividadDAO {
 			Horario horario = Horario.valueOf(rs.getString("horario"));
 			int numMaxAsistentes =rs.getInt("numMaxAsistentes");
 			int numeroMonitores=rs.getInt("numeroMonitores");
-			actividad=new Actividad(nombre,nivelEducativo,horario,numMaxAsistentes,numeroMonitores);
+			actividad=new ActividadDTO(nombre,nivelEducativo,horario,numMaxAsistentes,numeroMonitores);
 
 			conexionBD.closeConnection();
 			
@@ -146,7 +146,7 @@ public class ActividadDAO {
 
 
 	
-	public void asociarCampamentoActividad(Campamento Campamento, Actividad actividad){
+	public void asociarCampamentoActividad(CampamentoDTO Campamento, ActividadDTO actividad){
         String Consulta=getConsulta("asociarCampamentoActividad");
 
 		try{

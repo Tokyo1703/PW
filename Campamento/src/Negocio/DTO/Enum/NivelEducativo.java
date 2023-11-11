@@ -1,4 +1,4 @@
-package Negocio.DTO;
+package Negocio.DTO.Enum;
 
 public enum NivelEducativo{
     Infantil, Juvenil, Adolescente

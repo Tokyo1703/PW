@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import Negocio.DTO.Enum.Registro;
 import Negocio.DTO.Enum.TipoInscripcion;
 
-public class Inscripcion
+public class InscripcionDTO
 {
     private int idAsistente;
     private int idCampamento;
@@ -15,13 +15,13 @@ public class Inscripcion
     private TipoInscripcion tipoInscripcion;
 
     // Constructor Vacio
-    public Inscripcion()
+    public InscripcionDTO()
     {
 
     }
 
     // Constructor Diferenciador Temprano/Tardia
-    public Inscripcion(int idAsistente_, int idCampamento_, LocalDate fecha_, float precio_, Registro tipoRegistro_, TipoInscripcion tipoInscripcion_)
+    public InscripcionDTO(int idAsistente_, int idCampamento_, LocalDate fecha_, float precio_, Registro tipoRegistro_, TipoInscripcion tipoInscripcion_)
     {
 
         this.idAsistente = idAsistente_;

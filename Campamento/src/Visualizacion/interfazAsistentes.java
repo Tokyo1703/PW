@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Negocio.gestorAsistentes;
-import Negocio.DTO.Asistente;
+import Negocio.DTO.AsistenteDTO;
 
 public class interfazAsistentes {
 
@@ -112,7 +112,7 @@ public class interfazAsistentes {
             especial = true;
         }
 
-        Asistente nuevo = new Asistente(id, nombre, fecha, especial);
+        AsistenteDTO nuevo = new AsistenteDTO(id, nombre, fecha, especial);
 
         return Gestor.insertarAsistente(nuevo);
         
@@ -145,16 +145,16 @@ public class interfazAsistentes {
             especial = true;
         }
 
-        Asistente edit = new Asistente(id, nombre, fecha, especial);
+        AsistenteDTO edit = new AsistenteDTO(id, nombre, fecha, especial);
         return Gestor.editarAsistente(id, edit);
     }
 
     private void ListarAsistentes(){
 
-        ArrayList<Asistente> lista = new ArrayList<Asistente>();
+        ArrayList<AsistenteDTO> lista = new ArrayList<AsistenteDTO>();
         lista = Gestor.Listar();
 
-        for(Asistente it: lista){
+        for(AsistenteDTO it: lista){
 
             System.out.println(it.toString());
         }

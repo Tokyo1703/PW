@@ -6,7 +6,7 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.Asistente;
+import Negocio.DTO.AsistenteDTO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,7 +40,7 @@ public class AsistenteDAO {
 
 	}
 
-    public void AgregarAsistente(Asistente asistente){
+    public void AgregarAsistente(AsistenteDTO asistente){
 
 		String Consulta=getConsulta("insertarAsistente");
 
@@ -86,7 +86,7 @@ public class AsistenteDAO {
 		return existe;
 	}
 
-	public void modificar(Asistente asistente){
+	public void modificar(AsistenteDTO asistente){
 		String Consulta=getConsulta("modificarAsistente");
 
 		try{
@@ -108,9 +108,9 @@ public class AsistenteDAO {
 		}
 	}
 	
-	public ArrayList<Asistente> listaAsistentes(){
+	public ArrayList<AsistenteDTO> listaAsistentes(){
 
-		ArrayList<Asistente> lista = new ArrayList<Asistente>();
+		ArrayList<AsistenteDTO> lista = new ArrayList<AsistenteDTO>();
 		String Consulta=getConsulta("listarAsistentes");
 
 		try{
@@ -129,7 +129,7 @@ public class AsistenteDAO {
 					atencion=true;
 				}
 				
-				lista.add(new Asistente(id,nombre,fecha,atencion));
+				lista.add(new AsistenteDTO(id,nombre,fecha,atencion));
 
 			}
 			conexionBD.closeConnection();

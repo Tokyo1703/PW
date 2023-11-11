@@ -2,7 +2,9 @@ package Negocio.DTO;
 
 import java.time.LocalDate;
 
-public class Campamento {
+import Negocio.DTO.Enum.NivelEducativo;
+
+public class CampamentoDTO {
 
 
     
@@ -18,12 +20,12 @@ public class Campamento {
     //Constructores 
 
     //Constructor Vacio
-    public Campamento(){
+    public CampamentoDTO(){
 
     }
 
     //Constructor Parametrizado
-    public Campamento(int id, LocalDate inicio, LocalDate fin, NivelEducativo nivel, int Nmax){
+    public CampamentoDTO(int id, LocalDate inicio, LocalDate fin, NivelEducativo nivel, int Nmax){
 
         id_ = id;
         inicio_ = inicio;

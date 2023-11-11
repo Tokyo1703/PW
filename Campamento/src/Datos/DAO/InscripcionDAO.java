@@ -11,7 +11,7 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.Inscripcion;
+import Negocio.DTO.InscripcionDTO;
 
 public class InscripcionDAO {
 
@@ -35,7 +35,7 @@ public class InscripcionDAO {
 		return Consulta;
 	}
 
-	public void agregarInscripcion(Inscripcion inscripcion){
+	public void agregarInscripcion(InscripcionDTO inscripcion){
 
 		String Consulta=getConsulta("insertarInscipcion");
 

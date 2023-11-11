@@ -1,15 +1,15 @@
 package Negocio.DTO;
 
-public class Monitor {
+public class MonitorDTO {
     private int id;
     private String NombreCompleto;
     private boolean AtencionEsp;
 
-    public Monitor(){
+    public MonitorDTO(){
 
     }
 
-    public Monitor(int id, String NombreCompleto, boolean AtencionEsp){
+    public MonitorDTO(int id, String NombreCompleto, boolean AtencionEsp){
         this.id = id;
         this.NombreCompleto = NombreCompleto;
         this.AtencionEsp = AtencionEsp;

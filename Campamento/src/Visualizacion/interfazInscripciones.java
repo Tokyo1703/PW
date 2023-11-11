@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Negocio.gestorInscripciones;
-import Negocio.DTO.Campamento;
+import Negocio.DTO.CampamentoDTO;
 import Negocio.DTO.Enum.TipoInscripcion;
 
 public class interfazInscripciones {
@@ -105,10 +105,10 @@ public class interfazInscripciones {
 
     private void ListarCampamentos(){
 
-        ArrayList<Campamento> lista = new ArrayList<Campamento>();
+        ArrayList<CampamentoDTO> lista = new ArrayList<CampamentoDTO>();
         lista = Gestor.campamentosDisponibles();
 
-        for(Campamento it: lista){
+        for(CampamentoDTO it: lista){
 
             System.out.println(it.toString());
         }

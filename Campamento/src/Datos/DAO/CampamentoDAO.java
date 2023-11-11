@@ -13,8 +13,8 @@ import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
 import Datos.Comun.ConexionBD;
-import Negocio.DTO.Campamento;
-import Negocio.DTO.NivelEducativo;
+import Negocio.DTO.CampamentoDTO;
+import Negocio.DTO.Enum.NivelEducativo;
 
 public class CampamentoDAO {
 
@@ -38,7 +38,7 @@ public class CampamentoDAO {
 		return Consulta;
 	}
 
-	public void AgregarCampamento(Campamento campamento){
+	public void AgregarCampamento(CampamentoDTO campamento){
 
 		String Consulta=getConsulta("insertarCampamento");
 
@@ -84,10 +84,10 @@ public class CampamentoDAO {
 		return existe;
 	}
 
-	public Campamento buscarCampamento(int id){
+	public CampamentoDTO buscarCampamento(int id){
 		
 		String Consulta=getConsulta("buscarCampamento");
-		Campamento campamento=new Campamento();
+		CampamentoDTO campamento=new CampamentoDTO();
 
 		try{
 			ConexionBD conexionBD=new ConexionBD("config.properties");
@@ -103,7 +103,7 @@ public class CampamentoDAO {
 			LocalDate fechaFin= LocalDate.parse(rs.getString("fechaFin"));
 			NivelEducativo nivelEducativo = NivelEducativo.valueOf(rs.getString("nivelEducativo"));
 			int numMaxAsistentes =rs.getInt("numMaxAsistentes");
-			campamento=new Campamento(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes);
+			campamento=new CampamentoDTO(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes);
 
 			conexionBD.closeConnection();
 			
@@ -114,9 +114,9 @@ public class CampamentoDAO {
 
 	}
 
-	public ArrayList<Campamento> buscarCampamentosPorFecha(LocalDate fecha){
+	public ArrayList<CampamentoDTO> buscarCampamentosPorFecha(LocalDate fecha){
 		String Consulta=getConsulta("buscarCampamentoPorFecha");
-		ArrayList<Campamento> lista = new ArrayList<Campamento>();
+		ArrayList<CampamentoDTO> lista = new ArrayList<CampamentoDTO>();
 
 		try{
 			ConexionBD conexionBD=new ConexionBD("config.properties");
@@ -132,7 +132,7 @@ public class CampamentoDAO {
 				LocalDate fechaFin= LocalDate.parse(rs.getString("fechaFin"));
 				NivelEducativo nivelEducativo = NivelEducativo.valueOf(rs.getString("nivelEducativo"));
 				int numMaxAsistentes =rs.getInt("numMaxAsistentes");
-				lista.add(new Campamento(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes));
+				lista.add(new CampamentoDTO(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes));
 			}
 
 			conexionBD.closeConnection();

@@ -3,9 +3,9 @@ package Negocio;
 import Datos.DAO.ActividadDAO;
 import Datos.DAO.CampamentoDAO;
 import Datos.DAO.MonitorDAO;
-import Negocio.DTO.Actividad;
-import Negocio.DTO.Campamento;
-import Negocio.DTO.Monitor;
+import Negocio.DTO.ActividadDTO;
+import Negocio.DTO.CampamentoDTO;
+import Negocio.DTO.MonitorDTO;
 
 public class gestorCampamentos {
     
@@ -20,7 +20,7 @@ public class gestorCampamentos {
         Monitor_DAO = new MonitorDAO();
     }
     
-    public boolean InsertarCampamento(Campamento campamento){
+    public boolean InsertarCampamento(CampamentoDTO campamento){
         if(!Campamento_DAO.existeID(campamento.getId())){
             Campamento_DAO.AgregarCampamento(campamento);
             return true;
@@ -29,7 +29,7 @@ public class gestorCampamentos {
         }
     }
 
-    public boolean InsertarMonitor(Monitor monitor){
+    public boolean InsertarMonitor(MonitorDTO monitor){
         if(!Monitor_DAO.existeID(monitor.getId())){
             Monitor_DAO.AgregarMonitor(monitor);
             return true;
@@ -38,7 +38,7 @@ public class gestorCampamentos {
         }
     }
 
-    public boolean InsertarActividad(Actividad actividad){
+    public boolean InsertarActividad(ActividadDTO actividad){
         if(!Actividad_DAO.existeActividad(actividad.GetNombre())){
             Actividad_DAO.AgregarActividad(actividad);
             return true;
@@ -50,8 +50,8 @@ public class gestorCampamentos {
     //0 --> Exito 1--> Fallo no esite ese monitor 2--> Fallo no exite esa actividad
     public int AsociarMonitorActividad(int ID_Monitor, String Nombre_Actividad){
 
-        Monitor monitor = new Monitor();
-        Actividad actividad = new Actividad();
+        MonitorDTO monitor = new MonitorDTO();
+        ActividadDTO actividad = new ActividadDTO();
 
         if(Monitor_DAO.existeID(ID_Monitor)){
 
@@ -76,8 +76,8 @@ public class gestorCampamentos {
     //0 --> Exito 1--> Fallo no esite ese campamento 2--> Fallo no exite esa actividad
     public int AsociarActividadcampamento(int ID_Campamento, String Nombre_Actividad){
 
-        Campamento campamento = new Campamento();
-        Actividad actividad = new Actividad();
+        CampamentoDTO campamento = new CampamentoDTO();
+        ActividadDTO actividad = new ActividadDTO();
 
         if(Campamento_DAO.existeID(ID_Campamento)){
 
@@ -107,7 +107,7 @@ public class gestorCampamentos {
             return 1;
         }else{
 
-            Monitor especial = new Monitor();
+            MonitorDTO especial = new MonitorDTO();
             especial = Monitor_DAO.buscarMonitor(IdMonitor);
 
             if(!especial.getAtencionEsp()){
