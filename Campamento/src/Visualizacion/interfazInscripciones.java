@@ -25,7 +25,7 @@ public class interfazInscripciones {
                                 "1- Realizar Inscripcion Completa \n"+
                                 "2- Realizar Inscripcion Parcial \n"+
                                 "3- Ver campamentos disponibles \n"+
-                                "4- Cerrar gestor"); 
+                                "4- Salir"); 
 
                 opcion = sc.nextInt();
                 

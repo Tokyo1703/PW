@@ -22,7 +22,7 @@ public class interfazAsistentes {
 
             while(opcion!=4){
 
-                System.out.println("---Menu Asistentes---\n\n"+
+                System.out.println("\n---Menu Asistentes---\n\n"+
                                 "1- Añadir nuevo asistente\n"+
                                 "2- Modificar un asistente\n"+
                                 "3- Listar asistentes\n"+

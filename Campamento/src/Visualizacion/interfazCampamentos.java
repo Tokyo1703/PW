@@ -23,7 +23,11 @@ public class interfazCampamentos {
 
             while(opcion != 4){
                 
-                System.out.println("---Menu Campamentos---\n1- Añadir Monitor\n2- Gestionar Actividades\n3- Gestionar Campamentos\n4- Salir\n");
+                System.out.println("\n---Menu Campamentos, Actividades y Monitores---\n\n"+
+                                "1- Añadir monitor\n"+
+                                "2- Gestionar actividades\n"+
+                                "3- Gestionar campamentos\n"+
+                                "4- Salir\n");
 
                 sc = new Scanner(System.in);
                 opcion = sc.nextInt();
@@ -50,7 +54,7 @@ public class interfazCampamentos {
                         break;
                     case 4:
                     
-                        System.out.println("SALIENDO MENU CAMPAMENTO...\n");
+                        System.out.println("SALIENDO MENU GESTOR CAMPAMENTOS...\n");
                         break;
                     default:
                         
