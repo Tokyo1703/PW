@@ -34,8 +34,9 @@ public class gestorInscripciones
 
     // Añadir Inscripciones
 
-    public boolean inscribirParcial(int idAsistente, int idCampamento, LocalDate fecha)
+    public boolean inscribirParcial(int idAsistente, int idCampamento)
     {
+        LocalDate fecha=LocalDate.now();
         if (!Asistente_DAO.existeID(idAsistente))
         {
             error = 0;
@@ -85,8 +86,11 @@ public class gestorInscripciones
         }
     }
 
-    public boolean inscribirCompleta(int idAsistente, int idCampamento, LocalDate fecha)
+    public boolean inscribirCompleta(int idAsistente, int idCampamento)
     {
+
+        LocalDate fecha= LocalDate.now();
+
         if (!Asistente_DAO.existeID(idAsistente))
         {
             error = 0;
@@ -138,8 +142,9 @@ public class gestorInscripciones
 
     // Campamentos disponibles
 
-    public ArrayList<Campamento> campamentosDisponibles(LocalDate fecha)
+    public ArrayList<Campamento> campamentosDisponibles()
     {
+        LocalDate fecha = LocalDate.now();
         ArrayList<Campamento> camps = new ArrayList<Campamento>();
 
         camps = Campamento_DAO.buscarCampamentosPorFecha(fecha.plusDays(2));

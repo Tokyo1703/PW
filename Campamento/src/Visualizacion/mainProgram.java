@@ -2,10 +2,14 @@ package Visualizacion;
 
 import java.util.Scanner;
 
+import Negocio.DTO.Inscripcion;
+
 public class mainProgram {
     public static void main(String[] args){
 
-        interfazAsistentes Asistente = new interfazAsistentes();
+        interfazAsistentes InterfazAsistentes = new interfazAsistentes();
+        interfazInscripciones InterfazInscripciones = new interfazInscripciones();
+        interfazCampamentos InterfazCampamentos = new interfazCampamentos();
 
         int opcion = 0;
 
@@ -27,19 +31,18 @@ public class mainProgram {
                 
                 case 1:
 
-                    Asistente.menu();
+                    InterfazAsistentes.menu();
                     break;
 
                 case 2:
 
+                    //InterfazCampamentos.menu();
                     break;
 
                 case 3:
 
+                    InterfazInscripciones.menu();
                     break;
-            
-            
-
             }
         }
     }
