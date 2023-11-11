@@ -35,7 +35,7 @@ public class InscripcionDAO {
 		return Consulta;
 	}
 
-	public void agregarParcial(Inscripcion inscripcion){
+	public void agregarInscripcion(Inscripcion inscripcion){
 
 		String Consulta=getConsulta("insertarInscipcion");
 
@@ -48,7 +48,7 @@ public class InscripcionDAO {
 			ps.setInt(2,inscripcion.getIdCampamento());
 			ps.setString(3,inscripcion.getFecha().toString());
 			ps.setFloat(4,inscripcion.getPrecio());
-			ps.setString(5,"Parcial");
+			ps.setString(5,inscripcion.getTipoInscripcion().name());
 			ps.setString(6, inscripcion.getRegistro().name());
 
 			ps.executeUpdate();
@@ -59,58 +59,9 @@ public class InscripcionDAO {
 		}
     }
 
-	public void agregarCompleta(Inscripcion inscripcion){
+	public boolean existeInscripcion(int idAsistente, int idCampamento){
 
-		String Consulta=getConsulta("insertarInscipcion");
-
-		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
-        	Connection conexion=conexionBD.getConnection();
-			PreparedStatement ps=conexion.prepareStatement(Consulta);
-
-			ps.setInt(1, inscripcion.getIdAsistente());
-			ps.setInt(2,inscripcion.getIdCampamento());
-			ps.setString(3,inscripcion.getFecha().toString());
-			ps.setFloat(4,inscripcion.getPrecio());
-			ps.setString(5,"Completa");
-			ps.setString(6, inscripcion.getRegistro().name());
-
-			ps.executeUpdate();
-
-			conexionBD.closeConnection();
-		}catch(Exception e){
-			System.out.println(e);
-		}
-    }
-
-	public boolean existeParcial(int idAsistente, int idCampamento){
-
-		String Consulta=getConsulta("buscarInscripcionParcial");
-		boolean existe=false;
-		try{
-			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
-        	Connection conexion=conexionBD.getConnection();	
-			PreparedStatement ps=conexion.prepareStatement(Consulta);
-
-			ps.setInt(1,idAsistente);
-			ps.setInt(2,idCampamento);
-
-			ResultSet rs=(ResultSet)ps.executeQuery();
-			if(rs.next()){
-				existe=true;
-			}
-
-			conexionBD.closeConnection();
-		}catch(Exception e){
-			System.out.println(e);
-		}
-		return existe;
-    }
-
-	public boolean existeCompleta(int idAsistente, int idCampamento){
-
-		String Consulta=getConsulta("buscarInscripcionCompleta");
+		String Consulta=getConsulta("buscarInscripcion");
 		boolean existe=false;
 		try{
 			

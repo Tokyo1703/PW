@@ -2,6 +2,7 @@ package Negocio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 
 import Datos.DAO.AsistenteDAO;
 import Datos.DAO.CampamentoDAO;
@@ -13,29 +14,21 @@ import Negocio.DTO.Enum.Registro;
 import Negocio.DTO.Enum.TipoInscripcion;
 
 
+
 public class gestorInscripciones
 {
     // Codigo de error que se pueda producir, obten el mensaje con mensajeError()
     private int error;
-
+    
     // Acceso a base de datos
-    private InscripcionDAO Inscripcion_DAO; 
-    private CampamentoDAO Campamento_DAO;
-    private AsistenteDAO Asistente_DAO;
+    private InscripcionDAO Inscripcion_DAO=new InscripcionDAO(); 
+    private CampamentoDAO Campamento_DAO=new CampamentoDAO();
+    private AsistenteDAO Asistente_DAO=new AsistenteDAO();
 
-    // Constructor
-
-    public gestorInscripciones()
-    {
-        Campamento_DAO = new CampamentoDAO();
-        Inscripcion_DAO = new InscripcionDAO();
-        Asistente_DAO = new AsistenteDAO();
-    } 
 
     // Añadir Inscripciones
 
-    public boolean inscribirParcial(int idAsistente, int idCampamento)
-    {
+    public boolean realizarInscripcion(int idAsistente, int idCampamento, TipoInscripcion tipo){
         LocalDate fecha=LocalDate.now();
         if (!Asistente_DAO.existeID(idAsistente))
         {
@@ -47,11 +40,16 @@ public class gestorInscripciones
             error = 1;
             return false;
         }
-
-        Campamento camp = Campamento_DAO.buscarCampamento(idCampamento); 
+        
+        Campamento camp = Campamento_DAO.buscarCampamento(idCampamento);
+        if(camp.getMax() <= Inscripcion_DAO.numeroAsistentes(camp.getId())){
+            error=2;
+            return false;
+        }
+         
         Registro tipoRegistro;
         
-        int dias = (int) (camp.getInicio().getDayOfMonth() - fecha.getDayOfMonth());
+        int dias = (int) ChronoUnit.DAYS.between(fecha,camp.getInicio());
         if (dias>=15)
         {
             tipoRegistro = Registro.Temprano;
@@ -62,84 +60,35 @@ public class gestorInscripciones
         }
         else // Menos de 48h del inicio no se puede registrar
         {
-            error = 2;
-            return false;
-        }
-
-        Inscripcion ins =  new Inscripcion(idAsistente, idCampamento, fecha, 100 + Campamento_DAO.numeroActividades(idCampamento)*20, tipoRegistro, TipoInscripcion.Parcial);
-        
-        if (Inscripcion_DAO.existeCompleta(idAsistente, idCampamento))
-        {
             error = 3;
             return false;
         }
-        else if (Inscripcion_DAO.existeParcial(idAsistente, idCampamento))
+        
+        
+        float precio;
+        if(tipo==TipoInscripcion.Parcial){
+            precio = 100 + Campamento_DAO.numeroActividades(idCampamento)*20;
+        }
+        else{
+            precio = 300 + Campamento_DAO.numeroActividades(idCampamento)*20;
+        }
+
+        Inscripcion ins =  new Inscripcion(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
+        
+        if(Inscripcion_DAO.existeInscripcion(idAsistente, idCampamento))
         {
-            error = -1;
-            return true;
+            error = 4;
+            return false;
         }
         else
         {
-            Inscripcion_DAO.agregarParcial(ins);
+            Inscripcion_DAO.agregarInscripcion(ins);
             error = -1;
             return true;
         }
     }
 
-    public boolean inscribirCompleta(int idAsistente, int idCampamento)
-    {
-
-        LocalDate fecha= LocalDate.now();
-
-        if (!Asistente_DAO.existeID(idAsistente))
-        {
-            error = 0;
-            return false;
-        }
-        if (!Campamento_DAO.existeID(idCampamento))
-        {
-            error = 1;
-            return false;
-        }
-
-        Campamento camp = Campamento_DAO.buscarCampamento(idCampamento); 
-        Registro tipoRegistro;
-
-        int dias = (int) (camp.getInicio().getDayOfMonth() - fecha.getDayOfMonth());
-        if (dias>=15)
-        {
-            tipoRegistro = Registro.Temprano;
-        }
-        else if (dias>2)
-        {
-            tipoRegistro = Registro.Tardio;
-        }
-        else // Menos de 48h del inicio no se puede registrar
-        {
-            error = 2;
-            return false;
-        }
-
-        Inscripcion ins =  new Inscripcion(idAsistente, idCampamento, fecha, 300 + Campamento_DAO.numeroActividades(idCampamento)*20, tipoRegistro, TipoInscripcion.Completa);
-        
-        if (Inscripcion_DAO.existeParcial(idAsistente, idCampamento))
-        {
-            error = 3;
-            return false;
-        }
-        else if (Inscripcion_DAO.existeCompleta(idAsistente, idCampamento))
-        {
-            error = -1;
-            return true;
-        }
-        else
-        {
-            Inscripcion_DAO.agregarCompleta(ins);
-            error = -1;
-            return true;
-        }
-    }
-
+    
     // Campamentos disponibles
 
     public ArrayList<Campamento> campamentosDisponibles()
@@ -148,11 +97,11 @@ public class gestorInscripciones
         ArrayList<Campamento> camps = new ArrayList<Campamento>();
 
         camps = Campamento_DAO.buscarCampamentosPorFecha(fecha.plusDays(2));
-        
+
         for (int i = 0; i < camps.size(); i++)
         {
-            if (camps.get(i).getMax() > Inscripcion_DAO.numeroAsistentes(camps.get(i).getId()));
-            {
+            if (camps.get(i).getMax() <= Inscripcion_DAO.numeroAsistentes(camps.get(i).getId())){   
+
                 camps.remove(i);
             }   
         }
@@ -166,7 +115,7 @@ public class gestorInscripciones
         switch(error)
         {
             case -1:
-                mensaje = "No Error";
+                mensaje = "Inscripcion realizada con exito";
             break;
             
             case 0:
@@ -178,11 +127,15 @@ public class gestorInscripciones
             break;
 
             case 2:
-                mensaje = "Error. Se ha cerrado el periodo de inscripcion";
+                mensaje = "Error. El campamento esta completo";
             break;
 
             case 3:
-                mensaje = "Error. El asistente esta inscrito en otra modalidad";
+                mensaje = "Error. Se ha cerrado el periodo de inscripcion";
+            break;
+
+            case 4:
+                mensaje = "Error. El asistente esta inscrito en este campamento";
             break;
         }
         return mensaje;

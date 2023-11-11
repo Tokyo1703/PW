@@ -72,6 +72,7 @@ DROP TABLE IF EXISTS Actividad_Campamento;
 CREATE TABLE IF NOT EXISTS Actividad_Campamento (
     nombreActividad varchar(64) not null,
 	idCampamento int(8) not null,
+    primary key(nombreActividad,idCampamento),
     constraint fk_Campamento foreign key (idCampamento) references Campamento(Id),
     constraint fk_nombreActividad foreign key (nombreActividad) references Actividad(nombre)
 );
@@ -84,6 +85,7 @@ DROP TABLE IF EXISTS Actividad_Monitor;
 CREATE TABLE IF NOT EXISTS Actividad_Monitor (
     nombreActividad varchar(64) not null,
 	idMonitor int(8) not null,
+    primary key(nombreActividad,idMonitor),
     constraint fk_IdMonitor foreign key (idMonitor) references Monitor(Id),
     constraint fk_nombreActividadMonitor foreign key (nombreActividad) references Actividad(nombre)
 );
@@ -94,12 +96,13 @@ CREATE TABLE IF NOT EXISTS Actividad_Monitor (
 -- 
 DROP TABLE IF EXISTS Inscripcion;
 CREATE TABLE IF NOT EXISTS Inscripcion (
-    IdParticipante int(8) primary key,
+    IdParticipante int(8) not null,
     IdCampamento int(8) not null,
     fecha date not null,
     precio real not null,
     tipo varchar(16) not null,
     registro varchar(16) not null,
+    primary key(IdParticipante,IdCampamento),
     constraint ck_Tipo CHECK (tipo in ('Completa', 'Parcial')),
     constraint ck_Registro CHECK (registro in ('Temprano', 'Tardio')),
     constraint fk_IdParticipante foreign key (IdParticipante) references Asistente(Id),

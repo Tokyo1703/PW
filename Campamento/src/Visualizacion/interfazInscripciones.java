@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Negocio.gestorInscripciones;
-import Negocio.DTO.Asistente;
 import Negocio.DTO.Campamento;
+import Negocio.DTO.Enum.TipoInscripcion;
 
 public class interfazInscripciones {
     private gestorInscripciones Gestor = new gestorInscripciones();
@@ -21,28 +21,27 @@ public class interfazInscripciones {
 
             while(opcion!=4){
 
-                System.out.println("---Menu Inscripciones---\n\n"+
+                System.out.println("\n---Menu Inscripciones---\n\n"+
                                 "1- Realizar Inscripcion Completa \n"+
                                 "2- Realizar Inscripcion Parcial \n"+
                                 "3- Ver campamentos disponibles \n"+
                                 "4- Cerrar gestor"); 
 
                 opcion = sc.nextInt();
-            
+                
                 switch (opcion) {
                     case 1:
 
-                        if(!inscripcionCompleta()){
-                            System.out.println(Gestor.mensajeError());
-                        }
+                        inscripcionCompleta();
+                        System.out.println(Gestor.mensajeError());
 
                         break;
 
                     case 2:
 
-                        if(!inscripcionParcial()){
-                            System.out.println(Gestor.mensajeError());
-                        }
+                        inscripcionParcial();
+                        System.out.println(Gestor.mensajeError());
+                        
                         
                         break;
 
@@ -61,7 +60,10 @@ public class interfazInscripciones {
                         System.out.println("Opcion no valida\n");
                         break;
                 }
-            }                
+            }
+
+
+
         }
         catch(InputMismatchException e){
             e.printStackTrace();
@@ -85,8 +87,7 @@ public class interfazInscripciones {
         System.out.println("\nIntroduzca el id del campamento");
         int idCampamento=sc.nextInt();
 
-        sc.close();
-        return Gestor.inscribirCompleta(idAsistente, idCampamento);
+        return Gestor.realizarInscripcion(idAsistente, idCampamento,TipoInscripcion.Completa);
     }
 
     private boolean inscripcionParcial(){
@@ -99,8 +100,7 @@ public class interfazInscripciones {
         System.out.println("\nIntroduzca el id del campamento");
         int idCampamento=sc.nextInt();
 
-        sc.close();
-        return Gestor.inscribirParcial(idAsistente, idCampamento);
+        return Gestor.realizarInscripcion(idAsistente, idCampamento,TipoInscripcion.Parcial);
     }
 
     private void ListarCampamentos(){

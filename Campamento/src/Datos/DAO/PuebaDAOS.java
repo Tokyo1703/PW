@@ -7,12 +7,15 @@ import Negocio.DTO.Actividad;
 import Negocio.DTO.Asistente;
 import Negocio.DTO.Campamento;
 import Negocio.DTO.Horario;
+import Negocio.DTO.Inscripcion;
 import Negocio.DTO.Monitor;
 import Negocio.DTO.NivelEducativo;
+import Negocio.DTO.Enum.Registro;
+import Negocio.DTO.Enum.TipoInscripcion;
 
 public class PuebaDAOS {
     public static void main(String[] args){
-        LocalDate fecha=LocalDate.parse("2000-09-22");
+        LocalDate fecha=LocalDate.now();
         Asistente asistentePrueba=new Asistente(16,"Ivan Romero Garcia",fecha,true);
         Monitor monitorPrueba=new Monitor(22,"Pepe Garcia Cruz",false);
         Actividad actividadPrueba=new Actividad("Escalada", NivelEducativo.Juvenil,Horario.valueOf("Manana"), 10, 3);
@@ -44,12 +47,17 @@ public class PuebaDAOS {
             System.out.println(campamentoPrueba.toString());
         }
         campamentoDAO.asociarMonitorResponsable(11, 21);
-        ArrayList<Campamento> lista2= campamentoDAO.buscarCampamentosPorFecha(LocalDate.parse("2023-11-08"));
+        */
+        
+        ArrayList<Campamento> lista2= campamentoDAO.buscarCampamentosPorFecha(fecha.plusDays(2));
         for(Campamento it: lista2){
             System.out.println(it.toString());
-        }*/
+        }
         
-        System.out.println(monitorDAO.cantidadActividadesMonitor(23));
-
+        //System.out.println(monitorDAO.cantidadActividadesMonitor(23));
+        InscripcionDAO inscripcionDAO = new InscripcionDAO();
+        
+        //Inscripcion inscripcionPrueba=new Inscripcion(5, 21, fecha, 300, Registro.Temprano, TipoInscripcion.Completa);
+        //inscripcionDAO.agregarCompleta(inscripcionPrueba);
     }   
 }

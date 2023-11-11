@@ -16,7 +16,7 @@ public class mainProgram {
 
         while (opcion != 4){
 
-            System.out.println("\nEscoga una opción:\n"+
+            System.out.println("\n---Menu Principal---\n"+
                     "1) Gestionar asistentes\n"+
                     "2) Gestionar campamentos\n"+
                     "3) Gestionar inscripciones\n"+
