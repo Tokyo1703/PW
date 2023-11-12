@@ -71,7 +71,8 @@ public class interfazAsistentes {
                         System.out.println("Opcion no valida\n");
                         break;
                 }
-            }                
+            }         
+            sc.close();       
         }
         catch(InputMismatchException e){
             e.printStackTrace();
@@ -114,6 +115,7 @@ public class interfazAsistentes {
 
         AsistenteDTO nuevo = new AsistenteDTO(id, nombre, fecha, especial);
 
+        sc.close();
         return Gestor.insertarAsistente(nuevo);
         
     }
@@ -146,6 +148,8 @@ public class interfazAsistentes {
         }
 
         AsistenteDTO edit = new AsistenteDTO(id, nombre, fecha, especial);
+
+        sc.close();
         return Gestor.editarAsistente(id, edit);
     }
 

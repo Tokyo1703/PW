@@ -62,7 +62,7 @@ public class interfazInscripciones {
                 }
             }
 
-
+            sc.close();
 
         }
         catch(InputMismatchException e){
@@ -87,6 +87,7 @@ public class interfazInscripciones {
         System.out.println("\nIntroduzca el id del campamento");
         int idCampamento=sc.nextInt();
 
+        sc.close();
         return Gestor.realizarInscripcion(idAsistente, idCampamento,TipoInscripcion.Completa);
     }
 
@@ -100,6 +101,7 @@ public class interfazInscripciones {
         System.out.println("\nIntroduzca el id del campamento");
         int idCampamento=sc.nextInt();
 
+        sc.close();
         return Gestor.realizarInscripcion(idAsistente, idCampamento,TipoInscripcion.Parcial);
     }
 
