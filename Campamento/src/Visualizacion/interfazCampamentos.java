@@ -216,7 +216,7 @@ public class interfazCampamentos {
 
         MonitorDTO nuevo = new MonitorDTO(id, nombre, especial);
 
-        sc.close();
+        
         return Gestor_campamento.InsertarMonitor(nuevo);
     }
 
@@ -247,7 +247,7 @@ public class interfazCampamentos {
 
         ActividadDTO nueva = new ActividadDTO(Nombre, Nivel, Hora, Capacidad, MonitoresMax);
 
-        sc.close();
+        
         return Gestor_campamento.InsertarActividad(nueva);
     }
 
@@ -290,7 +290,7 @@ public class interfazCampamentos {
                 System.out.println("Este campamento ya tiene todos los monitores necesarios\n");
                 break;
         }
-        sc.close();
+        
     }        
 
 
@@ -318,7 +318,7 @@ public class interfazCampamentos {
 
         CampamentoDTO nuevo = new CampamentoDTO(id, Inicio, Fin, nivel, Max);
 
-        sc.close();
+        
         return Gestor_campamento.InsertarCampamento(nuevo);
     }
 
@@ -361,7 +361,7 @@ public class interfazCampamentos {
                 break;
 
         }
-        sc.close();
+        
     }
 
     public void Vincular_MonitorResponsabe_Campamento(){
@@ -399,7 +399,7 @@ public class interfazCampamentos {
                 break;
 
         }
-        sc.close();
+        
     }
 
     public void Vincular_MonitorESP_Campamento(){
@@ -438,7 +438,7 @@ public class interfazCampamentos {
                                 "Vuelva a probar o asegurese de haber insertado correctamente el ID\n");
                 break;
         }
-        sc.close();
+        
     }
     
 }
