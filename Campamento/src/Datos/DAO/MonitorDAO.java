@@ -16,9 +16,16 @@ import Datos.Comun.ConexionBD;
 import Negocio.DTO.ActividadDTO;
 import Negocio.DTO.MonitorDTO;
 
-
-
+/**
+ * Clase DAO de monitor, encargada de obtener los datos de la clase monitor de la base de datos.
+ */
 public class MonitorDAO {
+
+	/**
+     * Metodo usado para extraer la sentencia sql del fichero sql.properties
+     * @param clave cadena utilizada como clave de busqueda
+     * @return string que almacena la sentencia sql
+     */
 
     private String getConsulta(String clave){
 
@@ -40,6 +47,11 @@ public class MonitorDAO {
 		return Consulta;
 
 	}
+
+	/**
+     * Metodo usado para añadir un monitor a la base de datos
+     * @param monitor monitor que se quiere añadir
+     */
 
     public void AgregarMonitor(MonitorDTO monitor){
 
@@ -63,6 +75,12 @@ public class MonitorDAO {
 		}
     }
 
+	/**
+     * Metodo usado para buscar si existe un monitor mediante un identificador en la base de datos
+	 * @param Id identificador del monitor
+	 * @return true si se encuentra el monitor, false si no
+     */
+
 	public boolean existeID(int Id){
 		String Consulta=getConsulta("buscarMonitor");
 		boolean existe=false;
@@ -85,6 +103,12 @@ public class MonitorDAO {
 		}
 		return existe;
 	}
+
+	/**
+     * Metodo usado para buscar un monitor mediante un identificador en la base de datos
+	 * @param id identificador del monitor
+	 * @return monitor que se busca
+     */
 
 	public MonitorDTO buscarMonitor(int id){
 		
@@ -118,6 +142,12 @@ public class MonitorDAO {
 
 	}			
 
+	/**
+     * Metodo usado para contar el numero de actividades a las que esta asociado un monitor
+     * @param id identificador del monitor
+	 * @return numero de actividades
+     */
+
 	public int cantidadActividadesMonitor(int id){
 		String Consulta=getConsulta("cantidadActividadesMonitor");
 		int cantidad=0;
@@ -141,6 +171,13 @@ public class MonitorDAO {
 		}	
 		return cantidad;
 	}
+
+	/**
+     * Metodo usado para asociar un monitor a una actividad
+	 * @param monitor monitor que se va a asociar
+	 * @param actividad actividad a la que se va a asociar
+     */
+
     public void asociarMonitorActividad(MonitorDTO monitor, ActividadDTO actividad){
         String Consulta=getConsulta("asociarMonitorActividad");
 
@@ -156,6 +193,13 @@ public class MonitorDAO {
 			System.out.println(e);
 		}
     }
+
+	/**
+     * Metodo usado para comprobar si un monitor esta asociado a una actividad
+	 * @param monitor monitor 
+	 * @param actividad actividad
+	 * @return true si esta asociado, false si no
+     */
 
 	public boolean existeMonitorEnActividad(MonitorDTO monitor, ActividadDTO actividad){
 		String Consulta=getConsulta("buscarActividadMonitor");
@@ -180,6 +224,11 @@ public class MonitorDAO {
 		}
 		return existe;
 	}
+
+	/**
+     * Metodo usado para obtener todos los monitores de la base de datos
+	 * @return ArrayList de los monitores
+     */
 
     public ArrayList<MonitorDTO> listaMonitores(){
 

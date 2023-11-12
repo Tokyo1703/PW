@@ -13,7 +13,16 @@ import com.mysql.jdbc.ResultSet;
 import Datos.Comun.ConexionBD;
 import Negocio.DTO.InscripcionDTO;
 
+/**
+ * Clase DAO de inscripcion, encargada de obtener los datos de la clase inscripcion de la base de datos.
+ */
 public class InscripcionDAO {
+
+	/**
+     * Metodo usado para extraer la sentencia sql del fichero sql.properties
+     * @param clave cadena utilizada como clave de busqueda
+     * @return string que almacena la sentencia sql
+     */
 
     private String getConsulta(String clave){
 
@@ -34,6 +43,11 @@ public class InscripcionDAO {
 
 		return Consulta;
 	}
+
+	/**
+     * Metodo usado para añadir una inscripcion a la base de datos
+     * @param inscripcion inscripcion que se quiere añadir
+     */
 
 	public void agregarInscripcion(InscripcionDTO inscripcion){
 
@@ -59,6 +73,13 @@ public class InscripcionDAO {
 		}
     }
 
+	/**
+     * Metodo usado para buscar si existe una inscripcion mediante un campamento y un asistente en la base de datos
+     * @param idAsistente identificador del asistente
+	 * @param idCampamento identificador del campamento
+	 * @return true si se encuentra la inscripcion, false si no
+     */
+
 	public boolean existeInscripcion(int idAsistente, int idCampamento){
 
 		String Consulta=getConsulta("buscarInscripcion");
@@ -83,6 +104,12 @@ public class InscripcionDAO {
 		}
 		return existe;
     }
+
+	/**
+     * Metodo usado para contar el numero de asistentes a un campamento
+     * @param idCampamento identificador del campamento
+	 * @return numero de asistentes
+     */
 
 	public int numeroAsistentes(int idCampamento){
 		String Consulta=getConsulta("contarAsistentes");

@@ -17,7 +17,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 
+/**
+ * Clase DAO de asistente, encargada de obtener los datos de la clase asistente de la base de datos.
+ */
 public class AsistenteDAO {
+
+	/**
+     * Metodo usado para extraer la sentencia sql del fichero sql.properties
+     * @param clave cadena utilizada como clave de busqueda
+     * @return string que almacena la sentencia sql
+     */
 
 	private String getConsulta(String clave){
 
@@ -39,6 +48,11 @@ public class AsistenteDAO {
 		return Consulta;
 
 	}
+
+	/**
+     * Metodo usado para añadir un asistente a la base de datos
+     * @param asistente asistente que se quiere añadir
+     */
 
     public void AgregarAsistente(AsistenteDTO asistente){
 
@@ -63,6 +77,12 @@ public class AsistenteDAO {
 		}
     }
 
+	/**
+     * Metodo usado para buscar si existe un asistente mediante un identificador en la base de datos
+     * @param Id identificador del asistente
+	 * @return true si se encuentra el asistente, false si no
+     */
+
 	public boolean existeID(int Id){
 		String Consulta=getConsulta("existeIdAsistente");
 		boolean existe=false;
@@ -86,6 +106,11 @@ public class AsistenteDAO {
 		return existe;
 	}
 
+	/**
+     * Metodo usado para modificar los datos de una asistente ya existente en la base de datos
+     * @param asistente asistente a modificar
+     */
+
 	public void modificar(AsistenteDTO asistente){
 		String Consulta=getConsulta("modificarAsistente");
 
@@ -107,6 +132,11 @@ public class AsistenteDAO {
 			System.out.println(e);
 		}
 	}
+
+	/**
+     * Metodo usado para obtener todos los asistetes de la base de datos
+	 * @return ArrayList de las actividades
+     */
 	
 	public ArrayList<AsistenteDTO> listaAsistentes(){
 

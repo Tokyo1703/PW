@@ -17,8 +17,16 @@ import Negocio.DTO.CampamentoDTO;
 import Negocio.DTO.Enum.Horario;
 import Negocio.DTO.Enum.NivelEducativo;
 
-
+/**
+ * Clase DAO de actividad, encargada de obtener los datos de la clase actividad de la base de datos.
+ */
 public class ActividadDAO {
+
+	/**
+     * Metodo usado para extraer la sentencia sql del fichero sql.properties
+     * @param clave cadena utilizada como clave de busqueda
+     * @return string que almacena la sentencia sql
+     */
     
     private String getConsulta(String clave){
 
@@ -40,7 +48,10 @@ public class ActividadDAO {
 		return Consulta;
 	}
 
-
+	/**
+     * Metodo usado para añadir una actividad a la base de datos
+     * @param actividad actividad que se quiere añadir
+     */
 
     public void AgregarActividad(ActividadDTO actividad){
 
@@ -65,6 +76,12 @@ public class ActividadDAO {
 		}
     }
 
+	/**
+     * Metodo usado para buscar si existe una actividad mediante un nombre en la base de datos
+     * @param nombre nombre de la actividad
+	 * @return true si se encuentra la actividad, false si no
+     */
+
 	public boolean existeActividad(String nombre){
 		String Consulta=getConsulta("buscarActividad");
 		boolean existe=false;
@@ -87,6 +104,12 @@ public class ActividadDAO {
 		}
 		return existe;
 	}
+
+	/**
+     * Metodo usado para buscar una actividad mediante un nombre en la base de datos
+     * @param nombre nombre de la actividad
+	 * @return actividad que se busca
+     */
 
 	public ActividadDTO buscarActividad(String nombre){
 		
@@ -118,6 +141,13 @@ public class ActividadDAO {
 
 	}
 
+	/**
+     * Metodo usado para comprobar si una actividad pertenece a un campamento
+     * @param actividad actividad que se busca
+	 * @param campamento campamento donde buscar
+	 * @return true si se encuentra la actividad, false si no
+     */
+
 	public boolean existeActividadEnCampamento(ActividadDTO actividad, CampamentoDTO campamento){
 		String Consulta=getConsulta("buscarActividadCampamento");
 		boolean existe=false;
@@ -141,6 +171,12 @@ public class ActividadDAO {
 		}
 		return existe;
 	}
+
+	/**
+     * Metodo usado para contar el numero de monitores de una actividad
+     * @param nombre nombre de la actividad
+	 * @return numero de monitores
+     */
 
 	public int cantidadMonitoresActividad(String nombre){
 		
@@ -168,7 +204,11 @@ public class ActividadDAO {
 		
 	}
 
-
+	/**
+     * Metodo usado para añadir una actividad a un campamento
+	 * @param campamento campamento donde se añade
+	 * @param actividad actividad que se añade
+     */
 	
 	public void asociarCampamentoActividad(CampamentoDTO Campamento, ActividadDTO actividad){
         String Consulta=getConsulta("asociarCampamentoActividad");
