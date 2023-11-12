@@ -120,8 +120,8 @@ public class CampamentoDTO {
         @Override 
         public String toString(){
 
-            String InfoCampamento = "Identificador: " + id_ + "\nFecha de Inicio: " + inicio_ + "\nFecha de finalizacion: "
-                                    + fin_ + "\nNivel educativo: " + nivel_ + "Maximo de participantes: " + Nmax_ ;
+            String InfoCampamento = "\nIdentificador: " + id_ + "\nFecha de Inicio: " + inicio_ + "\nFecha de finalizacion: "
+                                    + fin_ + "\nNivel educativo: " + nivel_ + "\nMaximo de participantes: " + Nmax_ ;
 
             return InfoCampamento;
         }
