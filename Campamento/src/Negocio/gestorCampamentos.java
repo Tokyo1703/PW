@@ -9,17 +9,11 @@ import Negocio.DTO.MonitorDTO;
 
 public class gestorCampamentos {
     
-    private CampamentoDAO Campamento_DAO;
-    private ActividadDAO Actividad_DAO;
-    private MonitorDAO Monitor_DAO;
-
-
-    public gestorCampamentos(){
-        Campamento_DAO = new CampamentoDAO();
-        Actividad_DAO = new ActividadDAO();
-        Monitor_DAO = new MonitorDAO();
-    }
+    private CampamentoDAO Campamento_DAO=new CampamentoDAO();
+    private ActividadDAO Actividad_DAO=new ActividadDAO();
+    private MonitorDAO Monitor_DAO=new MonitorDAO();
     
+
     public boolean InsertarCampamento(CampamentoDTO campamento){
         if(!Campamento_DAO.existeID(campamento.getId())){
             Campamento_DAO.AgregarCampamento(campamento);
@@ -47,7 +41,8 @@ public class gestorCampamentos {
         }
     }
 
-    //0 --> Exito 1--> Fallo no esite ese monitor 2--> Fallo no exite esa actividad
+    //0 --> Exito   1 --> Fallo no existe ese monitor    2 --> Fallo no existe esa actividad
+    //3 --> Ya existe un monitor    4 --> Alcnzado el numero de monitores de la actividad
     public int AsociarMonitorActividad(int ID_Monitor, String Nombre_Actividad){
 
         MonitorDTO monitor = new MonitorDTO();
@@ -67,6 +62,14 @@ public class gestorCampamentos {
         }else{
 
             return 2;
+        }
+
+        if(Monitor_DAO.existeMonitorEnActividad(monitor,actividad)){
+            return 3;
+        }
+
+        if(actividad.GetMonitoresMax()<=Actividad_DAO.cantidadMonitoresActividad(actividad.GetNombre())){
+            return 4;
         }
 
         Monitor_DAO.asociarMonitorActividad(monitor,actividad);
@@ -93,6 +96,14 @@ public class gestorCampamentos {
         }else{
 
             return 2;
+        }
+
+        if(Actividad_DAO.existeActividadEnCampamento(actividad,campamento)){
+            return 3;
+        }
+
+        if(actividad.GetNivel()!=campamento.getNivel()){
+            return 4;
         }
 
         Actividad_DAO.asociarCampamentoActividad(campamento,actividad);

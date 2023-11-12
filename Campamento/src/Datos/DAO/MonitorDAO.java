@@ -157,6 +157,29 @@ public class MonitorDAO {
 		}
     }
 
+	public boolean existeMonitorEnActividad(MonitorDTO monitor, ActividadDTO actividad){
+		String Consulta=getConsulta("buscarActividadMonitor");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,monitor.getId());
+			ps.setString(2,actividad.GetNombre());
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
 
     public ArrayList<MonitorDTO> listaMonitores(){
 

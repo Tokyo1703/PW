@@ -118,6 +118,30 @@ public class ActividadDAO {
 
 	}
 
+	public boolean existeActividadEnCampamento(ActividadDTO actividad, CampamentoDTO campamento){
+		String Consulta=getConsulta("buscarActividadCampamento");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD("config.properties");
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,campamento.getId());
+			ps.setString(2,actividad.GetNombre());
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
+
 	public int cantidadMonitoresActividad(String nombre){
 		
 		String Consulta=getConsulta("cantidadMonitoresActividad");
