@@ -56,7 +56,6 @@ public class ConexionBD {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			this.conexion = (Connection) DriverManager.getConnection(url, Usuario, Contrasena);
-			System.out.println("¡Conexión a la base de datos con exito!");
 		} 
 		catch (SQLException e) {
 			System.err.println("La conexion a MySQL ha fallado!");
@@ -74,7 +73,6 @@ public class ConexionBD {
 		try {
 			if(this.conexion != null && !this.conexion.isClosed()) {
 				this.conexion.close();
-				System.out.println("¡La conexion a la base de datos se ha cerrado corectamente!");
 			}
 		} catch (SQLException e) {
 			System.err.println("Error intentando cerrar la conexion.");
