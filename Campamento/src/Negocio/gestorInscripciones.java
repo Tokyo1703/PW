@@ -17,16 +17,27 @@ import Negocio.DTO.Enum.TipoInscripcion;
 
 public class gestorInscripciones
 {
-    // Codigo de error que se pueda producir, obten el mensaje con mensajeError()
+    /**
+     * Variable que representa el codigo de error que se puede prodicir.
+     */
     private int error;
     
-    // Acceso a base de datos
+    /**
+     * Variable CampamentoDAO, representa una instancia de la clase CampamentoDAO usada para la conexion con la base de datos.
+     * Variable ActividadDAO, representa una instancia de la clase ActividadDAO usada para la conexion con la base de datos.
+     * Variable InscripcionDAO, representa una instancia de la clase InscripcionDAO usada para la conexion con la base de datos.
+     */
     private InscripcionDAO Inscripcion_DAO=new InscripcionDAO(); 
     private CampamentoDAO Campamento_DAO=new CampamentoDAO();
     private AsistenteDAO Asistente_DAO=new AsistenteDAO();
 
-
-    // Añadir Inscripciones
+    /**
+     * Metodo usado para añadir una Inscriocion si se cumplen los requisitos
+     * @param idAsistente id del asistente a inscribir
+     * @param idCampamento id del campamento en el que se inscribe
+     * @param tipo tipo de inscripcion que realiza
+     * @return true si se registra correctamente, false si se produce algun error
+     */
 
     public boolean realizarInscripcion(int idAsistente, int idCampamento, TipoInscripcion tipo){
         LocalDate fecha=LocalDate.now();
@@ -87,9 +98,11 @@ public class gestorInscripciones
             return true;
         }
     }
-
     
-    // Campamentos disponibles
+    /**
+     * Metodo que lista los campamentos de los que se dispone.
+     * @return Un ArrayList con la lista de Campamentos que hay en la bbdd
+     */
 
     public ArrayList<CampamentoDTO> campamentosDisponibles()
     {
@@ -108,6 +121,11 @@ public class gestorInscripciones
     
         return camps;
     }
+
+    /**
+     * Metodo para traducir el codigo de error que ha podido ocurrir en los anteriores metodos
+     * @return un String interpretable para la capa de visualizacion con el codigo del error
+     */
 
     public String mensajeError()
     {
