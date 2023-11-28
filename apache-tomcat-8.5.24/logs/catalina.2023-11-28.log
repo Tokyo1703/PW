@@ -1,0 +1,40 @@
+28-Nov-2023 20:43:39.934 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.5.24
+28-Nov-2023 20:43:39.947 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 27 2017 13:05:30 UTC
+28-Nov-2023 20:43:39.949 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.5.24.0
+28-Nov-2023 20:43:39.952 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+28-Nov-2023 20:43:39.954 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.2.0-37-generic
+28-Nov-2023 20:43:39.957 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+28-Nov-2023 20:43:39.961 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/local/java/jdk-11.0.20
+28-Nov-2023 20:43:39.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.20+9-LTS-256
+28-Nov-2023 20:43:39.966 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+28-Nov-2023 20:43:39.969 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/carla/Desktop/PW/PW/apache-tomcat-8.5.24
+28-Nov-2023 20:43:39.972 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/carla/Desktop/PW/PW/apache-tomcat-8.5.24
+28-Nov-2023 20:43:39.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/conf/logging.properties
+28-Nov-2023 20:43:39.976 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+28-Nov-2023 20:43:39.977 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+28-Nov-2023 20:43:39.978 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+28-Nov-2023 20:43:39.980 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+28-Nov-2023 20:43:39.980 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24
+28-Nov-2023 20:43:39.981 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24
+28-Nov-2023 20:43:39.982 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/temp
+28-Nov-2023 20:43:39.983 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento óptimo en entornos de desarrollo no ha sido hallada en java.library.path: [/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib]
+28-Nov-2023 20:43:40.117 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+28-Nov-2023 20:43:40.166 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+28-Nov-2023 20:43:40.178 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+28-Nov-2023 20:43:40.183 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+28-Nov-2023 20:43:40.188 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 1006 ms
+28-Nov-2023 20:43:40.351 INFO [main] org.apache.catalina.core.StandardService.startInternal Arrancando servicio [Catalina]
+28-Nov-2023 20:43:40.353 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.24
+28-Nov-2023 20:43:40.452 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Despliegue del directorio [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/docs] de la aplicación web
+28-Nov-2023 20:43:40.994 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/docs] has finished in [527] ms
+28-Nov-2023 20:43:40.994 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Despliegue del directorio [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/ROOT] de la aplicación web
+28-Nov-2023 20:43:41.074 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/ROOT] has finished in [80] ms
+28-Nov-2023 20:43:41.074 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Despliegue del directorio [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/host-manager] de la aplicación web
+28-Nov-2023 20:43:41.258 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/host-manager] has finished in [184] ms
+28-Nov-2023 20:43:41.262 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Despliegue del directorio [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/manager] de la aplicación web
+28-Nov-2023 20:43:41.308 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/manager] has finished in [46] ms
+28-Nov-2023 20:43:41.310 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Despliegue del directorio [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/examples] de la aplicación web
+28-Nov-2023 20:43:41.582 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/carla/Desktop/PW/PW/apache-tomcat-8.5.24/webapps/examples] has finished in [271] ms
+28-Nov-2023 20:43:41.596 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+28-Nov-2023 20:43:41.661 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+28-Nov-2023 20:43:41.682 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1491 ms
