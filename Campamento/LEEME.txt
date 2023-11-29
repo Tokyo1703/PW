@@ -1,3 +1,0 @@
-Codigo para ejecutar el archivo Campamento.jar desde la terminal en el directorio raiz Campamento:
-java -jar Campamento.jar 
-
