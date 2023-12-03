@@ -1,4 +1,4 @@
-package Negocio.DTO.Enum;
+package src.Negocio.DTO.Enum;
 
 public enum Registro{
     Temprano,Tardio

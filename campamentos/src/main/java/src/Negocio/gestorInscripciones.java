@@ -1,17 +1,17 @@
-package Negocio;
+package src.Negocio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 
-import Datos.DAO.AsistenteDAO;
-import Datos.DAO.CampamentoDAO;
-import Datos.DAO.InscripcionDAO;
+import src.Datos.DAO.AsistenteDAO;
+import src.Datos.DAO.CampamentoDAO;
+import src.Datos.DAO.InscripcionDAO;
 
-import Negocio.DTO.CampamentoDTO;
-import Negocio.DTO.InscripcionDTO;
-import Negocio.DTO.Enum.Registro;
-import Negocio.DTO.Enum.TipoInscripcion;
+import src.Negocio.DTO.CampamentoDTO;
+import src.Negocio.DTO.InscripcionDTO;
+import src.Negocio.DTO.Enum.Registro;
+import src.Negocio.DTO.Enum.TipoInscripcion;
 
 
 

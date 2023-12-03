@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Negocio.DAO.UsuarioDAO" %>
-<jsp:useBean  id="customerBean" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
+<jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
 <%
     /* Posibles flujos:
         1) customerBean está logado (!= null && != "") -> Se redirige al index.jsp

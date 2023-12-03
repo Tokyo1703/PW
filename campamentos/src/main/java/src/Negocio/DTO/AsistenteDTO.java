@@ -1,4 +1,4 @@
-package Negocio.DTO;
+package src.Negocio.DTO;
 
 import java.time.LocalDate;
 

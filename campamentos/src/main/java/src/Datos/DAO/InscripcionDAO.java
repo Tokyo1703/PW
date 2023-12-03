@@ -1,4 +1,4 @@
-package Datos.DAO;
+package src.Datos.DAO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,11 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
-import com.mysql.jdbc.ResultSet;
 
-import Datos.Comun.ConexionBD;
-import Negocio.DTO.InscripcionDTO;
+
+import src.Datos.Comun.ConexionBD;
+import src.Negocio.DTO.InscripcionDTO;
 
 /**
  * Clase DAO de inscripcion, encargada de obtener los datos de la clase inscripcion de la base de datos.

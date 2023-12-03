@@ -1,7 +1,7 @@
-package Negocio.DTO;
+package src.Negocio.DTO;
 
-import Negocio.DTO.Enum.Horario;
-import Negocio.DTO.Enum.NivelEducativo;
+import src.Negocio.DTO.Enum.Horario;
+import src.Negocio.DTO.Enum.NivelEducativo;
 
 public class ActividadDTO {
     

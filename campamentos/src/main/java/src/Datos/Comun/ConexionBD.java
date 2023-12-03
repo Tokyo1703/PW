@@ -1,4 +1,4 @@
-package Datos.Comun;
+package src.Datos.Comun;
 
 import java.io.BufferedReader;
 import java.io.File;

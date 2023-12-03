@@ -1,10 +1,10 @@
-package Negocio;
+package src.Negocio;
 
-import Negocio.DTO.AsistenteDTO;
+import src.Negocio.DTO.AsistenteDTO;
 
 import java.util.ArrayList;
 
-import Datos.DAO.AsistenteDAO;
+import src.Datos.DAO.AsistenteDAO;
 /**
  * Clase gestor asistentes, encargada de realizar las comprovaciones en los datos recividos de la capa de 
  * visualizacion antes de almacenarlos en la base de datos.

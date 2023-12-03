@@ -1,11 +1,11 @@
-package Negocio;
+package src.Negocio;
 
-import Datos.DAO.ActividadDAO;
-import Datos.DAO.CampamentoDAO;
-import Datos.DAO.MonitorDAO;
-import Negocio.DTO.ActividadDTO;
-import Negocio.DTO.CampamentoDTO;
-import Negocio.DTO.MonitorDTO;
+import src.Datos.DAO.ActividadDAO;
+import src.Datos.DAO.CampamentoDAO;
+import src.Datos.DAO.MonitorDAO;
+import src.Negocio.DTO.ActividadDTO;
+import src.Negocio.DTO.CampamentoDTO;
+import src.Negocio.DTO.MonitorDTO;
 
 /**
  * Clase gestor campamentos, encargada de comprobar y gestionar los datos de los campamentos, las actividades y 
