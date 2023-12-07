@@ -2,12 +2,13 @@ package src.Negocio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.time.temporal.ChronoUnit;
+
 
 import src.Datos.DAO.AsistenteDAO;
 import src.Datos.DAO.CampamentoDAO;
 import src.Datos.DAO.InscripcionDAO;
-
 import src.Negocio.DTO.CampamentoDTO;
 import src.Negocio.DTO.InscripcionDTO;
 import src.Negocio.DTO.Enum.Registro;
@@ -27,9 +28,15 @@ public class gestorInscripciones
      * Variable ActividadDAO, representa una instancia de la clase ActividadDAO usada para la conexion con la base de datos.
      * Variable InscripcionDAO, representa una instancia de la clase InscripcionDAO usada para la conexion con la base de datos.
      */
-    private InscripcionDAO Inscripcion_DAO=new InscripcionDAO(); 
-    private CampamentoDAO Campamento_DAO=new CampamentoDAO();
-    private AsistenteDAO Asistente_DAO=new AsistenteDAO();
+    private InscripcionDAO Inscripcion_DAO; 
+    private CampamentoDAO Campamento_DAO;
+    private AsistenteDAO Asistente_DAO;
+
+    public gestorInscripciones(Properties sql, Properties config){
+        Inscripcion_DAO = new InscripcionDAO(sql, config);
+        Campamento_DAO = new CampamentoDAO(sql,config);
+        Asistente_DAO = new AsistenteDAO(sql, config);
+    }
 
     /**
      * Metodo usado para añadir una Inscriocion si se cumplen los requisitos

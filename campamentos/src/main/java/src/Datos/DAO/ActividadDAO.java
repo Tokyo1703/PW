@@ -1,10 +1,5 @@
 package src.Datos.DAO;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -22,28 +17,24 @@ import src.Negocio.DTO.Enum.NivelEducativo;
  * Clase DAO de actividad, encargada de obtener los datos de la clase actividad de la base de datos.
  */
 public class ActividadDAO {
+	
+	private Properties sql;
+	private Properties config;
+
+    public ActividadDAO(Properties sql, Properties config){
+		this.sql=sql;
+		this.config=config;
+	}
 
 	/**
      * Metodo usado para extraer la sentencia sql del fichero sql.properties
      * @param clave cadena utilizada como clave de busqueda
      * @return string que almacena la sentencia sql
      */
-    
+
+
     private String getConsulta(String clave){
-
-		Properties sql = new Properties();
 		
-		try{
-			BufferedReader lector = new BufferedReader(new FileReader(new File("sql.properties")));
-			sql.load(lector);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-
 		String Consulta = sql.getProperty(clave);
 
 		return Consulta;
@@ -59,7 +50,7 @@ public class ActividadDAO {
 		String Consulta=getConsulta("insertarActividad");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -88,7 +79,7 @@ public class ActividadDAO {
 		boolean existe=false;
 		try{
 			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();	
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -118,7 +109,7 @@ public class ActividadDAO {
 		ActividadDTO actividad=new ActividadDTO();
 		
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -154,7 +145,7 @@ public class ActividadDAO {
 		boolean existe=false;
 		try{
 			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();	
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -185,7 +176,7 @@ public class ActividadDAO {
 		int cantidad=0;
 
 		try {
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -215,7 +206,7 @@ public class ActividadDAO {
         String Consulta=getConsulta("asociarCampamentoActividad");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			ps.setString(1,actividad.GetNombre());

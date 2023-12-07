@@ -18,9 +18,9 @@
 				b) No hay parámetros en el request -> procede del controlador /sin mensaje
 			*/
 		String nextPage = "../controladores/loginControlador.jsp";
-		String messageNextPage = request.getParameter("message");
-		if (messageNextPage == null){
-			messageNextPage = "";
+		String mensajeNextPage = request.getParameter("message");
+		if (mensajeNextPage == null){
+			mensajeNextPage = "";
 		}
 
 		if (customerBean != null && !customerBean.getCorreo().equals("")) {
@@ -29,10 +29,10 @@
 		} 
 		else{
 		%>
-		<%= messageNextPage %><br/><br/>
+		<%= mensajeNextPage %><br/><br/>
 		<form method="post" action="../controladores/loginControlador.jsp">
 			<label for="correo">Correo: </label>
-			<input type="email" name="name"><br/>
+			<input type="email" name="correo"><br/>
 			<label for="contrasena">Contraseña: </label>
 			<input type="password" name="contrasena">	
 			<br/>

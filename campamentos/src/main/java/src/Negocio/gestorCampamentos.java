@@ -1,5 +1,7 @@
 package src.Negocio;
 
+import java.util.Properties;
+
 import src.Datos.DAO.ActividadDAO;
 import src.Datos.DAO.CampamentoDAO;
 import src.Datos.DAO.MonitorDAO;
@@ -19,10 +21,18 @@ public class gestorCampamentos {
      * Variable MonitorDAO, representa una instancia de la clase MonitorDAO usada para la conexion con la base de datos.
      */
     
-    private CampamentoDAO Campamento_DAO=new CampamentoDAO();
-    private ActividadDAO Actividad_DAO=new ActividadDAO();
-    private MonitorDAO Monitor_DAO=new MonitorDAO();
+    private CampamentoDAO Campamento_DAO;
+    private ActividadDAO Actividad_DAO;
+    private MonitorDAO Monitor_DAO;
     
+
+    
+    
+    public gestorCampamentos(Properties sql, Properties config){
+        Campamento_DAO = new CampamentoDAO(sql,config);
+        Actividad_DAO = new ActividadDAO(sql, config);
+        Monitor_DAO = new MonitorDAO(sql, config);
+    }
     /**
      * Metodo encargado de Insertar un campamento si no existe con anterioridad
      * @param campamento Campamento que se quiere insertar

@@ -1,10 +1,6 @@
 package src.Datos.DAO;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +16,13 @@ import src.Negocio.DTO.MonitorDTO;
  * Clase DAO de monitor, encargada de obtener los datos de la clase monitor de la base de datos.
  */
 public class MonitorDAO {
+	private Properties sql;
+	private Properties config;
 
+    public MonitorDAO(Properties sql, Properties config){
+		this.sql=sql;
+		this.config=config;
+	}
 	/**
      * Metodo usado para extraer la sentencia sql del fichero sql.properties
      * @param clave cadena utilizada como clave de busqueda
@@ -28,19 +30,6 @@ public class MonitorDAO {
      */
 
     private String getConsulta(String clave){
-
-		Properties sql = new Properties();
-		
-		try{
-			BufferedReader lector = new BufferedReader(new FileReader(new File("sql.properties")));
-			sql.load(lector);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
 
 		String Consulta = sql.getProperty(clave);
 
@@ -58,7 +47,7 @@ public class MonitorDAO {
 		String Consulta=getConsulta("insertarMonitor");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			String AtencionEspecial ="No";
@@ -86,7 +75,7 @@ public class MonitorDAO {
 		boolean existe=false;
 		try{
 			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();	
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -116,7 +105,7 @@ public class MonitorDAO {
 		MonitorDTO monitor=new MonitorDTO();
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -153,7 +142,7 @@ public class MonitorDAO {
 		int cantidad=0;
 
 		try {
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -182,7 +171,7 @@ public class MonitorDAO {
         String Consulta=getConsulta("asociarMonitorActividad");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			ps.setInt(2,monitor.getId());
@@ -206,7 +195,7 @@ public class MonitorDAO {
 		boolean existe=false;
 		try{
 			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();	
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -236,7 +225,7 @@ public class MonitorDAO {
 		String Consulta=getConsulta("listarMonitores");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			ResultSet rs=(ResultSet)ps.executeQuery();

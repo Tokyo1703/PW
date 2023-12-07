@@ -3,6 +3,7 @@ package src.Negocio;
 import src.Negocio.DTO.AsistenteDTO;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 import src.Datos.DAO.AsistenteDAO;
 /**
@@ -17,9 +18,8 @@ public class gestorAsistentes{
 
     private AsistenteDAO DAO;
     
-    public gestorAsistentes(){
-
-        DAO = new AsistenteDAO();
+    public gestorAsistentes(Properties sql, Properties config){
+        DAO = new AsistenteDAO(sql,config);
     }
 
     /**

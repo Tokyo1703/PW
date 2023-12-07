@@ -1,10 +1,5 @@
 package src.Datos.DAO;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,20 +11,15 @@ import src.Negocio.DTO.Enum.TipoUsuario;
 
 public class UsuarioDAO {
     
-    private String getConsulta(String clave){
+	private Properties sql;
+	private Properties config;
 
-		Properties sql = new Properties();
-		
-		try{
-			BufferedReader lector = new BufferedReader(new FileReader(new File("sql.properties")));
-			sql.load(lector);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
+    public UsuarioDAO(Properties sql, Properties config){
+		this.sql=sql;
+		this.config=config;
+	}
+
+    private String getConsulta(String clave){
 
 		String Consulta = sql.getProperty(clave);
 
@@ -41,7 +31,7 @@ public class UsuarioDAO {
 		String Consulta=getConsulta("insertarUsuario");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			ps.setString(1,usuario.getCorreo());
@@ -54,12 +44,35 @@ public class UsuarioDAO {
 		}
     }
 
+	public boolean existeCorreo(String correo){
+		String Consulta=getConsulta("buscarUsuarioPorCorreo");
+		boolean existe=false;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1,correo);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return existe;
+	}
+
 	public UsuarioDTO buscarUsuarioPorCorreo(String correo){
 		String Consulta=getConsulta("buscarUsuarioPorCorreo");
 		UsuarioDTO usuario=new UsuarioDTO();
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 

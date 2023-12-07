@@ -1,10 +1,5 @@
 package src.Datos.Comun;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,20 +19,7 @@ public class ConexionBD {
 	
 	protected String url;
 
-	public ConexionBD(String FichProperties){
-
-		Properties config = new Properties();
-		
-		try{
-			BufferedReader lector = new BufferedReader(new FileReader(new File(FichProperties)));
-			config.load(lector);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
+	public ConexionBD(Properties config){
 
 		String Nombre = config.getProperty("nombre");
 		String Puerto = config.getProperty("puerto");

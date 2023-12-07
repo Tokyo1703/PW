@@ -3,16 +3,9 @@ package src.Datos.DAO;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
-
 import src.Datos.Comun.ConexionBD;
 import src.Negocio.DTO.AsistenteDTO;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -22,7 +15,13 @@ import java.time.LocalDate;
  * Clase DAO de asistente, encargada de obtener los datos de la clase asistente de la base de datos.
  */
 public class AsistenteDAO {
+	private Properties sql;
+	private Properties config;
 
+    public AsistenteDAO(Properties sql, Properties config){
+		this.sql=sql;
+		this.config=config;
+	}
 	/**
      * Metodo usado para extraer la sentencia sql del fichero sql.properties
      * @param clave cadena utilizada como clave de busqueda
@@ -30,19 +29,6 @@ public class AsistenteDAO {
      */
 
 	private String getConsulta(String clave){
-
-		Properties sql = new Properties();
-		
-		try{
-			BufferedReader lector = new BufferedReader(new FileReader(new File("sql.properties")));
-			sql.load(lector);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
 
 		String Consulta = sql.getProperty(clave);
 
@@ -60,7 +46,7 @@ public class AsistenteDAO {
 		String Consulta=getConsulta("insertarAsistente");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			String AtencionEspecial ="No";
@@ -89,7 +75,7 @@ public class AsistenteDAO {
 		boolean existe=false;
 		try{
 			
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();	
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
@@ -116,7 +102,7 @@ public class AsistenteDAO {
 		String Consulta=getConsulta("modificarAsistente");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			String AtencionEspecial ="No";
@@ -145,7 +131,7 @@ public class AsistenteDAO {
 		String Consulta=getConsulta("listarAsistentes");
 
 		try{
-			ConexionBD conexionBD=new ConexionBD("config.properties");
+			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
 			ResultSet rs=(ResultSet)ps.executeQuery();
