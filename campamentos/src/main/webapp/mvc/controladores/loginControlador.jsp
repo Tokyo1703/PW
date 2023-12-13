@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO" %>
+<%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario" %>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
 <%
 
@@ -13,14 +13,22 @@
     sqlProperties.load(myIOsql);
     configProperties.load(myIOconfig);
     /* Posibles flujos:
-        1) customerBean está logado (!= null && != "") -> Se redirige al index.jsp
+        1) customerBean está logado (!= null && != "") -> Se redirige al la vista del tipo de usuario
         2) customerBean no está logado:
             a) Hay parámetros en el request  -> procede de la vista 
             b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
         */
-    //Caso 1: Por defecto, vuelve al index
-    String nextPage = "../vistas/loginCorrecto.jsp";
+    //Caso 1: Por defecto
+    String nextPage="../../index.jsp";
     String mensajeNextPage = "";
+    if(customerBean != null && !customerBean.getCorreo().equals("")){
+        if(customerBean.getTipo()==TipoUsuario.Asistente){
+            nextPage = "../vistas/asistenteVista.jsp";
+        }
+        else{
+            nextPage = "../vistas/administradorVista.jsp";
+        }
+    }
     //Caso 2
     if (customerBean == null || customerBean.getCorreo().equals("")) {
         String correo = request.getParameter("correo");
@@ -45,7 +53,12 @@
                 //Comprobamos que la contraseña sea correcta
                 if(usuario.getContrasena().equals(contrasena)){
                      // Usuario válido
-                    nextPage = "../vistas/loginCorrecto.jsp";
+                    if(usuario.getTipo()==TipoUsuario.Asistente){
+                        nextPage = "../vistas/asistenteVista.jsp";
+                    }
+                    else{
+                        nextPage = "../vistas/administradorVista.jsp";
+                    }
 %>
                 <jsp:setProperty property="correo" value="<%=correo%>" name="customerBean"/>
                 <jsp:setProperty property="contrasena" value="<%=contrasena%>" name="customerBean"/>
@@ -56,6 +69,9 @@
                     nextPage = "../vistas/loginVista.jsp";
                     mensajeNextPage = "Contraseña incorrecta";
                 }
+
+                    
+
             }
             
         //Caso 2.b -> se debe ir a la vista por primera vez

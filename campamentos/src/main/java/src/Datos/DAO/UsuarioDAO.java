@@ -81,7 +81,7 @@ public class UsuarioDAO {
 
 			if(rs.next()){
 			
-				String contrasena=rs.getString("contraseña");
+				String contrasena=rs.getString("contrasena");
 				TipoUsuario tipo= TipoUsuario.valueOf(rs.getString("tipo"));
 				usuario=new UsuarioDTO(correo,contrasena,tipo);
 			}

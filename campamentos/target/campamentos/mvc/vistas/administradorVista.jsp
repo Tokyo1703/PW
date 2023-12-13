@@ -4,10 +4,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Página web de campamentos</title>
+        <title>Pagina Administrador</title>
     </head>
     <body>
-        <h1>Inicio de sesión correcto</h1>
+        <h1>Página Administrador</h1>
         
     </body>
 </html>

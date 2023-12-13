@@ -13,12 +13,12 @@
     sqlProperties.load(myIOsql);
     configProperties.load(myIOconfig);
     /* Posibles flujos:
-        1) customerBean está logado (!= null && != "") -> Se redirige al la vista del tipo de usuario
+        1) customerBean está logado (!= null && != "") -> Se redirige a la vista del tipo de usuario
         2) customerBean no está logado:
             a) Hay parámetros en el request  -> procede de la vista 
             b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
         */
-    //Caso 1: Por defecto
+    //Caso 1
     String nextPage="../../index.jsp";
     String mensajeNextPage = "";
     if(customerBean != null && !customerBean.getCorreo().equals("")){
@@ -30,10 +30,10 @@
         }
     }
     //Caso 2
-    if (customerBean == null || customerBean.getCorreo().equals("")) {
+    else if (customerBean == null || customerBean.getCorreo().equals("")) {
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
-
+        String tipo = request.getParameter("tipo"); 
         //Caso 2.a: Hay parámetros -> procede de la VISTA
         if (correo != null) {
 
@@ -42,42 +42,35 @@
 
             //Se realizan todas las comprobaciones necesarias del dominio
 
-            //Aquí sólo comprobamos que exista el usuario
-            if(!usuarioDAO.existeCorreo(correo)){
-                nextPage = "../vistas/loginVista.jsp";
-                mensajeNextPage = "No existe un usuario con ese correo";
+            //Aqui comprobamos que no exista el usuario
+            if(usuarioDAO.existeCorreo(correo)){
+                nextPage = "../vistas/registroVista.jsp";
+                mensajeNextPage = "Ya existe un usuario con ese correo";
             }
-            //Aquí ya sabemos que existe el usuario
+            //Aqui ya sabemos que no existe ese usuario
             else{
-                UsuarioDTO usuario = usuarioDAO.buscarUsuarioPorCorreo(correo);
-                //Comprobamos que la contraseña sea correcta
-                if(usuario.getContrasena().equals(contrasena)){
-                     // Usuario válido
-                    if(usuario.getTipo()==TipoUsuario.Asistente){
-                        nextPage = "../vistas/asistenteVista.jsp";
-                    }
-                    else{
-                        nextPage = "../vistas/administradorVista.jsp";
-                    }
+                UsuarioDTO usuario = new UsuarioDTO(correo,contrasena,TipoUsuario.valueOf(tipo));
+                usuarioDAO.AgregarUsuario(usuario);
+              
 %>
                 <jsp:setProperty property="correo" value="<%=correo%>" name="customerBean"/>
                 <jsp:setProperty property="contrasena" value="<%=contrasena%>" name="customerBean"/>
                 <jsp:setProperty property="tipo" value="<%=usuario.getTipo()%>" name="customerBean"/>                
-<% 
+<%              
+                if(usuario.getTipo()==TipoUsuario.Asistente){
+                    nextPage = "../vistas/asistenteVista.jsp";
                 }
                 else{
-                    nextPage = "../vistas/loginVista.jsp";
-                    mensajeNextPage = "Contraseña incorrecta";
+                    nextPage = "../vistas/administradorVista.jsp";
                 }
-
-                    
-
+                
+                
             }
             
         //Caso 2.b -> se debe ir a la vista por primera vez
         }
         else {
-            nextPage = "../vistas/loginVista.jsp";		
+            nextPage = "../vistas/registroVista.jsp";		
         }
     }
 %>
