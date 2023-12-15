@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario" %>
+<%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario, src.Negocio.DTO.AsistenteDTO,
+    src.Datos.DAO.AsistenteDAO" %>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
 <%
 
@@ -31,6 +32,9 @@
     }
     //Caso 2
     else if (customerBean == null || customerBean.getCorreo().equals("")) {
+        String nombreCompleto = request.getParameter("nombreCompleto");
+        String fechaNacimiento = request.getParameter("fechaNacimiento");
+        String atencionEspecial = request.getParameter("atencionEspecial");
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
         String tipo = request.getParameter("tipo"); 
@@ -39,7 +43,7 @@
 
             UsuarioDAO usuarioDAO = new UsuarioDAO(sqlProperties,configProperties);
             
-
+            
             //Se realizan todas las comprobaciones necesarias del dominio
 
             //Aqui comprobamos que no exista el usuario
@@ -49,11 +53,24 @@
             }
             //Aqui ya sabemos que no existe ese usuario
             else{
-                UsuarioDTO usuario = new UsuarioDTO(correo,contrasena,TipoUsuario.valueOf(tipo));
+                if(tipo.equals("Asistente")){
+                    boolean atencion = false;
+                    AsistenteDAO asistenteDAO= new AsistenteDAO(sqlProperties,configProperties);
+                    int id = 1 + asistenteDAO.buscarIdMax();
+                    if(atencionEspecial!=null){
+                        atencion=true;
+                    }
+
+                    
+                    AsistenteDTO asistente = new AsistenteDTO(id,nombreCompleto,fechaNacimiento,atencion);
+                    asistenteDAO.AgregarAsistente(asistente);
+                }
+                UsuarioDTO usuario = new UsuarioDTO(nombreCompleto,correo,contrasena,TipoUsuario.valueOf(tipo));
                 usuarioDAO.AgregarUsuario(usuario);
               
 %>
-                <jsp:setProperty property="correo" value="<%=correo%>" name="customerBean"/>
+               <jsp:setProperty property="correo" value="<%=correo%>" name="customerBean"/>
+                <jsp:setProperty property="nombre" value="<%=nombreCompleto%>" name="customerBean"/>
                 <jsp:setProperty property="contrasena" value="<%=contrasena%>" name="customerBean"/>
                 <jsp:setProperty property="tipo" value="<%=usuario.getTipo()%>" name="customerBean"/>                
 <%              

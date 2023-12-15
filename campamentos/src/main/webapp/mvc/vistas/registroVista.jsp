@@ -31,12 +31,24 @@
 		%>
 		<%= mensajeNextPage %><br/><br/>
 		<form method="post" action="../controladores/registroControlador.jsp">
+		    <label for="tipo">Tipo de usuario (Asistente/Administrador): </label>
+			<input type="text" name="tipo"><br/>
+
+			<label for="nombreCompleto">Nombre y apellidos: </label>
+			<input type="text" name="nombreCompleto"><br/>
+
+			<label for="fechaNacimiento">Asistente: Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
+			<input type="text" name="fechaNacimiento"><br/>
+
+			<label for="atencionEspecial">Asistente: Seleccione este boton si necesita atencion especial</label>
+			<input type="checkbox" name="atencionEspecial" value="Si"><br/>
+
 			<label for="correo">Correo: </label>
 			<input type="email" name="correo"><br/>
+
 			<label for="contrasena">Contraseña: </label>
 			<input type="password" name="contrasena"><br/>
-            <label for="tipo">Tipo de usuario (Asistente/Administrador): </label>
-			<input type="text" name="tipo"><br/>	
+
 			<br/>
 			<input type="submit" value="Enviar">
 		</form>

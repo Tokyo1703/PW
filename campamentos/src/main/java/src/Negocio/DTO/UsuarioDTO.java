@@ -3,6 +3,8 @@ package src.Negocio.DTO;
 import src.Negocio.DTO.Enum.TipoUsuario;
 
 public class UsuarioDTO {
+
+    private String nombreCompleto;
     private String correo;
     private String contrasena;
     private TipoUsuario tipo;
@@ -11,10 +13,15 @@ public class UsuarioDTO {
     public UsuarioDTO(){
 
     }
-    public UsuarioDTO(String correo, String contrasena, TipoUsuario tipo){
+    public UsuarioDTO(String nombre, String correo, String contrasena, TipoUsuario tipo){
+        this.nombreCompleto = nombre;
         this.correo = correo;
         this.contrasena = contrasena;
         this.tipo = tipo;
+    }
+
+    public String getNombre(){
+        return nombreCompleto;
     }
 
     public String getCorreo(){
@@ -27,6 +34,10 @@ public class UsuarioDTO {
 
     public TipoUsuario getTipo(){
         return tipo;
+    }
+
+    public void setNombre(String nombre){
+        this.nombreCompleto = nombre;
     }
 
     public void setCorreo(String correo){

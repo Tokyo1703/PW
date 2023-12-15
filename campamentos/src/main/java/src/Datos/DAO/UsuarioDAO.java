@@ -34,9 +34,10 @@ public class UsuarioDAO {
 			ConexionBD conexionBD=new ConexionBD(config);
         	Connection conexion=conexionBD.getConnection();
 			PreparedStatement ps=conexion.prepareStatement(Consulta);
+			ps.setString(2,usuario.getNombre());
 			ps.setString(1,usuario.getCorreo());
-			ps.setString(2,usuario.getContrasena());
-			ps.setString(3,usuario.getTipo().name());
+			ps.setString(3,usuario.getContrasena());
+			ps.setString(4,usuario.getTipo().name());
 			ps.executeUpdate();
 			conexionBD.closeConnection();
 		}catch(Exception e){
@@ -80,10 +81,10 @@ public class UsuarioDAO {
 			ResultSet rs=(ResultSet)ps.executeQuery();
 
 			if(rs.next()){
-			
+				String nombre=rs.getString("nombreApellidos");
 				String contrasena=rs.getString("contrasena");
 				TipoUsuario tipo= TipoUsuario.valueOf(rs.getString("tipo"));
-				usuario=new UsuarioDTO(correo,contrasena,tipo);
+				usuario=new UsuarioDTO(nombre,correo,contrasena,tipo);
 			}
 
 			conexionBD.closeConnection();

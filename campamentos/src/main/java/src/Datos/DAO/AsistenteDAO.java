@@ -9,7 +9,6 @@ import src.Negocio.DTO.AsistenteDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
 
 /**
  * Clase DAO de asistente, encargada de obtener los datos de la clase asistente de la base de datos.
@@ -93,6 +92,27 @@ public class AsistenteDAO {
 		return existe;
 	}
 
+
+	public int buscarIdMax(){
+		String Consulta=getConsulta("buscarIdMax");
+		int id=0;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				id=rs.getInt("max(Id)");
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return id;
+	}
 	/**
      * Metodo usado para modificar los datos de una asistente ya existente en la base de datos
      * @param asistente asistente a modificar
@@ -139,7 +159,7 @@ public class AsistenteDAO {
 			while(rs.next()){
 				int id=rs.getInt("Id");
 				String nombre=rs.getString("nombreApellidos");
-				LocalDate fecha= LocalDate.parse(rs.getString("fechaNacimiento"));
+				String fecha= rs.getString("fechaNacimiento");
 				String atencionEspecial=rs.getString("atencionEspecial");
 				boolean atencion=false;
 				if(atencionEspecial.equals("Si")){

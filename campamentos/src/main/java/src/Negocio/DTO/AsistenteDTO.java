@@ -13,10 +13,10 @@ public class AsistenteDTO {
 
     }
 
-    public AsistenteDTO(int id, String nombreCompleto, LocalDate fechaNacimiento, boolean atencionEsp){
+    public AsistenteDTO(int id, String nombreCompleto, String fechaNacimiento, boolean atencionEsp){
         this.id=id;
         this.nombreCompleto=nombreCompleto;
-        this.fechaNacimiento=fechaNacimiento;
+        this.fechaNacimiento=LocalDate.parse(fechaNacimiento);
         this.atencionEsp=atencionEsp;
     }
 
