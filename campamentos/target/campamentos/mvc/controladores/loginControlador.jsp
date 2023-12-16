@@ -60,7 +60,7 @@
                         nextPage = "../vistas/administradorVista.jsp";
                     }
 %>
-                <jsp:setProperty property="nombreCompleto" value="<%=usuario.getNombre()%>" name="customerBean"/>
+                <jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="customerBean"/>
                 <jsp:setProperty property="correo" value="<%=correo%>" name="customerBean"/>
                 <jsp:setProperty property="contrasena" value="<%=contrasena%>" name="customerBean"/>
                 <jsp:setProperty property="tipo" value="<%=usuario.getTipo()%>" name="customerBean"/>                

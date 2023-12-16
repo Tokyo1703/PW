@@ -8,7 +8,11 @@
     </head>
     <body>
         <h1>Página web de campamentos</h1>
-        <a href="/campamentos/mvc/controladores/loginControlador.jsp">Inicio de sesión</a>
-        <a href="/campamentos/mvc/controladores/registroControlador.jsp">Registro</a>
+        <a href="/campamentos/mvc/controladores/loginControlador.jsp">
+        <button> Login </button>
+        </a>
+        <a href="/campamentos/mvc/controladores/registroControlador.jsp">
+        <button> Registro </button>
+        </a>
     </body>
 </html>
