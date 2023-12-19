@@ -18,7 +18,7 @@
 				b) No hay parámetros en el request -> procede del controlador /sin mensaje
 			*/
 		String nextPage = "../controladores/registroControlador.jsp";
-		String mensajeNextPage = request.getParameter("message");
+		String mensajeNextPage = request.getParameter("mensaje");
 		if (mensajeNextPage == null){
 			mensajeNextPage = "";
 		}
@@ -32,22 +32,22 @@
 		<%= mensajeNextPage %><br/><br/>
 		<form method="post" action="../controladores/registroControlador.jsp">
 		    <label for="tipo">Tipo de usuario (Asistente/Administrador): </label>
-			<input type="text" name="tipo"><br/>
+			<input type="text" name="tipo" required><br/>
 
 			<label for="nombreCompleto">Nombre y apellidos: </label>
-			<input type="text" name="nombreCompleto"><br/>
+			<input type="text" name="nombreCompleto" required><br/>
 
 			<label for="fechaNacimiento">Asistente: Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
-			<input type="text" name="fechaNacimiento"><br/>
+			<input type="text" name="fechaNacimiento" ><br/>
 
 			<label for="atencionEspecial">Asistente: Seleccione este boton si necesita atencion especial</label>
 			<input type="checkbox" name="atencionEspecial" value="Si"><br/>
 
 			<label for="correo">Correo: </label>
-			<input type="email" name="correo"><br/>
+			<input type="email" name="correo" required><br/>
 
 			<label for="contrasena">Contraseña: </label>
-			<input type="password" name="contrasena"><br/>
+			<input type="password" name="contrasena" required><br/>
 
 			<br/>
 			<input type="submit" value="Enviar">

@@ -18,7 +18,7 @@
 				b) No hay parámetros en el request -> procede del controlador /sin mensaje
 			*/
 		String nextPage = "../controladores/loginControlador.jsp";
-		String mensajeNextPage = request.getParameter("message");
+		String mensajeNextPage = request.getParameter("mensaje");
 		if (mensajeNextPage == null){
 			mensajeNextPage = "";
 		}

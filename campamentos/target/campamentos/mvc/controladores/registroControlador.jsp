@@ -92,5 +92,5 @@
     }
 %>
 <jsp:forward page="<%=nextPage%>">
-	<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+	<jsp:param value="<%=mensajeNextPage%>" name="mensaje"/>
 </jsp:forward>

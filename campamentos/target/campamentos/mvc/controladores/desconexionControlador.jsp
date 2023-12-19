@@ -14,6 +14,6 @@
     %>
     <jsp:forward page="../../index.jsp">
     <jsp:param value="Desconectado con exito" name="mensaje"/>
-        </jsp:forward>
+    </jsp:forward>
 </body>
 </html>
