@@ -1,6 +1,6 @@
 package src.Despliegue.servlets;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.servlet.*;
@@ -35,10 +35,19 @@ public class servletActividad extends HttpServlet {
             sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
             config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
             gestorCampamentos gestor = new gestorCampamentos(sql, config);
-            gestor.InsertarActividad(actividad);
+            
+            if(gestor.InsertarActividad(actividad)==false){
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.println("¡Ya existe esta actividad!");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevaActividadVista.jsp");
+                disp.include(request, response);
+            }
+            else{
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
+                disp.include(request, response);
+            }
 
-            RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
-            disp.forward(request, response);
         }catch(Exception e){
             System.out.println(e);
         }

@@ -41,6 +41,11 @@
                         <button> Dar de alta un monitor </button>
                     </a>
                 </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/nuevoCampamentoVista.jsp">
+                        <button> Dar de alta un monitor </button>
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -60,7 +65,7 @@
     }
     else{
         mensaje="Necesita iniciar sesion para tener acceso";
-        paginaSiguiente="index.jsp";
+        paginaSiguiente="../../index.jsp";
         %>
         <jsp:forward page="<%=paginaSiguiente%>">
         <jsp:param value="<%=mensaje%>" name="mensaje"/>
