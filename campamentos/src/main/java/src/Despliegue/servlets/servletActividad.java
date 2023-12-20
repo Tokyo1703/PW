@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import src.Negocio.gestorCampamentos;

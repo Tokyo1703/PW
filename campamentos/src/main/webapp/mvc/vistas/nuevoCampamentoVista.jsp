@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Nuevo Monitor</title>
+        <title>Nueva Campamento</title>
     </head>
 
     <% 
@@ -16,20 +16,26 @@
 
     <body>
         <header>
-        <h1>Nuevo Monitor</h1>
+        <h1>Nueva Campamento</h1>
         </header>
 
 
-        <form method="POST" action="/campamentos/servletMonitor">
+        <form method="POST" action="/campamentos/servletCampamento">
 
-            <label for="nombreCompleto">Nombre y apellidos: </label>
-            <input type="text" name="nombreCompleto" ><br/>
-
-            <label for="id">Id:</label>
+            <label for="id">Id: </label>
             <input type="text" name="id" ><br/>
 
-            <label for="atencionEspecial">Atencion especial(Si/No): </label>
-            <input type="text" name="atencionEspecial"><br/>
+            <label for="fechaInicio">Fecha de inicio: </label>
+            <input type="text" name="fechaInicio" ><br/>
+
+            <label for="fechaFin">Fecha de fin: </label>
+            <input type="text" name="fechaFin" ><br/>
+
+            <label for="nivelEducativo">Nivel Educativo(Infantil/Juvenil/Adolescente):</label>
+            <input type="text" name="nivelEducativo" ><br/>
+            
+            <label for="numMaxAsistentes">Número máximo de asistentes: </label>
+            <input type="text" name="numMaxAsistentes"><br/>
 
             <br/>
             <input type="submit" value="Añadir actividad">

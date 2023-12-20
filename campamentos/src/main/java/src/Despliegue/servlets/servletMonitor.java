@@ -22,7 +22,7 @@ public class servletMonitor extends HttpServlet {
         int Id=Integer.valueOf(request.getParameter("id"));
         String NombreCompleto = request.getParameter("nombreCompleto");
         Boolean AtencionEspecial=false;
-        if(request.getParameter("nombreCompleto").equals("Si")){
+        if(request.getParameter("atencionEspecial").equals("Si")){
             AtencionEspecial=true;
         }
 

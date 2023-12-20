@@ -41,6 +41,11 @@
                         <button> Dar de alta un monitor </button>
                     </a>
                 </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/nuevoCampamentoVista.jsp">
+                        <button> Dar de alta un monitor </button>
+                    </a>
+                </li>
             </ul>
         </div>
 
