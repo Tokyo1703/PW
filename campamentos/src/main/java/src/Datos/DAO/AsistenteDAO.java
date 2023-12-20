@@ -113,6 +113,39 @@ public class AsistenteDAO {
 		}
 		return id;
 	}
+
+	public AsistenteDTO buscarNombre(String nombre){
+		String Consulta=getConsulta("buscarNombre");
+		AsistenteDTO asistente = new AsistenteDTO();
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setString(1, nombre);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				int id=rs.getInt("Id");
+				String fecha= rs.getString("fechaNacimiento");
+				String atencionEspecial=rs.getString("atencionEspecial");
+				boolean atencion=false;
+				if(atencionEspecial.equals("Si")){
+					atencion=true;
+				}
+				
+				asistente = new AsistenteDTO(id,nombre,fecha,atencion);
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return asistente;
+	}
+
+
 	/**
      * Metodo usado para modificar los datos de una asistente ya existente en la base de datos
      * @param asistente asistente a modificar
