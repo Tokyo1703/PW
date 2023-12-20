@@ -95,4 +95,22 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
+	public void modificar(UsuarioDTO usuario){
+		String Consulta=getConsulta("modificarAsistente");
+
+		try{
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+			
+			ps.setString(3,usuario.getCorreo());
+			ps.setString(1,usuario.getNombre());
+			ps.setString(2,usuario.getContrasena());
+			ps.executeUpdate();
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+
 }
