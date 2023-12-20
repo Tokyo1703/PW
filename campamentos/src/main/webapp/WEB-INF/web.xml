@@ -13,4 +13,15 @@
     <param-name>config</param-name>
     <param-value>/WEB-INF/config.properties</param-value>
   </context-param>
+
+  <servlet>
+    <servlet-name>servletActividad</servlet-name>
+    <servlet-class>src.Despliegue.servlets.servletActividad</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>servletActividad</servlet-name>
+    <url-pattern>/servletActividad</url-pattern>
+  </servlet-mapping>
+
 </web-app>

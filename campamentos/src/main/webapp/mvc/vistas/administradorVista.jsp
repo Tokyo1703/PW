@@ -29,6 +29,21 @@
         <h1>Página Administrador</h1>
         </header>
 
+        <div>
+            <ul>
+                <li>
+                    <a href="/campamentos/mvc/vistas/nuevaActividadVista.jsp">
+                        <button> Dar de alta una actividad </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/nuevoMonitorVista.jsp">
+                        <button> Dar de alta un monitor </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         <aside>
             <a href="modificarDatosVista.jsp">
             <button> Modificar datos </button>
