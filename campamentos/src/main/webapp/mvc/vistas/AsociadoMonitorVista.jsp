@@ -16,6 +16,6 @@
         }
     %>
 
-    <a href="/mvc/vistas/vinculacionMonitorVista.jsp">Volver</a>
+    <a href="/mvc/vistas/modificarDatosVista.jsp">Volver</a>
 </body>
 </html>
