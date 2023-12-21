@@ -1,21 +1,24 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Resultado de Asociar Monitor a Actividad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Asociación de Monitor a Actividad</title>
 </head>
 <body>
-    <h2>Resultado de Asociar Monitor a Actividad</h2>
 
-    <%
-        String mensaje = request.getParameter("mensaje");
+    <h2>Asociar Monitor a Actividad</h2>
 
-        if (mensaje != null && !mensaje.isEmpty()) {
-    %>
-            <p><strong><%= mensaje %></strong></p>
-    <%
-        }
-    %>
+    <form action="/campamentos/asociarMonitor_Actividad" method="post">
+        <label for="Id">ID del Monitor:</label>
+        <input type="number" id="Id" name="Id" required><br>
 
-    <a href="/mvc/vistas/vinculacionMonitorActividadVista.jsp">Volver</a>
+        <label for="nombre">Nombre de la Actividad:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <input type="submit" value="Asociar Monitor">
+    </form>
+
 </body>
 </html>

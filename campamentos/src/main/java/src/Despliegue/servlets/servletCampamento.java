@@ -45,7 +45,7 @@ public class servletCampamento extends HttpServlet{
             Gestor.AsociarActividadcampamento(Id, Nombre);
 
             res.setStatus(HttpServletResponse.SC_OK);
-            res.sendRedirect("/mvc/vistas/vinculacionActividadVista.jsp");
+            res.sendRedirect("/mvc/vistas/administradorVista.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

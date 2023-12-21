@@ -65,6 +65,21 @@
                         <button> Dar de alta un campamento </button>
                     </a>
                 </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/AsociarMonitor_Actividad.jsp">
+                        <button> Vincular un monitor a una actividad </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/AsociarMonitorVista.jsp">
+                        <button> Vincular monitor campamento </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/vinculaActividadVista.jsp">
+                        <button> Vincular un actividad campamento </button>
+                    </a>
+                </li>
             </ul>
         </fieldset>
 

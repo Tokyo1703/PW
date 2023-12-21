@@ -49,7 +49,7 @@ public class servletAsociaM_A extends HttpServlet{
             gestor.AsociarMonitorActividad(IdMonitor, nombre);
 
             res.setStatus(HttpServletResponse.SC_OK);
-            res.sendRedirect("/mvc/vistas/AsociadoMonitor_ActividadVista.jsp?mensaje=Vinculacion exitosa");
+            res.sendRedirect("/mvc/vistas/administradorVista.jsp");
         }catch(Exception e){
 
             e.printStackTrace();

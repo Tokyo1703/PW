@@ -28,7 +28,7 @@ public class servletAsociaM extends HttpServlet{
             return;
         }
 
-        if(req.getParameter("Id") == null || req.getParameter("Id") == null){
+        if(req.getParameter("IdM") == null || req.getParameter("IdC") == null){
             
             res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error: Faltan parametros");
             return;
@@ -40,8 +40,8 @@ public class servletAsociaM extends HttpServlet{
             especial = true;
         }
 
-        Integer IdMonitor = Integer.parseInt(req.getParameter("Id"));
-        Integer IdCampamento = Integer.parseInt(req.getParameter("Id"));
+        Integer IdMonitor = Integer.parseInt(req.getParameter("IdM"));
+        Integer IdCampamento = Integer.parseInt(req.getParameter("IdC"));
 
         try{
 
@@ -61,7 +61,7 @@ public class servletAsociaM extends HttpServlet{
             }
 
             res.setStatus(HttpServletResponse.SC_OK);
-            res.sendRedirect("/mvc/vistas/AsociadoMonitorVista.jsp?mensaje=Asociacion exitosa");
+            res.sendRedirect("/mvc/vistas/administradorVista.jsp");
         }catch(Exception e){
 
             e.printStackTrace();
