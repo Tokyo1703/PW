@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario, src.Negocio.DTO.AsistenteDTO,
     src.Datos.DAO.AsistenteDAO" %>
+<%@ page errorPage="../vistas/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
 <%
 

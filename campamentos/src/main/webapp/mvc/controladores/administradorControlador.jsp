@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="src.Negocio.DTO.CampamentoDTO, src.Datos.DAO.InscripcionDAO, src.Negocio.gestorCampamentos, java.util.ArrayList, java.util.Properties" %>
+<%@ page errorPage="../vistas/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <% 
     String mensaje="";

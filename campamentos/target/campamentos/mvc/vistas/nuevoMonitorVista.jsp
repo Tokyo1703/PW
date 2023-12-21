@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
 <html>
@@ -19,21 +20,23 @@
         <h1>Nuevo Monitor</h1>
         </header>
 
+        <fieldset>
+        <legend>Información monitor:</legend>
+            <form method="POST" action="/campamentos/servletMonitor">
 
-        <form method="POST" action="/campamentos/servletMonitor">
+                <label for="nombreCompleto">Nombre y apellidos: </label>
+                <input type="text" name="nombreCompleto" ><br/>
 
-            <label for="nombreCompleto">Nombre y apellidos: </label>
-            <input type="text" name="nombreCompleto" ><br/>
+                <label for="id">Id:</label>
+                <input type="text" name="id" ><br/>
 
-            <label for="id">Id:</label>
-            <input type="text" name="id" ><br/>
+                <label for="atencionEspecial">Atencion especial(Si/No): </label>
+                <input type="text" name="atencionEspecial"><br/>
 
-            <label for="atencionEspecial">Atencion especial(Si/No): </label>
-            <input type="text" name="atencionEspecial"><br/>
-
-            <br/>
-            <input type="submit" value="Añadir actividad">
-        </form>
+                <br/>
+                <input type="submit" value="Añadir actividad">
+            </form>
+        <fieldset>
 
 
         

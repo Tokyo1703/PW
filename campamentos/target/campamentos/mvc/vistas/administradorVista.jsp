@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp"%>
 <%@ page import ="java.util.ArrayList"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
@@ -63,6 +64,21 @@
                 <li>
                     <a href="/campamentos/mvc/vistas/nuevoCampamentoVista.jsp">
                         <button> Dar de alta un campamento </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/AsociarMonitor_Actividad.jsp">
+                        <button> Vincular un monitor a una actividad </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/AsociarMonitorVista.jsp">
+                        <button> Vincular monitor campamento </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campamentos/mvc/vistas/vinculaActividadVista.jsp">
+                        <button> Vincular un actividad campamento </button>
                     </a>
                 </li>
             </ul>
