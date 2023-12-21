@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="src.Negocio.DTO.CampamentoDTO, src.Datos.DAO.InscripcionDAO, src.Negocio.gestorCampamentos" %>
+<%@ page import ="src.Negocio.DTO.CampamentoDTO, src.Datos.DAO.InscripcionDAO, src.Negocio.gestorCampamentos, java.util.ArrayList, java.util.Properties" %>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <% 
     String mensaje="";
@@ -16,24 +16,28 @@
             <%
         }
         else{
-            paginaSiguiente="../vistas/administradorVista";
-            Properties sql=new Properties();
-            Properties config=new Properties();
-            sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
-            config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
+            paginaSiguiente="../vistas/administradorVista.jsp";
 
-            gestorCampamentos gestorcampamentos = new gestorCampamentos(sql, config);
-            InscripcionDAO inscripcionDAO = new InscripcionDAO(sql, config);
+            String fileSQL = application.getInitParameter("sql");
+            String fileCONFIG = application.getInitParameter("config");
+            java.io.InputStream myIOsql = application.getResourceAsStream(fileSQL);
+            java.io.InputStream myIOconfig = application.getResourceAsStream(fileCONFIG);
+            Properties sqlProperties = new java.util.Properties();
+            Properties configProperties = new java.util.Properties();
+            sqlProperties.load(myIOsql);
+            configProperties.load(myIOconfig);
+
+            gestorCampamentos gestor = new gestorCampamentos(sqlProperties, configProperties);
+            InscripcionDAO inscripcionDAO = new InscripcionDAO(sqlProperties, configProperties);
             ArrayList<CampamentoDTO> listaCampamentos = new ArrayList<CampamentoDTO>();
             ArrayList<Integer> listaId = new ArrayList<Integer>();
             ArrayList<Integer> listaCompletas = new ArrayList<Integer>();
             ArrayList<Integer> listaParciales = new ArrayList<Integer>();
-            ArrayList<Integer> Aux = new ArrayList<Integer>();
-            ArrayList<CampamentoDTO> listaCampamentos = new ArrayList<CampamentoDTO>();
+            ArrayList<Integer> aux = new ArrayList<Integer>();
 
             listaCampamentos=gestor.listaCampamentos();
             for(CampamentoDTO campamento : listaCampamentos){
-                Aux=inscripcionDAO.contarTiposAsistentes(campamento.getId());
+                aux=inscripcionDAO.contarTiposAsistentes(campamento.getId());
                 listaId.add(campamento.getId());
                 listaCompletas.add(aux.get(0));
                 listaParciales.add(aux.get(1));
