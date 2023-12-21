@@ -13,10 +13,11 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Properties;
 
-@WebServlet(name = "servletCampamento", urlPatterns = "/campamentos")
+@WebServlet(name = "servletCampamento", urlPatterns = "/campamentos/vincularActividadconCampamento")
 
 public class servletCampamento extends HttpServlet{
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws FileNotFoundException, IOException {
         HttpSession session = req.getSession();
 
