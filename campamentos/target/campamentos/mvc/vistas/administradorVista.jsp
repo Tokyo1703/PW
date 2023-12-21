@@ -30,6 +30,24 @@
         </header>
 
         <div>
+
+            <ul>
+                <%
+                ArrayList<Integer> listaId=(ArrayList<Integer>)request.getAttribute("listaId");
+                ArrayList<Integer> listaCompletas=(ArrayList<Integer>)request.getAttribute("listaCompletas");
+                ArrayList<Integer> listaParciales=(ArrayList<Integer>)request.getAttribute("listaParciales");
+                for(int i=0; i<listaId.size(); i++){
+                %>
+                    <li>Campamento <%=listaId.get(i)%>: <%=listaCompletas.get(i)%> inscripciones completas y 
+                    <%=listaParciales.get(i)%> inscripciones parciales</li>
+                <%
+                }
+                %>
+            </ul>
+        </div>
+
+        <fieldset>
+        <legend>Opciones del administrador</legend>
             <ul>
                 <li>
                     <a href="/campamentos/mvc/vistas/nuevaActividadVista.jsp">
@@ -43,11 +61,11 @@
                 </li>
                 <li>
                     <a href="/campamentos/mvc/vistas/nuevoCampamentoVista.jsp">
-                        <button> Dar de alta un monitor </button>
+                        <button> Dar de alta un campamento </button>
                     </a>
                 </li>
             </ul>
-        </div>
+        </fieldset>
 
         <aside>
             <a href="modificarDatosVista.jsp">

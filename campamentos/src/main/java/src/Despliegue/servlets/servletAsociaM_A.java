@@ -14,7 +14,7 @@ import src.Despliegue.customerBean;
 import src.Negocio.gestorCampamentos;
 import src.Negocio.DTO.Enum.TipoUsuario;
 
-@WebServlet(name = "servletAsociaM_A", urlPatterns = ("campamentos/asociarMonitor_Actividad/"))
+@WebServlet(name = "servletAsociaM_A", urlPatterns = ("/campamentos/asociarMonitor_Actividad"))
 public class servletAsociaM_A extends HttpServlet{
     
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws FileNotFoundException, IOException{

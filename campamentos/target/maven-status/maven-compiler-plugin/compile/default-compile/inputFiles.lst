@@ -1,4 +1,5 @@
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/DTO/Enum/TipoInscripcion.java
+/home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletCampamento.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/DTO/InscripcionDTO.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletActividad.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Datos/DAO/InscripcionDAO.java
@@ -9,11 +10,12 @@
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/DTO/Enum/Horario.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Datos/DAO/UsuarioDAO.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletUsuario.java
-/home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletsCampamento.java
+/home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletAsociaM_A.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/DTO/Enum/TipoUsuario.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Datos/DAO/AsistenteDAO.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/gestorCampamentos.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Datos/DAO/CampamentoDAO.java
+/home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Despliegue/servlets/servletAsociaM.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/DTO/UsuarioDTO.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/gestorAsistentes.java
 /home/carla/Desktop/PW/PW/campamentos/src/main/java/src/Negocio/gestorInscripciones.java

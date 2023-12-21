@@ -26,7 +26,7 @@
             nextPage = "../vistas/asistenteVista.jsp";
         }
         else{
-            nextPage = "../vistas/administradorVista.jsp";
+            nextPage = "administradorControlador.jsp";
         }
     }
     //Caso 2
@@ -57,7 +57,7 @@
                         nextPage = "../vistas/asistenteVista.jsp";
                     }
                     else{
-                        nextPage = "../vistas/administradorVista.jsp";
+                        nextPage = "administradorControlador.jsp";
                     }
 %>
                 <jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="customerBean"/>

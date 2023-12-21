@@ -1,3 +1,4 @@
+src/Despliegue/servlets/servletUsuario.class
 src/Despliegue/servlets/servletMonitor.class
 src/Negocio/DTO/Enum/TipoUsuario.class
 src/Datos/DAO/CampamentoDAO.class

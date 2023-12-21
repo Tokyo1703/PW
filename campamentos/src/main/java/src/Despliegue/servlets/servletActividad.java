@@ -1,5 +1,5 @@
 package src.Despliegue.servlets;
-import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -13,9 +13,6 @@ import src.Negocio.DTO.ActividadDTO;
 
 public class servletActividad extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 

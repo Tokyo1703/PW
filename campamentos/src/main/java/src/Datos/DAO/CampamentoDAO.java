@@ -131,6 +131,36 @@ public class CampamentoDAO {
 
 	}
 
+	public ArrayList<CampamentoDTO> listaCampamentos(){
+
+		ArrayList<CampamentoDTO> lista = new ArrayList<CampamentoDTO>();
+		String Consulta=getConsulta("listarCampamentos");
+		
+		try{
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+
+			while(rs.next()){
+				int id= rs.getInt("Id");
+				LocalDate fechaInicio= LocalDate.parse(rs.getString("fechaInicio"));
+				LocalDate fechaFin= LocalDate.parse(rs.getString("fechaFin"));
+				NivelEducativo nivelEducativo = NivelEducativo.valueOf(rs.getString("nivelEducativo"));
+				int numMaxAsistentes =rs.getInt("numMaxAsistentes");
+				lista.add(new CampamentoDTO(id,fechaInicio,fechaFin,nivelEducativo,numMaxAsistentes));
+			}
+
+			conexionBD.closeConnection();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return lista;
+
+	}
+
 	/**
      * Metodo usado para obtener todos los campamentos con una fecha de inicio superior a una dada
 	 * @param fecha fecha de corte para la busqueda

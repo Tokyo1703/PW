@@ -3,6 +3,7 @@ package src.Datos.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -124,5 +125,29 @@ public class InscripcionDAO {
 		}
 		return cantidad;
 	}
+	
+	public ArrayList<Integer> contarTiposAsistentes(int id){
+		String Consulta=getConsulta("contarTiposAsistentes");
+		ArrayList<Integer> inscripciones= new ArrayList<Integer>();
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
 
+			ps.setInt(1,id);
+			ps.setInt(2,id);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				inscripciones.add(rs.getInt("Completa"));
+				inscripciones.add(rs.getInt("Parcial"));
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return inscripciones;
+	}
 }

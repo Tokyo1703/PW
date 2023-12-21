@@ -18,29 +18,32 @@
         <header>
         <h1>Modificacion de datos</h1>
         </header>
-        <ul>
-            <li>Tipo de usuario: <%= customerBean.getTipo().name()></li>
-            <li>Correo: <%= customerBean.getCorreo().name()></li>
-            <form method="post" action="../controladores/registroControlador.jsp">
-                <li>
-                <label for="nombreCompleto">Nombre y apellidos: </label>
-                <input type="text" name="nombreCompleto" value=<%=customerBean.getNombre() %> ><br/>
-                </li>
+        <fieldset>
+        <legend>Informacion de usuario::</legend>
+            <ul>
+                <li>Tipo de usuario: <%= customerBean.getTipo().name()></li>
+                <li>Correo: <%= customerBean.getCorreo().name()></li>
+                <form method="post" action="../controladores/registroControlador.jsp">
+                    <li>
+                    <label for="nombreCompleto">Nombre y apellidos: </label>
+                    <input type="text" name="nombreCompleto" value=<%=customerBean.getNombre() %> ><br/>
+                    </li>
 
-                <li>
-                <label for="fechaNacimiento">Asistente: Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
-                <input type="text" name="fechaNacimiento" value=<%=>><br/>
-                </li>
+                    <li>
+                    <label for="fechaNacimiento">Asistente: Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
+                    <input type="text" name="fechaNacimiento" value=<%=>><br/>
+                    </li>
 
-                <li>
-                <label for="contrasena">Contraseña: </label>
-                <input type="password" name="contrasena"><br/>
-                </li>
+                    <li>
+                    <label for="contrasena">Contraseña: </label>
+                    <input type="password" name="contrasena"><br/>
+                    </li>
 
-                <br/>
-                <input type="submit" value="Actualizar informacion">
-            </form>
-        </ul>
+                    <br/>
+                    <input type="submit" value="Actualizar informacion">
+                </form>
+            </ul>
+        </fieldset>
 
         
     </body>

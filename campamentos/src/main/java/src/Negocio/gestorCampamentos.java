@@ -1,5 +1,6 @@
 package src.Negocio;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import src.Datos.DAO.ActividadDAO;
@@ -76,6 +77,16 @@ public class gestorCampamentos {
         } else {
             return false;
         }
+    }
+
+
+    public ArrayList<CampamentoDTO> listaCampamentos()
+    {
+        ArrayList<CampamentoDTO> camps = new ArrayList<CampamentoDTO>();
+
+        camps = Campamento_DAO.listaCampamentos();
+    
+        return camps;
     }
 
     /**
