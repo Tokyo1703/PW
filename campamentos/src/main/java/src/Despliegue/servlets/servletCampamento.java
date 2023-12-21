@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Properties;
 
-@WebServlet(name = "ActivitiesServlet", urlPatterns = "/activities")
+@WebServlet(name = "servletCampamento", urlPatterns = "/campamentos")
 
 public class servletCampamento extends HttpServlet{
 
@@ -26,14 +26,14 @@ public class servletCampamento extends HttpServlet{
             return;
         }
 
-        if (req.getParameter("id_") == null ||
-                req.getParameter("nombre_") == null) {
+        if (req.getParameter("Id") == null ||
+                req.getParameter("nombre") == null) {
             res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error: Faltan parametros");
             return;
         }
 
-        int Id = Integer.parseInt(req.getParameter("id_"));
-        String Nombre = req.getParameter("nombre_");
+        int Id = Integer.parseInt(req.getParameter("Id"));
+        String Nombre = req.getParameter("nombre");
     
         try {
             Properties sqlProperties = new Properties();
@@ -44,7 +44,7 @@ public class servletCampamento extends HttpServlet{
             gestorCampamentos Gestor = new gestorCampamentos(sqlProperties, configProperties);
             Gestor.AsociarActividadcampamento(Id, Nombre);
 
-            res.setStatus(HttpServletResponse.SC_CREATED);
+            res.setStatus(HttpServletResponse.SC_OK);
             res.sendRedirect("/mvc/vistas/vinculacionActividadVista.jsp");
 
         } catch (Exception e) {
