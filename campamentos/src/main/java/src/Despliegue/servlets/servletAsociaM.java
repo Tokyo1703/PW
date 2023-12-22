@@ -14,9 +14,10 @@ import src.Despliegue.customerBean;
 import src.Negocio.gestorCampamentos;
 import src.Negocio.DTO.Enum.TipoUsuario;
 
-@WebServlet(name = "servletAsociaM", urlPatterns = ("/campamentos/asociarMonitor"))
+@WebServlet(name = "servletAsociaM", urlPatterns = ("/campamentos/vincularMonitorconCampamento"))
 public class servletAsociaM extends HttpServlet{
     
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws FileNotFoundException, IOException{
 
         HttpSession sesion = req.getSession();
