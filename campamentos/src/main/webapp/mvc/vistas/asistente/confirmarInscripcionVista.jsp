@@ -37,14 +37,21 @@
                     <tr>
                         <td>Tipo de Registro: <%=registro%></td>
                     </tr>
+                        <% 
+                        if (registro.equals(Registro.Tardio)){
+                        %>
+                        <td>La inscripcion es Tardia por lo que no podras cancelarla</td>
+                        <%
+                        }
+                        %>
                 </table>
 
                 <input type="submit" value="Confirmar">
-                <a href="/campamentos/mvc/vistas/asistenteVista.jsp">
-                    <button>Cancelar</button>
-                </a>
             </form>
         </fieldset>
+        <a href="/campamentos/mvc/vistas/asistenteVista.jsp">
+                    <button>Volver</button>
+        </a>
 
 
         
