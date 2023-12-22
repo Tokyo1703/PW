@@ -77,7 +77,7 @@
             <li><a href="consultarCampamentosVista.jsp"> <button>Consultar campamentos disponibles</button> </a></li>
             <li><a href="buscarCampamentoVista.jsp"> <button>Buscar campamentos</button> </a></li>
             <li><a href="inscripcionVista.jsp"> <button>Realizar un registro a un campamento</button></a></li>
-            <li><a href="cancelarRegistro.jsp"> <button>Cancelar el registro a campamentos</button></a></li>
+            <li><a href="eliminarInscripcionVista.jsp"> <button>Cancelar el registro a campamentos</button></a></li>
         </ol>
     <% } %>
 </body>
