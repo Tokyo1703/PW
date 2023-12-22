@@ -67,17 +67,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/administrador/AsociarMonitor_Actividad.jsp">
+                    <a href="/campamentos/mvc/vistas/administrador/vincularMonitorconActividadVista.jsp">
                         <button> Vincular un monitor a una actividad </button>
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/administrador/AsociarMonitorVista.jsp">
+                    <a href="/campamentos/mvc/vistas/administrador/vincularMonitorconActividadVista.jsp">
                         <button> Vincular monitor campamento </button>
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/administrador/vinculaActividadVista.jsp">
+                    <a href="/campamentos/mvc/vistas/administrador/vincularActividadconCampamentoVista.jsp">
                         <button> Vincular un actividad campamento </button>
                     </a>
                 </li>
