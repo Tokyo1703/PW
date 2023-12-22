@@ -124,26 +124,8 @@ public class InscripcionDAO {
 			if(rs.next()){
 				LocalDate fecha = LocalDate.parse(rs.getString(3));
 				float precio = rs.getFloat(4);
-				TipoInscripcion tipo;
-				String tipo_str = rs.getString(5);
-				if(tipo_str == "Completa")
-				{
-					tipo = TipoInscripcion.Completa;
-				}
-				else
-				{
-					tipo = TipoInscripcion.Parcial;
-				}
-				Registro registro;
-				String registro_str = rs.getString(6);
-				if(registro_str == "Temprano")
-				{
-					registro = Registro.Temprano;
-				}
-				else
-				{
-					registro = Registro.Tardio;
-				}
+				TipoInscripcion tipo = TipoInscripcion.valueOf(rs.getString(5));
+				Registro registro = Registro.valueOf(rs.getString(6));
 
 				inscripcion = new InscripcionDTO(idAsistente, idCampamento, fecha, precio, registro, tipo);
 
@@ -226,7 +208,7 @@ public class InscripcionDAO {
 			ps.setInt(1,idAsistente);
 			ps.setInt(2,idCampamento);
 
-			ps.executeQuery();
+			ps.executeUpdate();
 			conexionBD.closeConnection();
 		}catch(Exception e){
 			System.out.println(e);

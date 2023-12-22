@@ -12,11 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import src.Datos.DAO.AsistenteDAO;
 import src.Despliegue.customerBean;
 import src.Negocio.gestorInscripciones;
+import src.Negocio.DTO.Enum.TipoUsuario;
 
-@WebServlet(name = "servletCancelarInscripcion", urlPatterns = ("/campamentos/cancelarInscripcionCampamento"))
+@WebServlet(name = "servletCancelarInscripcion", urlPatterns = ("/cancelarInscripcionCampamento"))
 public class servletCancelarInscripcion extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        customerBean customerBean = (customerBean) req.getSession().getAttribute("customerBean");
+        if(customerBean == null || customerBean.getTipo() == TipoUsuario.Administrador){
+
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado, solo usuarios Registrados");
+            return;
+        }
+
         if(req.getParameter("idCamp") == null){
             
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error: Faltan parametros");
@@ -32,13 +40,12 @@ public class servletCancelarInscripcion extends HttpServlet{
             AsistenteDAO asistenteDAO = new AsistenteDAO(sql, config);
             gestorInscripciones Inscripciones = new gestorInscripciones(sql, config);
             
-            customerBean bean = (customerBean) req.getSession().getAttribute("customerBean");
-            Integer idAsistente = asistenteDAO.buscarNombre(bean.getNombre()).getId();
+            Integer idAsistente = asistenteDAO.buscarNombre(customerBean.getNombre()).getId();
 
             if(Inscripciones.cancelarInscripcion(idAsistente, idCampamento))
             {
-                resp.setStatus(HttpServletResponse.SC_OK);
-                resp.sendRedirect("/mvc/vistas/asistenteVista.jsp");
+                
+                req.getRequestDispatcher("/mvc/vistas/asistente/asistenteVista.jsp").forward(req, resp);
             }
             else
             {

@@ -146,11 +146,11 @@ public class gestorInscripciones
             return false;
         }
 
-        if ( LocalDate.now().isAfter(Campamento_DAO.buscarCampamento(inscripcion.getIdCampamento()).getInicio()) )
+        if ( Campamento_DAO.buscarCampamento(inscripcion.getIdCampamento()).getInicio().isAfter(LocalDate.now()) )
         {
-            if (inscripcion.getRegistro() == Registro.Temprano)
+            if (inscripcion.getRegistro().equals(Registro.Temprano))
             {
-                Inscripcion_DAO.borrar(inscripcion.getIdCampamento(), inscripcion.getIdAsistente());
+                Inscripcion_DAO.borrar(idCampamento, idAsistente);
                 return true;
             }
             else

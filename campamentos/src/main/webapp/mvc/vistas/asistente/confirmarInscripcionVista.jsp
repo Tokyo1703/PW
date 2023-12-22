@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp"%>
+<%@ page errorPage="../comun/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
 <html>
@@ -9,8 +9,7 @@
 		<title>Confirmar Inscripcion</title>
     </head>
     <% 
-    String mensaje="";
-    String paginaSiguiente;
+	String mensajeNextPage = request.getParameter("mensaje");
     if(customerBean!=null && !customerBean.getCorreo().equals("")){
     %>
 
@@ -25,8 +24,8 @@
                 <%
                     String idCamp = request.getParameter("idCamp");
                     String tipo = request.getParameter("tipoInscripcion");
-                    float precio = request.getParameter("precio");
-                    String registro = request.getParameter("registro");
+                    Object precio = request.getAttribute("precio");
+                    Object registro = request.getAttribute("registro");
                 %>
                 <input type="hidden" name="idCamp" value="<%=idCamp%>" >
                 <input type="hidden" name="tipoInscripcion" value="<%=tipo%>" >
