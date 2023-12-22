@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/administrador/vincularMonitorconActividadVista.jsp">
+                    <a href="/campamentos/mvc/vistas/administrador/vincularMonitorconCampamentoVista.jsp">
                         <button> Vincular monitor campamento </button>
                     </a>
                 </li>
