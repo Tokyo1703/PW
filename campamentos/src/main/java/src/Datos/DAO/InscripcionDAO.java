@@ -125,4 +125,27 @@ public class InscripcionDAO {
 		return cantidad;
 	}
 
+	/**
+     * Metodo usado para borrar una inscripcion
+     * @param idCampamento identificador del campamento
+	 * @param idAsistente identificador del asistente
+     */
+	public void borrar(int idCampamento, int idAsistente){
+		String Consulta=getConsulta("borrarInscripcion");
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,idAsistente);
+			ps.setInt(2,idCampamento);
+
+			ps.executeQuery();
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+
 }

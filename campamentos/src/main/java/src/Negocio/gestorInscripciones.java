@@ -32,6 +32,11 @@ public class gestorInscripciones
     private CampamentoDAO Campamento_DAO;
     private AsistenteDAO Asistente_DAO;
 
+    /**
+     * Variable que representa la inscripcion que se esta registrando.
+     */
+    private InscripcionDTO inscripcion;
+
     public gestorInscripciones(Properties sql, Properties config){
         Inscripcion_DAO = new InscripcionDAO(sql, config);
         Campamento_DAO = new CampamentoDAO(sql,config);
@@ -90,8 +95,15 @@ public class gestorInscripciones
         else{
             precio = 300 + Campamento_DAO.numeroActividades(idCampamento)*20;
         }
-
-        InscripcionDTO ins =  new InscripcionDTO(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
+        if (inscripcion == null)
+        {
+            inscripcion =  new InscripcionDTO(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
+        }
+        else
+        {
+            error = 5;
+            return false;
+        }
         
         if(Inscripcion_DAO.existeInscripcion(idAsistente, idCampamento))
         {
@@ -100,9 +112,50 @@ public class gestorInscripciones
         }
         else
         {
-            Inscripcion_DAO.agregarInscripcion(ins);
             error = -1;
             return true;
+        }
+    }
+
+    /**
+     * Metodo usado para confirmar el registro
+     * @param confirmar true si se confirma la inscripcion registrada, false si se rechaza
+     * @return true si se confirma o rechaza correctamente, false si hay algun error
+     */
+    public boolean confirmarInscripcion(boolean confirmar, InscripcionDTO inscripcion){
+        if (error == -1)
+        {
+            if (confirmar)
+            {
+                Inscripcion_DAO.agregarInscripcion(inscripcion);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean cancelarInscripcion(InscripcionDTO ins)
+    {
+        if ( LocalDate.now().isAfter(Campamento_DAO.buscarCampamento(ins.getIdCampamento()).getInicio()) )
+        {
+            if (ins.getRegistro() == Registro.Temprano)
+            {
+                Inscripcion_DAO.borrar(ins.getIdCampamento(), ins.getIdAsistente());
+                return true;
+            }
+            else
+            {
+                error = 7;
+                return false;
+            }
+        }
+        else
+        {
+            error = 6;
+            return false;
         }
     }
     
@@ -161,6 +214,18 @@ public class gestorInscripciones
 
             case 4:
                 mensaje = "Error. El asistente esta inscrito en este campamento";
+            break;
+
+            case 5:
+                mensaje = "Error. Registro en curso confirme o rechace la inscripcion";
+            break;
+
+            case 6:
+                mensaje = "Error. Ya ha comenzado el campamento";
+            break;
+
+            case 7:
+                mensaje = "Error. No se puede cancelar en la modalidad Tardia";
             break;
         }
         return mensaje;

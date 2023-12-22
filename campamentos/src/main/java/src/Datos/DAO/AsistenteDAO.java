@@ -114,6 +114,11 @@ public class AsistenteDAO {
 		return id;
 	}
 
+	/**
+     * Metodo usado para buscar el asistente por su nombre
+	 * @param nombre nombre del asistente
+	 * @return asistente
+     */
 	public AsistenteDTO buscarNombre(String nombre){
 		String Consulta=getConsulta("buscarNombre");
 		AsistenteDTO asistente = new AsistenteDTO();
