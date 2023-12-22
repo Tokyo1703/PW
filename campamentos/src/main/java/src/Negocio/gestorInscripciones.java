@@ -32,11 +32,6 @@ public class gestorInscripciones
     private CampamentoDAO Campamento_DAO;
     private AsistenteDAO Asistente_DAO;
 
-    /**
-     * Variable que representa la inscripcion que se esta registrando.
-     */
-    private InscripcionDTO inscripcion;
-
     public gestorInscripciones(Properties sql, Properties config){
         Inscripcion_DAO = new InscripcionDAO(sql, config);
         Campamento_DAO = new CampamentoDAO(sql,config);
@@ -52,6 +47,8 @@ public class gestorInscripciones
      */
 
     public boolean realizarInscripcion(int idAsistente, int idCampamento, TipoInscripcion tipo){
+        InscripcionDTO inscripcion;
+
         LocalDate fecha=LocalDate.now();
         if (!Asistente_DAO.existeID(idAsistente))
         {
@@ -66,7 +63,7 @@ public class gestorInscripciones
         
         CampamentoDTO camp = Campamento_DAO.buscarCampamento(idCampamento);
         if(camp.getMax() <= Inscripcion_DAO.numeroAsistentes(camp.getId())){
-            error=2;
+            error=3;
             return false;
         }
          
@@ -83,7 +80,7 @@ public class gestorInscripciones
         }
         else // Menos de 48h del inicio no se puede registrar
         {
-            error = 3;
+            error = 4;
             return false;
         }
         
@@ -95,55 +92,65 @@ public class gestorInscripciones
         else{
             precio = 300 + Campamento_DAO.numeroActividades(idCampamento)*20;
         }
-        if (inscripcion == null)
-        {
-            inscripcion =  new InscripcionDTO(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
-        }
-        else
+        
+        
+        inscripcion =  new InscripcionDTO(idAsistente, idCampamento, fecha, precio, tipoRegistro, tipo);
+        
+        
+        if(Inscripcion_DAO.existeInscripcion(idAsistente, idCampamento))
         {
             error = 5;
             return false;
         }
-        
-        if(Inscripcion_DAO.existeInscripcion(idAsistente, idCampamento))
-        {
-            error = 4;
-            return false;
-        }
         else
         {
+            Inscripcion_DAO.agregarInscripcion(inscripcion);
             error = -1;
             return true;
         }
     }
 
-    /**
-     * Metodo usado para confirmar el registro
-     * @param confirmar true si se confirma la inscripcion registrada, false si se rechaza
-     * @return true si se confirma o rechaza correctamente, false si hay algun error
-     */
-    public boolean confirmarInscripcion(boolean confirmar, InscripcionDTO inscripcion){
-        if (error == -1)
-        {
-            if (confirmar)
-            {
-                Inscripcion_DAO.agregarInscripcion(inscripcion);
-            }
-            return true;
+    public float precioInscripcion(int idCampamento, TipoInscripcion tipo){
+        float precio;
+        if(tipo==TipoInscripcion.Parcial){
+            precio = 100 + Campamento_DAO.numeroActividades(idCampamento)*20;
         }
-        else
-        {
-            return false;
+        else{
+            precio = 300 + Campamento_DAO.numeroActividades(idCampamento)*20;
         }
+        return precio;
     }
 
-    public boolean cancelarInscripcion(InscripcionDTO ins)
-    {
-        if ( LocalDate.now().isAfter(Campamento_DAO.buscarCampamento(ins.getIdCampamento()).getInicio()) )
+    public Registro tipoRegistro(int idCampamento){
+        Registro tipoRegistro = null;
+
+        CampamentoDTO camp = Campamento_DAO.buscarCampamento(idCampamento);
+        int dias = (int) ChronoUnit.DAYS.between(LocalDate.now(), camp.getInicio());
+        if (dias>=15)
         {
-            if (ins.getRegistro() == Registro.Temprano)
+            tipoRegistro = Registro.Temprano;
+        }
+        else if (dias>2)
+        {
+            tipoRegistro = Registro.Tardio;
+        }
+        return tipoRegistro;
+    }
+
+    public boolean cancelarInscripcion(int idAsistente, int idCampamento)
+    {
+        InscripcionDTO inscripcion = Inscripcion_DAO.buscarInscripcion(idAsistente, idCampamento);
+        if (inscripcion == null)
+        {
+            error = 2;
+            return false;
+        }
+
+        if ( LocalDate.now().isAfter(Campamento_DAO.buscarCampamento(inscripcion.getIdCampamento()).getInicio()) )
+        {
+            if (inscripcion.getRegistro() == Registro.Temprano)
             {
-                Inscripcion_DAO.borrar(ins.getIdCampamento(), ins.getIdAsistente());
+                Inscripcion_DAO.borrar(inscripcion.getIdCampamento(), inscripcion.getIdAsistente());
                 return true;
             }
             else
@@ -205,19 +212,19 @@ public class gestorInscripciones
             break;
 
             case 2:
-                mensaje = "Error. El campamento esta completo";
+                mensaje = "Error. No Existe la inscripcion";
             break;
 
             case 3:
-                mensaje = "Error. Se ha cerrado el periodo de inscripcion";
+                mensaje = "Error. El campamento esta completo";
             break;
 
             case 4:
-                mensaje = "Error. El asistente esta inscrito en este campamento";
+                mensaje = "Error. Se ha cerrado el periodo de inscripcion";
             break;
 
             case 5:
-                mensaje = "Error. Registro en curso confirme o rechace la inscripcion";
+                mensaje = "Error. El asistente esta inscrito en este campamento";
             break;
 
             case 6:
@@ -227,6 +234,7 @@ public class gestorInscripciones
             case 7:
                 mensaje = "Error. No se puede cancelar en la modalidad Tardia";
             break;
+
         }
         return mensaje;
     }

@@ -3,12 +3,15 @@ package src.Datos.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 
 
 import src.Datos.Comun.ConexionBD;
 import src.Negocio.DTO.InscripcionDTO;
+import src.Negocio.DTO.Enum.Registro;
+import src.Negocio.DTO.Enum.TipoInscripcion;
 
 /**
  * Clase DAO de inscripcion, encargada de obtener los datos de la clase inscripcion de la base de datos.
@@ -95,6 +98,62 @@ public class InscripcionDAO {
 			System.out.println(e);
 		}
 		return existe;
+    }
+
+	/**
+     * Metodo usado para buscar una inscripcion mediante un campamento y un asistente en la base de datos
+     * @param idAsistente identificador del asistente
+	 * @param idCampamento identificador del campamento
+	 * @return inscripcion
+     */
+
+	public InscripcionDTO buscarInscripcion(int idAsistente, int idCampamento){
+
+		String Consulta=getConsulta("buscarInscripcion");
+		InscripcionDTO inscripcion=null;
+		try{
+			
+			ConexionBD conexionBD=new ConexionBD(config);
+        	Connection conexion=conexionBD.getConnection();	
+			PreparedStatement ps=conexion.prepareStatement(Consulta);
+
+			ps.setInt(1,idAsistente);
+			ps.setInt(2,idCampamento);
+
+			ResultSet rs=(ResultSet)ps.executeQuery();
+			if(rs.next()){
+				LocalDate fecha = LocalDate.parse(rs.getString(3));
+				float precio = rs.getFloat(4);
+				TipoInscripcion tipo;
+				String tipo_str = rs.getString(5);
+				if(tipo_str == "Completa")
+				{
+					tipo = TipoInscripcion.Completa;
+				}
+				else
+				{
+					tipo = TipoInscripcion.Parcial;
+				}
+				Registro registro;
+				String registro_str = rs.getString(6);
+				if(registro_str == "Temprano")
+				{
+					registro = Registro.Temprano;
+				}
+				else
+				{
+					registro = Registro.Tardio;
+				}
+
+				inscripcion = new InscripcionDTO(idAsistente, idCampamento, fecha, precio, registro, tipo);
+
+			}
+
+			conexionBD.closeConnection();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return inscripcion;
     }
 
 	/**
