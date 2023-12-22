@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario, src.Negocio.DTO.AsistenteDTO,
     src.Datos.DAO.AsistenteDAO" %>
-<%@ page errorPage="../vistas/error.jsp"%>
+<%@ page errorPage="../../vistas/comun/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
 <%
 
@@ -21,14 +21,14 @@
             b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
         */
     //Caso 1
-    String nextPage="../../index.jsp";
+    String nextPage="../../../index.jsp";
     String mensajeNextPage = "";
     if(customerBean != null && !customerBean.getCorreo().equals("")){
         if(customerBean.getTipo()==TipoUsuario.Asistente){
-            nextPage = "../vistas/asistenteVista.jsp";
+            nextPage = "../../vistas/asistenteVista.jsp";
         }
         else{
-            nextPage = "administradorControlador.jsp";
+            nextPage = "../administrador/administradorControlador.jsp";
         }
     }
     //Caso 2
@@ -49,7 +49,7 @@
 
             //Aqui comprobamos que no exista el usuario
             if(usuarioDAO.existeCorreo(correo)){
-                nextPage = "../vistas/registroVista.jsp";
+                nextPage = "../../vistas/comun/registroVista.jsp";
                 mensajeNextPage = "Ya existe un usuario con ese correo";
             }
             //Aqui ya sabemos que no existe ese usuario
@@ -76,10 +76,10 @@
                 <jsp:setProperty property="tipo" value="<%=usuario.getTipo()%>" name="customerBean"/>                
 <%              
                 if(usuario.getTipo()==TipoUsuario.Asistente){
-                    nextPage = "../vistas/asistenteVista.jsp";
+                    nextPage = "../../vistas/asistente/asistenteVista.jsp";
                 }
                 else{
-                    nextPage = "administradorControlador.jsp";
+                    nextPage = "../administrador/administradorControlador.jsp";
                 }
                 
                 
@@ -88,7 +88,7 @@
         //Caso 2.b -> se debe ir a la vista por primera vez
         }
         else {
-            nextPage = "../vistas/registroVista.jsp";		
+            nextPage = "../../vistas/comun/registroVista.jsp";		
         }
     }
 %>

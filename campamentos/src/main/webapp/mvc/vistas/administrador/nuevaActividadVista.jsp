@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp"%>
+<%@ page errorPage="../comun/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
 <html>
@@ -52,7 +52,7 @@
     }
     else{
         mensaje="Necesita iniciar sesion para tener acceso";
-        paginaSiguiente="../../index.jsp";
+        paginaSiguiente="../../../index.jsp";
         %>
         <jsp:forward page="<%=paginaSiguiente%>">
         <jsp:param value="<%=mensaje%>" name="mensaje"/>
