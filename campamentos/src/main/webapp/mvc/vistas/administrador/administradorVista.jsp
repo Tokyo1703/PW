@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp"%>
 <%@ page import ="java.util.ArrayList"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
@@ -66,17 +67,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/vincularMonitorconActividadVista.jsp">
+                    <a href="/campamentos/mvc/vistas/AsociarMonitor_Actividad.jsp">
                         <button> Vincular un monitor a una actividad </button>
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/vincularMonitoconCampamentoVista.jsp">
+                    <a href="/campamentos/mvc/vistas/AsociarMonitorVista.jsp">
                         <button> Vincular monitor campamento </button>
                     </a>
                 </li>
                 <li>
-                    <a href="/campamentos/mvc/vistas/vincularActividadconCampamentoVista.jsp">
+                    <a href="/campamentos/mvc/vistas/vinculaActividadVista.jsp">
                         <button> Vincular un actividad campamento </button>
                     </a>
                 </li>
@@ -84,11 +85,11 @@
         </fieldset>
 
         <aside>
-            <a href="modificarDatosVista.jsp">
+            <a href="/campamentos/mvc/controladores/modificarDatosControlador.jsp">
             <button> Modificar datos </button>
             </a>
 
-            <a href="../controladores/desconexionControlador.jsp">
+            <a href="/campamentos/mvc/controladores/desconexionControlador.jsp">
             <button> Desconectar </button>
             </a>
         </aside>
