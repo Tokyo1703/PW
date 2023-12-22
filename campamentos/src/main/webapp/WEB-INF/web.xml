@@ -23,5 +23,25 @@
     <servlet-name>servletActividad</servlet-name>
     <url-pattern>/servletActividad</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>servletMonitor</servlet-name>
+    <servlet-class>src.Despliegue.servlets.servletMonitor</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>servletMonitor</servlet-name>
+    <url-pattern>/servletMonitor</url-pattern>
+  </servlet-mapping>
+
+    <servlet>
+    <servlet-name>servletCampamento</servlet-name>
+    <servlet-class>src.Despliegue.servlets.servletCampamento</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>servletCampamento</servlet-name>
+    <url-pattern>/servletCampamento</url-pattern>
+  </servlet-mapping>
 
 </web-app>

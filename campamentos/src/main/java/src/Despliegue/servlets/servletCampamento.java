@@ -1,28 +1,28 @@
 package src.Despliegue.servlets;
 
-import java.io.PrintWriter;
-import java.util.Properties;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 import src.Negocio.gestorCampamentos;
-import src.Negocio.DTO.Enum.Horario;
+import src.Negocio.DTO.CampamentoDTO;
 import src.Negocio.DTO.Enum.NivelEducativo;
-import src.Negocio.DTO.ActividadDTO;
 
-public class servletActividad extends HttpServlet {
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.Properties;
+
+public class servletCampamento extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 
+        int id = Integer.valueOf(request.getParameter("id"));
+        LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicio"));
+        LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFin"));
+        NivelEducativo nivel = NivelEducativo.valueOf(request.getParameter("nivelEducativo"));
+        int numMaxAsistentes = Integer.valueOf(request.getParameter("numMaxAsistentes"));
 
-        String Nombre = request.getParameter("nombre");
-        NivelEducativo Nivel = NivelEducativo.valueOf(request.getParameter("nivelEducativo"));
-        Horario Hora = Horario.valueOf(request.getParameter("horario"));
-        int Capacidad = Integer.valueOf(request.getParameter("numMaxAsistentes"));
-        int MonitoresMax = Integer.valueOf(request.getParameter("numeroMonitores"));
-
-        ActividadDTO actividad = new ActividadDTO(Nombre,Nivel,Hora,Capacidad,MonitoresMax);
+        CampamentoDTO campamento = new CampamentoDTO(id,fechaInicio,fechaFin,nivel,numMaxAsistentes);
 
         Properties sql=new Properties();
         Properties config=new Properties();
@@ -31,27 +31,22 @@ public class servletActividad extends HttpServlet {
             sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
             config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
             gestorCampamentos gestor = new gestorCampamentos(sql, config);
-            
-            if(gestor.InsertarActividad(actividad)==false){
+
+            if(gestor.InsertarCampamento(campamento)==false){
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.println("¡Ya existe esta actividad!");
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevaActividadVista.jsp");
+                out.println("¡Ya existe un campamento con este id!");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevoCampamentoVista.jsp");
                 disp.include(request, response);
             }
             else{
                 RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
                 disp.forward(request, response);
             }
-
         }catch(Exception e){
             System.out.println(e);
         }
-        
-        
+
     }
-    
-
-
     
 }

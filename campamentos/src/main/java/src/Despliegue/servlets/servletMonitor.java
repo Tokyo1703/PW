@@ -1,28 +1,22 @@
 package src.Despliegue.servlets;
-import java.io.IOException;
 
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import javax.servlet.http.HttpServlet;
 
 import src.Negocio.gestorCampamentos;
 import src.Negocio.DTO.MonitorDTO;
 
 public class servletMonitor extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-    }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 
         int Id=Integer.valueOf(request.getParameter("id"));
         String NombreCompleto = request.getParameter("nombreCompleto");
         Boolean AtencionEspecial=false;
-        if(request.getParameter("nombreCompleto").equals("Si")){
+        if(request.getParameter("atencionEspecial").equals("Si")){
             AtencionEspecial=true;
         }
 
@@ -35,18 +29,23 @@ public class servletMonitor extends HttpServlet {
             sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
             config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
             gestorCampamentos gestor = new gestorCampamentos(sql, config);
-            gestor.InsertarMonitor(monitor);
 
-            RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
-            disp.forward(request, response);
+            if(gestor.InsertarMonitor(monitor)==false){
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.println("¡Ya existe este monitor!");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevoMonitorVista.jsp");
+                disp.include(request, response);
+            }
+            else{
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
+                disp.include(request, response);
+            }
         }catch(Exception e){
             System.out.println(e);
         }
         
         
     }
-    
-
-
     
 }
