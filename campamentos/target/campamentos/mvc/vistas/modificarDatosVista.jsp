@@ -22,18 +22,27 @@
         <fieldset>
         <legend>Informacion de usuario:</legend>
             <ul>
-                <li>Tipo de usuario: <%= customerBean.getTipo().name()></li>
-                <li>Correo: <%= customerBean.getCorreo().name()></li>
-                <form method="post" action="../controladores/registroControlador.jsp">
+                <li>Tipo de usuario: <%= customerBean.getTipo().name()%></li>
+                <li>Correo: <%= customerBean.getCorreo().name()%></li>
+                <form method="post" action="../controladores/modificarDatosControlador.jsp">
                     <li>
                     <label for="nombreCompleto">Nombre y apellidos: </label>
                     <input type="text" name="nombreCompleto" value=<%=customerBean.getNombre() %> ><br/>
                     </li>
 
+                    <%if(customerBean.getTipo().name().equals("Asistente")){%>
+
                     <li>
-                    <label for="fechaNacimiento">Asistente: Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
+                    <label for="fechaNacimiento">Fecha de nacimiento: (yyyy/mm/dd) (Asistente)</label>
                     <input type="text" name="fechaNacimiento" value=<%=>><br/>
                     </li>
+
+                    <li>
+                    <label for="atencionEspecial">Necesidad de atención especial</label>
+				    <input type="checkbox" name="atencionEspecial" value="Si"><br/>
+                    </li>
+
+                    <%}%>
 
                     <li>
                     <label for="contrasena">Contraseña: </label>

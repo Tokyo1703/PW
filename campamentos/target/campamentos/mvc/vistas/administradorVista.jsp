@@ -85,11 +85,11 @@
         </fieldset>
 
         <aside>
-            <a href="modificarDatosVista.jsp">
+            <a href="/campamentos/mvc/controladores/modificarDatosControlador.jsp">
             <button> Modificar datos </button>
             </a>
 
-            <a href="../controladores/desconexionControlador.jsp">
+            <a href="/campamentos/mvc/controladores/desconexionControlador.jsp">
             <button> Desconectar </button>
             </a>
         </aside>

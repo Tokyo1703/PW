@@ -1,6 +1,7 @@
 package src.Despliegue.servlets;
 
-import javax.servlet.RequestDispatcher;
+
+import javax.servlet.*;
 import javax.servlet.http.*;
 
 import src.Negocio.gestorCampamentos;
@@ -16,11 +17,13 @@ public class servletCampamento extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 
         int id = Integer.valueOf(request.getParameter("id"));
+        LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicio"));
+        LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFin"));
         NivelEducativo nivel = NivelEducativo.valueOf(request.getParameter("nivelEducativo"));
-        LocalDate fechaInicio = LocalDate.parse(request.getParameter("fehaInicio"));
-        LocalDate fechaFin = LocalDate.parse(request.getParameter("fehaFin"));
         int numMaxAsistentes = Integer.valueOf(request.getParameter("numMaxAsistentes"));
+
         CampamentoDTO campamento = new CampamentoDTO(id,fechaInicio,fechaFin,nivel,numMaxAsistentes);
+
         Properties sql=new Properties();
         Properties config=new Properties();
 
@@ -28,6 +31,7 @@ public class servletCampamento extends HttpServlet{
             sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
             config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
             gestorCampamentos gestor = new gestorCampamentos(sql, config);
+
             if(gestor.InsertarCampamento(campamento)==false){
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
@@ -36,8 +40,8 @@ public class servletCampamento extends HttpServlet{
                 disp.include(request, response);
             }
             else{
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
-                disp.include(request, response);
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
+                disp.forward(request, response);
             }
         }catch(Exception e){
             System.out.println(e);

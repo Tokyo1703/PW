@@ -38,7 +38,7 @@ public class servletMonitor extends HttpServlet {
                 disp.include(request, response);
             }
             else{
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
                 disp.include(request, response);
             }
         }catch(Exception e){

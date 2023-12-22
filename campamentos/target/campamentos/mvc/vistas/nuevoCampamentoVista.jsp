@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page errorPage="error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Nueva Campamento</title>
+        <title>Nuevo Campamento</title>
     </head>
 
     <% 
@@ -22,7 +22,7 @@
 
         <fieldset>
         <legend>Información campamento:</legend>
-            <form method="post" action="/campamentos/servletCampamento">
+            <form method="POST" action="/campamentos/servletCampamento">
 
                 <label for="id">Id: </label>
                 <input type="text" name="id" ><br/>

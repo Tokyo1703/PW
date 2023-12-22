@@ -13,7 +13,6 @@ import src.Negocio.DTO.ActividadDTO;
 
 public class servletActividad extends HttpServlet {
 
-
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 
 
@@ -41,8 +40,8 @@ public class servletActividad extends HttpServlet {
                 disp.include(request, response);
             }
             else{
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
-                disp.include(request, response);
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
+                disp.forward(request, response);
             }
 
         }catch(Exception e){
