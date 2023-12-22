@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp"%>
+
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <!DOCTYPE html>
 <html>
@@ -34,9 +34,9 @@
                 <input type="text" name="atencionEspecial"><br/>
 
                 <br/>
-                <input type="submit" value="Añadir actividad">
+                <input type="submit" value="Añadir monitor">
             </form>
-        <fieldset>
+        </fieldset>
 
 
         

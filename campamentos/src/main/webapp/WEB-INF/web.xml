@@ -34,4 +34,14 @@
     <url-pattern>/servletMonitor</url-pattern>
   </servlet-mapping>
 
+    <servlet>
+    <servlet-name>servletCampamento</servlet-name>
+    <servlet-class>src.Despliegue.servlets.servletCampamento</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>servletCampamento</servlet-name>
+    <url-pattern>/servletCampamento</url-pattern>
+  </servlet-mapping>
+
 </web-app>

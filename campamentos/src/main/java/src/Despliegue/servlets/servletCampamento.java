@@ -1,56 +1,48 @@
 package src.Despliegue.servlets;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.*;
 
-import src.Despliegue.customerBean;
 import src.Negocio.gestorCampamentos;
-import src.Negocio.DTO.Enum.TipoUsuario;
+import src.Negocio.DTO.CampamentoDTO;
+import src.Negocio.DTO.Enum.NivelEducativo;
 
-import javax.servlet.annotation.WebServlet;
-
-import java.io.IOException;
-
-import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Properties;
-
-@WebServlet(name = "servletCampamento", urlPatterns = "/campamentos/vincularActividadconCampamento")
 
 public class servletCampamento extends HttpServlet{
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws FileNotFoundException, IOException {
-        HttpSession session = req.getSession();
+    public void doPost(HttpServletRequest request, HttpServletResponse response){
 
-        customerBean customerBean = (customerBean) session.getAttribute("customerBean");
-        if (customerBean == null || customerBean.getTipo() == TipoUsuario.Asistente) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado, Solo administradores");
-            return;
+        int id = Integer.valueOf(request.getParameter("id"));
+        NivelEducativo nivel = NivelEducativo.valueOf(request.getParameter("nivelEducativo"));
+        LocalDate fechaInicio = LocalDate.parse(request.getParameter("fehaInicio"));
+        LocalDate fechaFin = LocalDate.parse(request.getParameter("fehaFin"));
+        int numMaxAsistentes = Integer.valueOf(request.getParameter("numMaxAsistentes"));
+        CampamentoDTO campamento = new CampamentoDTO(id,fechaInicio,fechaFin,nivel,numMaxAsistentes);
+        Properties sql=new Properties();
+        Properties config=new Properties();
+
+        try{
+            sql.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("sql")));
+            config.load(getServletContext().getResourceAsStream(getServletContext().getInitParameter("config")));
+            gestorCampamentos gestor = new gestorCampamentos(sql, config);
+            if(gestor.InsertarCampamento(campamento)==false){
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.println("¡Ya existe un campamento con este id!");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevoCampamentoVista.jsp");
+                disp.include(request, response);
+            }
+            else{
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administradorVista.jsp");
+                disp.include(request, response);
+            }
+        }catch(Exception e){
+            System.out.println(e);
         }
 
-        if (req.getParameter("Id") == null ||
-                req.getParameter("nombre") == null) {
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error: Faltan parametros");
-            return;
-        }
-
-        int Id = Integer.parseInt(req.getParameter("Id"));
-        String Nombre = req.getParameter("nombre");
-    
-        try {
-            Properties sqlProperties = new Properties();
-            Properties configProperties = new Properties();
-            sqlProperties.load(getServletContext().getResourceAsStream("/WEB-INF/sql.properties"));
-            configProperties.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-
-            gestorCampamentos Gestor = new gestorCampamentos(sqlProperties, configProperties);
-            Gestor.AsociarActividadcampamento(Id, Nombre);
-
-            res.setStatus(HttpServletResponse.SC_OK);
-            res.sendRedirect("/mvc/vistas/administradorVista.jsp");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad request: " + e.getMessage());
-        }
     }
+    
 }

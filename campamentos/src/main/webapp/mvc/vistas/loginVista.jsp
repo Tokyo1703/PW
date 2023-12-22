@@ -10,7 +10,6 @@
 		<title>Log in</title>
 	</head>
 	<body>
-		Inicio de sesión:
 		<%
 		/* Posibles flujos:
 			1) customerBean está logado (!= null && != "") -> Se redirige al index.jsp (no debería estar aquí pero hay que comprobarlo)
@@ -20,9 +19,6 @@
 			*/
 		String nextPage = "../controladores/loginControlador.jsp";
 		String mensajeNextPage = request.getParameter("mensaje");
-		if (mensajeNextPage == null){
-			mensajeNextPage = "";
-		}
 
 		if (customerBean != null && !customerBean.getCorreo().equals("")) {
 			//No debería estar aquí -> flujo salta a index.jsp
@@ -30,7 +26,14 @@
 		} 
 		else{
 		%>
-		<%= mensajeNextPage %><br/><br/>
+		<header>
+        <h1>Inicio de sesión</h1>
+        </header>
+			<%if (mensajeNextPage == null){
+				mensajeNextPage = "";
+			}else{%>
+			<%= mensajeNextPage %><br/>
+			<%}%>
 		<form method="post" action="../controladores/loginControlador.jsp">
 			<label for="correo">Correo: </label>
 			<input type="email" name="correo"><br/>
