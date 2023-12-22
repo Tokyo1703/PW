@@ -17,12 +17,12 @@
 				a) Hay parámetros en el request  -> procede del controlador /con mensaje 
 				b) No hay parámetros en el request -> procede del controlador /sin mensaje
 			*/
-		String nextPage = "../controladores/loginControlador.jsp";
+		String nextPage = "../../controladores/comun/loginControlador.jsp";
 		String mensajeNextPage = request.getParameter("mensaje");
 
 		if (customerBean != null && !customerBean.getCorreo().equals("")) {
 			//No debería estar aquí -> flujo salta a index.jsp
-			nextPage = "../../index.jsp";
+			nextPage = "../../../index.jsp";
 		} 
 		else{
 		%>
@@ -34,7 +34,7 @@
 			}else{%>
 			<%= mensajeNextPage %><br/>
 			<%}%>
-		<form method="post" action="../controladores/loginControlador.jsp">
+		<form method="post" action="../../controladores/comun/loginControlador.jsp">
 			<label for="correo">Correo: </label>
 			<input type="email" name="correo"><br/>
 			<label for="contrasena">Contraseña: </label>

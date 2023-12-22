@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="src.Negocio.DTO.CampamentoDTO, src.Datos.DAO.InscripcionDAO, src.Negocio.gestorCampamentos, java.util.ArrayList, java.util.Properties" %>
-<%@ page errorPage="../vistas/error.jsp"%>
+<%@ page errorPage="../../vistas/comun/error.jsp"%>
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>    
 <% 
     String mensaje="";
@@ -9,7 +9,7 @@
     if(customerBean!=null && !customerBean.getCorreo().equals("")){
         if(customerBean.getTipo().name().equals("Asistente")){
             mensaje="No tiene acceso a esta pagina";
-            paginaSiguiente="asistenteVista.jsp";
+            paginaSiguiente="../../vistas/asistente/asistenteVista.jsp";
             %>
             <jsp:forward page="<%=paginaSiguiente%>">
             <jsp:param value="<%=mensaje%>" name="mensaje"/>
@@ -17,7 +17,7 @@
             <%
         }
         else{
-            paginaSiguiente="../vistas/administradorVista.jsp";
+            paginaSiguiente="../../vistas/administrador/administradorVista.jsp";
 
             String fileSQL = application.getInitParameter("sql");
             String fileCONFIG = application.getInitParameter("config");
@@ -56,7 +56,7 @@
     }
     else{
         mensaje="Necesita iniciar sesion para tener acceso";
-        paginaSiguiente="../../index.jsp";
+        paginaSiguiente="../../../index.jsp";
         %>
         <jsp:forward page="<%=paginaSiguiente%>">
         <jsp:param value="<%=mensaje%>" name="mensaje"/>

@@ -24,7 +24,7 @@
             <ul>
                 <li>Tipo de usuario: <%= customerBean.getTipo().name()%></li>
                 <li>Correo: <%= customerBean.getCorreo().name()%></li>
-                <form method="post" action="../controladores/modificarDatosControlador.jsp">
+                <form method="post" action="../../controladores/comun/modificarDatosControlador.jsp">
                     <li>
                     <label for="nombreCompleto">Nombre y apellidos: </label>
                     <input type="text" name="nombreCompleto" value=<%=customerBean.getNombre() %> ><br/>
@@ -62,7 +62,7 @@
     }
     else{
         mensaje="Necesita iniciar sesion para tener acceso";
-        paginaSiguiente="../../index.jsp";
+        paginaSiguiente="../../../index.jsp";
         %>
         <jsp:forward page="<%=paginaSiguiente%>">
         <jsp:param value="<%=mensaje%>" name="mensaje"/>

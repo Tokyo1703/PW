@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="../vistas/error.jsp"%>	
+<%@ page errorPage="../../vistas/comun/error.jsp"%>
 <%@ page import ="src.Negocio.DTO.UsuarioDTO, src.Datos.DAO.UsuarioDAO, src.Negocio.DTO.Enum.TipoUsuario" %>
 
 <jsp:useBean  id="customerBean" scope="session" class="src.Despliegue.customerBean"></jsp:useBean>
@@ -21,14 +21,14 @@
             b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
         */
     //Caso 1: Por defecto
-    String nextPage="../../index.jsp";
+    String nextPage="../../../index.jsp";
     String mensajeNextPage = "";
     if(customerBean != null && !customerBean.getCorreo().equals("")){
         if(customerBean.getTipo()==TipoUsuario.Asistente){
-            nextPage = "../vistas/asistenteVista.jsp";
+            nextPage = "../../vistas/asistente/asistenteVista.jsp";
         }
         else{
-            nextPage = "administradorControlador.jsp";
+            nextPage = "../administrador/administradorControlador.jsp";
         }
     }
     //Caso 2
@@ -46,7 +46,7 @@
 
             //Aquí sólo comprobamos que exista el usuario
             if(!usuarioDAO.existeCorreo(correo)){
-                nextPage = "../vistas/loginVista.jsp";
+                nextPage = "../../vistas/comun/loginVista.jsp";
                 mensajeNextPage = "No existe un usuario con ese correo";
             }
             //Aquí ya sabemos que existe el usuario
@@ -56,10 +56,10 @@
                 if(usuario.getContrasena().equals(contrasena)){
                      // Usuario válido
                     if(usuario.getTipo()==TipoUsuario.Asistente){
-                        nextPage = "../vistas/asistenteVista.jsp";
+                        nextPage = "../../vistas/asistente/asistenteVista.jsp";
                     }
                     else{
-                        nextPage = "administradorControlador.jsp";
+                        nextPage = "../administrador/administradorControlador.jsp";
                     }
 %>
                 <jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="customerBean"/>
@@ -69,7 +69,7 @@
 <% 
                 }
                 else{
-                    nextPage = "../vistas/loginVista.jsp";
+                    nextPage = "../../vistas/comun/loginVista.jsp";
                     mensajeNextPage = "Contraseña incorrecta";
                 }
 
@@ -80,7 +80,7 @@
         //Caso 2.b -> se debe ir a la vista por primera vez
         }
         else {
-            nextPage = "../vistas/loginVista.jsp";		
+            nextPage = "../../vistas/comun/loginVista.jsp";		
         }
     }
 %>

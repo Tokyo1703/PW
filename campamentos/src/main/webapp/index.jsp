@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp"%>
+<%@ page errorPage="vistas/comun/error.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,10 +15,10 @@
         }%>
 
         <h1>Página web de campamentos</h1>
-        <a href="/campamentos/mvc/controladores/loginControlador.jsp">
+        <a href="/campamentos/mvc/controladores/comun/loginControlador.jsp">
         <button> Login </button>
         </a>
-        <a href="/campamentos/mvc/controladores/registroControlador.jsp">
+        <a href="/campamentos/mvc/controladores/comun/registroControlador.jsp">
         <button> Registro </button>
         </a>
     </body>

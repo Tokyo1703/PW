@@ -36,11 +36,11 @@ public class servletActividad extends HttpServlet {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
                 out.println("¡Ya existe esta actividad!");
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/nuevaActividadVista.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/vistas/administrador/nuevaActividadVista.jsp");
                 disp.include(request, response);
             }
             else{
-                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administradorControlador.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("/mvc/controladores/administrador/administradorControlador.jsp");
                 disp.forward(request, response);
             }
 
